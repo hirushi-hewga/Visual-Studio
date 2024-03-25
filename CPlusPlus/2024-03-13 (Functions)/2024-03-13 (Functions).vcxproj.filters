@@ -19,12 +19,4 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-13 (Functions)\HW.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-13 (Functions)\Lesson.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
 </Project>
