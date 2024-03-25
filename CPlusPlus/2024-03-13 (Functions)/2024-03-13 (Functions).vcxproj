@@ -126,13 +126,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-13 (Functions)\Header.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-13 (Functions)\HW.cpp" />
-    <ClCompile Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-13 (Functions)\Lesson.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

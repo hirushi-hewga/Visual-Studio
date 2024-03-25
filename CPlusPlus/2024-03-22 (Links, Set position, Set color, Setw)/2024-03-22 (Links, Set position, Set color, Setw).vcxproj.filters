@@ -14,29 +14,4 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-22 (Links, Set position, Set color, Setw)\Header1.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-22 (Links, Set position, Set color, Setw)\Header2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-22 (Links, Set position, Set color, Setw)\Header.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-22 (Links, Set position, Set color, Setw)\HW.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-22 (Links, Set position, Set color, Setw)\Lesson.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-22 (Links, Set position, Set color, Setw)\Practice.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-22 (Links, Set position, Set color, Setw)\Table.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
 </Project>
