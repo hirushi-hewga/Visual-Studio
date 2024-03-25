@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-13 (Functions)\Header.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-13 (Functions)\HW.cpp" />
+    <ClCompile Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-13 (Functions)\Lesson.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
