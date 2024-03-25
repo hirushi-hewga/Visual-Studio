@@ -18,5 +18,8 @@
     <ClCompile Include="..\..\..\..\New folder\hirushi-hewga\Visual-Studio\CPlusPlus\2024-03-18 (Lenears search, Sort)\Lesson.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HW.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
