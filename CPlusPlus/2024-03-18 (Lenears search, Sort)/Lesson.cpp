@@ -129,7 +129,7 @@ void InsertSort(int arr[], int size)
 
 }
 
-void BinarySearch(int arr[], int size, int key)
+int BinarySearch(int arr[], int size, int key)
 {
 	int B = 0, E = size - 1;
 	while (true)
@@ -151,8 +151,8 @@ void BinarySearch(int arr[], int size, int key)
 
 }
 
-int main() {
-	srand(time(NULL));
+//int main() {
+	/*srand(time(NULL));
 	const int size = 10;
 	int arr[size]{};
 	InitArray(arr, size);
@@ -179,5 +179,5 @@ int main() {
 	else
 	{
 		cout << "Key not found" << endl;
-	}
-}
+	}*/
+//}
