@@ -46,19 +46,21 @@ int* AddNumber(int* arr, int* size, int number)
 	return arr;
 }
 
-int* CreateArr(int size)
+int* CreateArray(int size)
 {
 	int* arr = new int[size];
 	return arr;
 }
 
-int main()
-{
+
+//int main()
+//{
+	/*
 	int size;
 	cout << "Enter size of arr: ";
 	cin >> size;
 	//int* arr = new int[size];
-	int* arr = CreateArr(size);
+	int* arr = CreateArray(size);
 	InitArray(arr, size);
 	ShowArray(arr, size);
 	delete[] arr;
@@ -78,6 +80,8 @@ int main()
 		ShowArray(arr, size);
 	}
 	delete[] arr;
+	*/
+
 
 
 
@@ -102,6 +106,11 @@ int main()
 	//int* ptr = nullptr;//trash
 	//if (ptr != nullptr) {   }
 
+
+
+
+
+
 	/*
 	int a = 10;
 	int b;//trash
@@ -124,4 +133,4 @@ int main()
 	delete pb;
 	delete pc;
 	*/
-}
+//}
