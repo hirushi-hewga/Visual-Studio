@@ -42,7 +42,7 @@ Date CreateNewDate()
 	cin >> temp.year;
 	cout << "Enter month name: ";
 	cin >> temp.month_name;
-	return temp
+	return temp;
 }
 
 //int main()
