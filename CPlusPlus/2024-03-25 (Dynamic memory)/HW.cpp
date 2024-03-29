@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Header.h"
 using namespace std;
-int main()
-{
+//int main()
+//{
 	/*
 	int* a = new int;
 	float* b = new float;
@@ -61,7 +61,7 @@ int main()
 	} while (choice != 0);
 	delete[] arr;
 	*/
-}
+//}
 
 int* IndexDeleteElem(int* arr, int* size)
 {
