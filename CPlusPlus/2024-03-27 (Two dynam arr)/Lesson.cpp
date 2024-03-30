@@ -1,8 +1,8 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
-int main()
-{
+//int main()
+//{
 	/*
 	srand(time(NULL));
 	int rows = 4;
@@ -37,13 +37,7 @@ int main()
 	}
 	delete[] arr;
 	*/
-
-
-
-
-
-	srand(time(NULL));
-}
+//}
 
 void DeleteRowInTheEnd(int** arr, int& rows, int cols)
 {
