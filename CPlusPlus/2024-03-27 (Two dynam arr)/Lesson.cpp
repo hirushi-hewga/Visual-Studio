@@ -41,7 +41,7 @@ void FillArr(int** arr, int rows, int cols)
 	}
 }
 
-void FillArr(int** arr, int rows, int cols)
+void FillArr2(int** arr, int rows, int cols)
 {
 	for (int i = 0; i < rows; i++)
 	{
