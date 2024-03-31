@@ -9,9 +9,10 @@ int main()
 	cin >> *rows;
 	cout << "Enter matrix cols: ";
 	cin >> *cols;
-	int** arr = CreateArray(rows);
+	int** arr = Create2DArray(rows, cols);
 
-
+	Init2DArray(arr, rows, cols);
+	Show2DArray(arr, rows, cols);
 
 	for (int i = 0; i < *rows; i++)
 	{
@@ -20,8 +21,35 @@ int main()
 	delete[] arr;
 }
 
-int** CreateArray(int* size)
+void Show2DArray(int** arr, int* rows, int* cols)
 {
-	int** arr = new int* [10];
+	for (int i = 0; i < *rows; i++)
+	{
+		for (int j = 0; j < *cols; j++)
+		{
+			cout << *(*(arr + i) + j) << ' ';
+		}
+		cout << endl;
+	}
+}
+
+void Init2DArray(int** arr, int* rows, int* cols)
+{
+	for (int i = 0; i < *rows; i++)
+	{
+		for (int j = 0; j < *cols; j++)
+		{
+			*(*(arr + i) + j) = rand() % 79 + 20;
+		}
+	}
+}
+
+int** Create2DArray(int* rows, int* cols)
+{
+	int** arr = new int* [*rows];
+	for (int i = 0; i < *rows; i++)
+	{
+		*(arr + i) = new int[*cols];
+	}
 	return arr;
 }
