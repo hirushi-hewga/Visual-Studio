@@ -3,6 +3,7 @@
 using namespace std;
 int main()
 {
+	srand(time(NULL));
 	int* rows = new int;
 	int* cols = new int;
 	cout << "Enter matrix rows: ";
