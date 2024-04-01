@@ -91,8 +91,93 @@ void ChangeInfo(Movie m[], int size, int id)
 	}
 }
 
+const char* Filename = "C:/Users/mka.STEP.002/Desktop";
+
+struct Human
+{
+private:
+	char name[50];
+	char surname[50];
+	int age;
+public:
+	void Fill()
+	{
+		cout << "Enter name : ";
+		cin >> name;
+		cout << "Enter surname : ";
+		cin >> surname;
+		cout << "Enter age : ";
+		cin >> age;
+	}
+	void Show()
+	{
+		cout << "\nName : " << name << "\nSurname : " << surname << "\nAge : " << age << endl;
+	}
+	void Copy(Human h)
+	{
+		strcpy_s(name, strlen(h.name) + 1, h.name);
+		strcpy_s(surname, strlen(h.surname) + 1, h.surname);
+		age = h.age;
+	}
+};
+
+enum Menu{ADD = 1, SHOW, EXIT};
+
+int Menu()
+{
+	int choice;
+	cout << "1. Add person" << endl;
+	cout << "2. Show all person" << endl;
+	cout << "3. Exit" << endl;
+	cin >> choice;
+	return choice;
+}
+
+void AddHuman(Human* h, int& size)
+{
+	size++;
+	Human* temp = new Human[size];
+	for (int i = 0; i < size-1; i++)
+	{
+		temp[i].Copy(h[i]);
+	}
+	temp[size - 1].Fill();
+	delete h;
+	h = temp;
+}
+
+void ShowAll(Human* h, int size)
+{
+
+}
+
 int main()
 {
+	Human h{};
+	h.Fill();
+	h.Show();
+
+	bool isExit = false;
+	int size = 0;
+	Human* humans = new Human[size];
+
+	while (!isExit)
+	{
+		switch (Menu())
+		{
+		case Menu::ADD:AddHuman(humans, size); break;
+		case Menu::SHOW:ShowAll(humans, size); break;
+		case Menu::EXIT:isExit = true; break;
+		}
+	}
+
+	delete[] humans;
+
+
+
+
+
+	/*
 	const int size = 5;
 	Movie movies[size]{
 		{1,"Harry Potter","Alfonso Cuaron","Fantasy",3.72,150.49,250},
@@ -155,4 +240,5 @@ int main()
 			cout << "Error choice." << endl; break;
 		}
 	} while (choice != 0);
+	*/
 }
