@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-01 (Struct, Save to
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-02-26 (Intro to C++)", "2024-02-26 (Intro to C++)\2024-02-26 (Intro to C++).vcxproj", "{1BAF1A0F-D5F3-4D90-BC93-46380B9F2781}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-02-28 (Variables, Data types)", "2024-02-28 (Variables, Data types)\2024-02-28 (Variables, Data types).vcxproj", "{116BCBD6-8916-4E1A-98F0-09F2E6834496}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -121,6 +123,14 @@ Global
 		{1BAF1A0F-D5F3-4D90-BC93-46380B9F2781}.Release|x64.Build.0 = Release|x64
 		{1BAF1A0F-D5F3-4D90-BC93-46380B9F2781}.Release|x86.ActiveCfg = Release|Win32
 		{1BAF1A0F-D5F3-4D90-BC93-46380B9F2781}.Release|x86.Build.0 = Release|Win32
+		{116BCBD6-8916-4E1A-98F0-09F2E6834496}.Debug|x64.ActiveCfg = Debug|x64
+		{116BCBD6-8916-4E1A-98F0-09F2E6834496}.Debug|x64.Build.0 = Debug|x64
+		{116BCBD6-8916-4E1A-98F0-09F2E6834496}.Debug|x86.ActiveCfg = Debug|Win32
+		{116BCBD6-8916-4E1A-98F0-09F2E6834496}.Debug|x86.Build.0 = Debug|Win32
+		{116BCBD6-8916-4E1A-98F0-09F2E6834496}.Release|x64.ActiveCfg = Release|x64
+		{116BCBD6-8916-4E1A-98F0-09F2E6834496}.Release|x64.Build.0 = Release|x64
+		{116BCBD6-8916-4E1A-98F0-09F2E6834496}.Release|x86.ActiveCfg = Release|Win32
+		{116BCBD6-8916-4E1A-98F0-09F2E6834496}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
