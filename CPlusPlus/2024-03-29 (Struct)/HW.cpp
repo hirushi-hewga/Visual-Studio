@@ -25,6 +25,15 @@ struct Praska
 	int power;
 };
 
+struct Boiler
+{
+	char company[20];
+	char color[20];
+	int power;
+	int capacity;
+	int heatingTemperature;
+};
+
 WashMashine CreateWashMashine()
 {
 	WashMashine temp;
@@ -68,6 +77,22 @@ Praska CreatePraska()
 	return temp;
 }
 
+Boiler CreateBoiler()
+{
+	Boiler temp;
+	cout << "Enter boiler company: ";
+	cin >> temp.company;
+	cout << "Enter boiler color: ";
+	cin >> temp.color;
+	cout << "Enter boiler power: ";
+	cin >> temp.power;
+	cout << "Enter boiler capacity: ";
+	cin >> temp.capacity;
+	cout << "Enter boiler heating temperature: ";
+	cin >> temp.heatingTemperature;
+	return temp;
+}
+
 void ShowWashMashine(WashMashine m)
 {
 	cout << "============== WashingMashine ==============" << endl;
@@ -93,6 +118,16 @@ void ShowPraska(Praska p)
 	cout << "Power: " << p.power << endl;
 }
 
+void ShowBoiler(Boiler b)
+{
+	cout << "================== Boiler ==================" << endl;
+	cout << "Company: " << b.company << endl;
+	cout << "Color: " << b.color << endl;
+	cout << "Power: " << b.power << endl;
+	cout << "Capacity: " << b.capacity << endl;
+	cout << "Heating temperature: " << b.heatingTemperature << endl;
+}
+
 int main()
 {
 	/*
@@ -111,6 +146,8 @@ int main()
 
 
 
-
-
+	/*
+	Boiler boiler = CreateBoiler();
+	ShowBoiler(boiler);
+	*/
 }
