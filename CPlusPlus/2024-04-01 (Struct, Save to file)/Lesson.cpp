@@ -91,7 +91,8 @@ void ChangeInfo(Movie m[], int size, int id)
 	}
 }
 
-const char* Filename = "C:/Users/mka.STEP.002/Desktop";
+//const char* Filename = "C:/Users/mka.STEP.002/Desktop/Humans.txt";
+const char* Filename = "Humans.txt";
 
 struct Human
 {
@@ -148,7 +149,7 @@ void AddHuman(Human* h, int& size)
 
 void ShowAll(Human* h, int size)
 {
-
+	
 }
 
 int main()
