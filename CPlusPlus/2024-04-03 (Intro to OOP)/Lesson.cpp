@@ -34,7 +34,7 @@ using namespace std;
 class Player
 {
 private: // (default)
-	string name; // char name[50];
+	string name;
 	int age;
 	int games;
 	int goals;
@@ -67,9 +67,36 @@ public:
 	}
 };
 
+class Student
+{
+public:
+	string name;
+	string surname;
+	int marks[3];
+	double GetAverage()
+	{
+		double sum = 0;
+		for (int i = 0; i < 3; i++)
+		{
+			sum += marks[i];
+		}
+		return sum / 3.0;
+	}
+};
+
 int main()
 {
+	Student student;//object
+	Student student1;//object
+	Student student2;//object
+	student.name = "Valera";
+	student.surname = "Kyluk";
+	student.marks[0] = 10;
+	cout << "Name : " << student.name << " Surname : " << student.surname << " Marks : " << student.marks[0] << endl;
 
+
+
+	/*
 	Player pl;
 	pl.Initialize();
 	pl.InitPlayer();
@@ -83,7 +110,7 @@ int main()
 
 	pl.AddGameToPlayer(5);
 	pl.PrintPlayer();
-
+	*/
 
 
 
