@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include "Header.h"
 using namespace std;
 
 struct WashMashine
@@ -33,6 +34,22 @@ struct Boiler
 	int capacity;
 	int heatingTemperature;
 };
+
+struct CarNumber
+{
+	char a[5];
+	char b[5];
+	char c[5];
+};
+
+struct MotorCar
+{
+	char color[20];
+	char model[20];
+	CarNumber number;
+};
+
+
 
 WashMashine CreateWashMashine()
 {
@@ -93,6 +110,8 @@ Boiler CreateBoiler()
 	return temp;
 }
 
+
+
 void ShowWashMashine(WashMashine m)
 {
 	cout << "============== WashingMashine ==============" << endl;
@@ -128,6 +147,10 @@ void ShowBoiler(Boiler b)
 	cout << "Heating temperature: " << b.heatingTemperature << endl;
 }
 
+
+
+
+
 int main()
 {
 	/*
@@ -150,4 +173,36 @@ int main()
 	Boiler boiler = CreateBoiler();
 	ShowBoiler(boiler);
 	*/
+
+
+
+
+	/**/
+	const int size = 10;
+	MotorCar cars[size] = { { "orange","Skoda",{"BK","1111","IT"} },
+							{ "green","Mazda",{"BK","1112","IT"} },
+							{ "blue","Toyota",{"BK","1113","IT"} },
+							{ "red","Honda",{"BK","1114","IT"} },
+							{ "yellow","Ford",{"BK","1115","IT"} },
+							{ "black","Chevrolet",{"BK","1116","IT"} },
+							{ "white","Nissan",{"BK","1117","IT"} },
+							{ "silver","Hyundai",{"BK","1118","IT"} },
+							{ "gray","Kia",{"BK","1119","IT"} },
+							{ "purple","Volkswagen",{"BK","1120","IT"} } };
+	MotorCar* pcars = cars;
+	ShowAllCars(pcars, size);
+}
+
+
+
+void ShowAllCars(MotorCar* c, int size)
+{
+	cout << "======== Cars ========" << endl;
+	for (int i = 0; i < size; i++)
+	{
+		cout << (*(c + i)).color << endl;
+		cout << (*(c + i)).model << endl;
+		cout << (*(c + i)).number.a << (*(c + i)).number.b << (*(c + i)).number.c << endl;
+	}
+	cout << "----------------------" << endl;
 }
