@@ -178,8 +178,27 @@ int main()
 
 
 	/**/
-	const int size = 10;
-	MotorCar cars[size] = { { "orange","Skoda",{"BK","1111","IT"} },
+	int size = 10;
+	MotorCar* cars = new MotorCar[size];
+	cars = CopyStructures(cars, size);
+	ShowAllCars(cars, size);
+	delete[] cars;
+}
+
+
+
+void ShowAllCars(MotorCar* cars, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		cout << "Color: " << cars[i].color << ", Model: " << cars[i].model << endl;
+	}
+}
+
+MotorCar* CopyStructures(MotorCar* c, int& size)
+{
+	MotorCar* temp = new MotorCar[size];
+	MotorCar cars[10] = { { "orange","Skoda",{"BK","1111","IT"} },
 							{ "green","Mazda",{"BK","1112","IT"} },
 							{ "blue","Toyota",{"BK","1113","IT"} },
 							{ "red","Honda",{"BK","1114","IT"} },
@@ -189,20 +208,17 @@ int main()
 							{ "silver","Hyundai",{"BK","1118","IT"} },
 							{ "gray","Kia",{"BK","1119","IT"} },
 							{ "purple","Volkswagen",{"BK","1120","IT"} } };
-	MotorCar* pcars = cars;
-	ShowAllCars(pcars, size);
-}
-
-
-
-void ShowAllCars(MotorCar* c, int size)
-{
-	cout << "======== Cars ========" << endl;
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < 10; i++)
 	{
-		cout << (*(c + i)).color << endl;
-		cout << (*(c + i)).model << endl;
-		cout << (*(c + i)).number.a << (*(c + i)).number.b << (*(c + i)).number.c << endl;
+		*(temp + i) = cars[i];
 	}
-	cout << "----------------------" << endl;
+	delete[] c;
+	c = new MotorCar[10];
+	for (int i = 0; i < 10; i++)
+	{
+		*(c + i) = *(temp + i);
+	}
+	delete[] temp;
+	size = 10;
+	return c;
 }
