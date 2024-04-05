@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include <iomanip>
 #include "Header.h"
 using namespace std;
 
@@ -44,6 +45,7 @@ struct CarNumber
 
 struct MotorCar
 {
+	int id;
 	char color[20];
 	char model[20];
 	CarNumber number;
@@ -147,9 +149,9 @@ void ShowBoiler(Boiler b)
 	cout << "Heating temperature: " << b.heatingTemperature << endl;
 }
 
-
-
-
+MotorCar* CopyStructures(MotorCar* c, int& size);
+void ShowAllCars(MotorCar* cars, int size);
+void ShowCarById(MotorCar* c, int size);
 
 int main()
 {
@@ -182,43 +184,43 @@ int main()
 	MotorCar* cars = new MotorCar[size];
 	cars = CopyStructures(cars, size);
 	ShowAllCars(cars, size);
+	ShowCarById();
+
 	delete[] cars;
 }
 
 
 
-void ShowAllCars(MotorCar* cars, int size)
+void ShowCarById(MotorCar* c, int size)
 {
+
+}
+
+void ShowAllCars(MotorCar* c, int size)
+{
+	cout << "======== Cars ========" << endl;
 	for (int i = 0; i < size; i++)
 	{
-		cout << "Color: " << cars[i].color << ", Model: " << cars[i].model << endl;
+		cout << "Color : " << c[i].color << endl;
+		cout << "Model : " << c[i].model << endl;
+		cout << "Number : " << c[i].number.a << c[i].number.b << c[i].number.c << endl;
+		cout << "----------------------" << endl;
 	}
 }
 
 MotorCar* CopyStructures(MotorCar* c, int& size)
 {
-	MotorCar* temp = new MotorCar[size];
-	MotorCar cars[10] = { { "orange","Skoda",{"BK","1111","IT"} },
-							{ "green","Mazda",{"BK","1112","IT"} },
-							{ "blue","Toyota",{"BK","1113","IT"} },
-							{ "red","Honda",{"BK","1114","IT"} },
-							{ "yellow","Ford",{"BK","1115","IT"} },
-							{ "black","Chevrolet",{"BK","1116","IT"} },
-							{ "white","Nissan",{"BK","1117","IT"} },
-							{ "silver","Hyundai",{"BK","1118","IT"} },
-							{ "gray","Kia",{"BK","1119","IT"} },
-							{ "purple","Volkswagen",{"BK","1120","IT"} } };
-	for (int i = 0; i < 10; i++)
-	{
-		*(temp + i) = cars[i];
-	}
-	delete[] c;
-	c = new MotorCar[10];
-	for (int i = 0; i < 10; i++)
-	{
-		*(c + i) = *(temp + i);
-	}
-	delete[] temp;
-	size = 10;
-	return c;
+	MotorCar* temp = new MotorCar[size]{
+		{ 1, "orange","Skoda",{"BK","1111","IT"} },
+		{ 2, "green","Mazda",{"BK","1112","IT"} },
+		{ 3, "blue","Toyota",{"BK","1113","IT"} },
+		{ 4, "red","Honda",{"BK","1114","IT"} },
+		{ 5, "yellow","Ford",{"BK","1115","IT"} },
+		{ 6, "black","Chevrolet",{"BK","1116","IT"} },
+		{ 7, "white","Nissan",{"BK","1117","IT"} },
+		{ 8, "silver","Hyundai",{"BK","1118","IT"} },
+		{ 9, "gray","Kia",{"BK","1119","IT"} },
+		{ 10, "purple","Volkswagen",{"BK","1120","IT"}
+	} };
+	return temp;
 }

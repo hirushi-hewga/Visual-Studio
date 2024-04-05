@@ -1,2 +1,3 @@
 #pragma once
-void ShowCar(MotorCar c);
+//MotorCar* CopyStructures(MotorCar* c, int& size);
+//void ShowAllCars(MotorCar* cars, int size);
