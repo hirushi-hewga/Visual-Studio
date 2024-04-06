@@ -1,7 +1,6 @@
 #include <iostream>
 #include <conio.h>
 #include <iomanip>
-#include "Header.h"
 using namespace std;
 
 struct WashMashine
@@ -152,6 +151,11 @@ void ShowBoiler(Boiler b)
 MotorCar* CopyStructures(MotorCar* c, int& size);
 void ShowAllCars(MotorCar* cars, int size);
 void ShowCarById(MotorCar* c, int size);
+void ShowCarsId(MotorCar* c, int size);
+void SearchCarByNumber(MotorCar* c, int size);
+void ShowCarsNumber(MotorCar* c, int size);
+MotorCar* EditCar(MotorCar* c, int size);
+MotorCar InitCar(MotorCar* c, MotorCar car, int index, int size);
 
 int main()
 {
@@ -183,17 +187,154 @@ int main()
 	int size = 10;
 	MotorCar* cars = new MotorCar[size];
 	cars = CopyStructures(cars, size);
+
 	ShowAllCars(cars, size);
-	ShowCarById();
+
+	ShowCarById(cars, size);
+
+	SearchCarByNumber(cars, size);
+
+	cars = EditCar(cars, size);
 
 	delete[] cars;
 }
 
 
 
+MotorCar InitCar(MotorCar* c, MotorCar car, int index, int size)
+{
+	bool BOOL = false;
+	int* id = new int[size - 1];
+	cout << "Enter id : ";
+	cin >> car.id;
+	for (int i = 0; i < index; i++) *(id + i) = (*(c + i)).id;
+	for (int i = index + 1; i < size; i++) *(id + i - 1) = (*(c + i)).id;
+	do
+	{
+		if (BOOL)
+		{
+			cout << "Id exist. Try again!" << endl;
+			cout << "Enter id : ";
+			cin >> car.id;
+		}
+		BOOL = true;
+		for (int i = 0; i < size - 1; i++)
+		{
+			if (car.id == *(id + i))
+			{
+				break;
+			}
+			BOOL = false;
+		}
+	} while (BOOL);
+	delete[] id;
+	cout << "Enter car color : ";
+	cin >> car.color;
+	cout << "Enter car model : ";
+	cin >> car.model;
+	cout << "Enter car region (BK) : ";
+	cin >> car.number.a;
+	cout << "Enter car number (1234) : ";
+	cin >> car.number.b;
+	cout << "Enter car series (IT) : ";
+	cin >> car.number.c;
+
+
+
+
+	return car;
+}
+
+MotorCar* EditCar(MotorCar* c, int size)
+{
+	ShowCarsNumber(c, size);
+	int Index;
+	cout << "Choice car number (1 - " << size << ") : ";
+	cin >> Index;
+	while (Index<1 || Index>size)
+	{
+		cout << "Try again : ";
+		cin >> Index;
+	}
+	Index--;
+	MotorCar* temp = new MotorCar[size];
+	for (int i = 0; i < Index; i++)
+	{
+		*(temp + i) = *(c + i);
+	}
+	InitCar(c, *(temp + Index), Index, size);
+	for (int i = Index + 1; i < size; i++)
+	{
+		*(temp + i) = *(c + i);
+	}
+	delete[] c;
+	c = temp;
+	return c;
+}
+
+void ShowCarsNumber(MotorCar* c, int size)
+{
+	cout << "======= Number =======" << endl;
+	for (int i = 0; i < size; i++) cout << i + 1 << " - " << c[i].number.a << c[i].number.b << c[i].number.c << endl;
+}
+
+void SearchCarByNumber(MotorCar* c, int size)
+{
+	ShowCarsNumber(c, size);
+	int choice;
+	cout << "Choice car number (1 - " << size << ") : ";
+	cin >> choice;
+	while (choice<1 || choice>size)
+	{
+		cout << "Try again : ";
+		cin >> choice;
+	}
+	cout << "----------------------" << endl;
+	cout << "Id : " << c[choice - 1].id << endl;
+	cout << "Color : " << c[choice - 1].color << endl;
+	cout << "Model : " << c[choice - 1].model << endl;
+	cout << "Number : " << c[choice - 1].number.a << c[choice - 1].number.b << c[choice - 1].number.c << endl;
+	cout << "----------------------" << endl;
+}
+
+void ShowCarsId(MotorCar* c, int size)
+{
+	cout << "========= Id =========" << endl;
+	for (int i = 0; i < size; i++) cout << "Id : " << c[i].id << ", Model : " << c[i].model << endl;
+}
+
 void ShowCarById(MotorCar* c, int size)
 {
-
+	bool BOOL = false;
+	ShowCarsId(c, size);
+	int choice;
+	cout << "Enter id : ";
+	cin >> choice;
+	int* id = new int[size];
+	for (int i = 0; i < size; i++) *(id + i) = (*(c + i)).id;
+	int carIndex;
+	do
+	{
+		if (BOOL)
+		{
+			cout << "Try again : ";
+			cin >> choice;
+		}
+		BOOL = true;
+		for (int i = 0; i < size; i++) if (choice == c[i].id)
+		{
+			BOOL = false;
+			carIndex = i;
+			break;
+		}
+	} while (BOOL);
+	delete[] id;
+	cout << "----------------------" << endl;
+	cout << "Id : " << c[carIndex].id << endl;
+	cout << "Color : " << c[carIndex].color << endl;
+	cout << "Model : " << c[carIndex].model << endl;
+	cout << "Number : " << c[carIndex].number.a << c[carIndex].number.b << c[carIndex].number.c << endl;
+	cout << "----------------------" << endl;
 }
 
 void ShowAllCars(MotorCar* c, int size)
@@ -201,6 +342,7 @@ void ShowAllCars(MotorCar* c, int size)
 	cout << "======== Cars ========" << endl;
 	for (int i = 0; i < size; i++)
 	{
+		cout << "Id : " << c[i].id << endl;
 		cout << "Color : " << c[i].color << endl;
 		cout << "Model : " << c[i].model << endl;
 		cout << "Number : " << c[i].number.a << c[i].number.b << c[i].number.c << endl;
