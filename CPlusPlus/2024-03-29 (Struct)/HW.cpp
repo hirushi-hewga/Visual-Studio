@@ -37,9 +37,9 @@ struct Boiler
 
 struct CarNumber
 {
-	char a[5];
+	char a[3];
 	char b[5];
-	char c[5];
+	char c[3];
 };
 
 struct MotorCar
@@ -232,8 +232,9 @@ MotorCar InitCar(MotorCar* c, MotorCar car, int index, int size)
 	cin >> car.color;
 	cout << "Enter car model : ";
 	cin >> car.model;
+	string mystr;
 	cout << "Enter car region (BK) : ";
-	cin >> car.number.a;
+	cin >> mystr;
 	cout << "Enter car number (1234) : ";
 	cin >> car.number.b;
 	cout << "Enter car series (IT) : ";
