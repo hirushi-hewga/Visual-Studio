@@ -1,6 +1,7 @@
 #include <iostream>
 #include <conio.h>
 #include <iomanip>
+#include <cctype>
 using namespace std;
 
 struct WashMashine
@@ -196,6 +197,8 @@ int main()
 
 	cars = EditCar(cars, size);
 
+	ShowAllCars(cars, size);
+
 	delete[] cars;
 }
 
@@ -203,7 +206,7 @@ int main()
 
 MotorCar InitCar(MotorCar* c, MotorCar car, int index, int size)
 {
-	bool BOOL = false;
+	bool BOOL = true;
 	int* id = new int[size - 1];
 	cout << "Enter id : ";
 	cin >> car.id;
@@ -211,7 +214,7 @@ MotorCar InitCar(MotorCar* c, MotorCar car, int index, int size)
 	for (int i = index + 1; i < size; i++) *(id + i - 1) = (*(c + i)).id;
 	do
 	{
-		if (BOOL)
+		if (!BOOL)
 		{
 			cout << "Id exist. Try again!" << endl;
 			cout << "Enter id : ";
@@ -222,26 +225,92 @@ MotorCar InitCar(MotorCar* c, MotorCar car, int index, int size)
 		{
 			if (car.id == *(id + i))
 			{
+				BOOL = false;
 				break;
 			}
-			BOOL = false;
 		}
-	} while (BOOL);
+	} while (!BOOL);
 	delete[] id;
+	
 	cout << "Enter car color : ";
 	cin >> car.color;
+	
 	cout << "Enter car model : ";
 	cin >> car.model;
-	string mystr;
-	cout << "Enter car region (BK) : ";
-	cin >> mystr;
-	cout << "Enter car number (1234) : ";
-	cin >> car.number.b;
+
+	BOOL = true;
+	string region;
+	do{
+		if (!BOOL)
+		{
+			cout << "Error region. Try again!" << endl;
+		}
+		BOOL = false;
+		cout << "Enter car region (BK) : ";
+		cin >> region;
+		if (isupper(region[0]) && isalpha(region[0]) && isupper(region[1]) && isalpha(region[1]))
+		{
+			BOOL = true;
+		}
+	} while (BOOL);
+	car.number.a[0] = region[0];
+	car.number.a[1] = region[1];
+
+	BOOL = true;
+	int number;
+	do {
+		if (!BOOL)
+		{
+			cout << "Error number. Try again!" << endl;
+		}
+		BOOL = false;
+		cout << "Enter car number (1234) : ";
+		cin >> number;
+		if (isdigit(number % 10) && isdigit(number % 100 / 10) && isdigit(number % 1000 / 100) && isdigit(number / 1000))
+		{
+			BOOL = true;
+		}
+	} while (BOOL);
+	car.number.b[0] = 1;
+	car.number.b[1] = 2;
+	car.number.b[2] = 3;
+	car.number.b[3] = 4;
+
 	cout << "Enter car series (IT) : ";
 	cin >> car.number.c;
 
-
-
+	string series;
+	do {
+		BOOL = true;
+		if (!BOOL)
+		{
+			cout << "Error series. Try again!" << endl;
+		}
+		cout << "Enter car series (IT) : " << endl;
+		cin >> series;
+		for (int i = 65; i <= 90; i++)
+		{
+			if ((char)i == series[0])
+			{
+				BOOL = false;
+				break;
+			}
+		}
+		if (!BOOL)
+		{
+			BOOL = true;
+			for (int i = 65; i <= 90; i++)
+			{
+				if ((char)i == series[1])
+				{
+					BOOL = false;
+					break;
+				}
+			}
+		}
+	} while (!BOOL);
+	car.number.c[0] = series[0];
+	car.number.c[1] = series[1];
 
 	return car;
 }
