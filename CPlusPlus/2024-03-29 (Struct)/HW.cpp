@@ -39,7 +39,7 @@ struct Boiler
 struct CarNumber
 {
 	char a[3];
-	char b[5];
+	int b;
 	char c[3];
 };
 
@@ -156,7 +156,8 @@ void ShowCarsId(MotorCar* c, int size);
 void SearchCarByNumber(MotorCar* c, int size);
 void ShowCarsNumber(MotorCar* c, int size);
 MotorCar* EditCar(MotorCar* c, int size);
-MotorCar InitCar(MotorCar* c, MotorCar car, int index, int size);
+MotorCar* InitCar(MotorCar* c, MotorCar car, int index, int size);
+MotorCar* AddNewCar(MotorCar* c, int& size);
 
 int main()
 {
@@ -184,52 +185,88 @@ int main()
 
 
 
-	/**/
+	/*
 	int size = 10;
 	MotorCar* cars = new MotorCar[size];
 	cars = CopyStructures(cars, size);
 
-	ShowAllCars(cars, size);
-
-	ShowCarById(cars, size);
-
-	SearchCarByNumber(cars, size);
-
-	cars = EditCar(cars, size);
-
-	ShowAllCars(cars, size);
+	bool BOOL = false;
+	int choice;
+	do
+	{
+		cout << endl;
+		if (BOOL) cout << "Error choice. Try again!" << endl;
+		BOOL = false;
+		cout << "1 - show all cars" << endl;
+		cout << "2 - show car by id" << endl;
+		cout << "3 - show car by number" << endl;
+		cout << "4 - edit car by number" << endl;
+		cout << "5 - add new car" << endl;
+		cout << "0 - Exit" << endl;
+		cout << "Enter your choice : ";
+		cin >> choice;
+		cout << endl;
+		if (choice < 0 || choice > 5)
+		{
+			BOOL = true;
+			continue;
+		}
+		switch (choice)
+		{
+		case 1: ShowAllCars(cars, size); break;
+		case 2: ShowCarById(cars, size); break;
+		case 3: SearchCarByNumber(cars, size); break;
+		case 4: cars = EditCar(cars, size); break;
+		case 5: cars = AddNewCar(cars, size); break;
+		default: BOOL = true;
+		}
+		cout << endl;
+	} while (choice != 0);
+	cout << "Good bye!" << endl;
 
 	delete[] cars;
+	*/
 }
 
 
 
-MotorCar InitCar(MotorCar* c, MotorCar car, int index, int size)
+MotorCar* AddNewCar(MotorCar* c, int& size)
 {
-	bool BOOL = true;
+	size++;
+	MotorCar* temp = new MotorCar[size]{};
+	for (int i = 0; i < size - 1; i++)
+	{
+		*(temp + i) = *(c + i);
+	}
+	delete[] c;
+	c = InitCar(temp, *(temp + size - 1), size - 1, size);
+	return c;
+}
+
+MotorCar* InitCar(MotorCar* c, MotorCar car, int index, int size)
+{
+	bool BOOL = false;
 	int* id = new int[size - 1];
-	cout << "Enter id : ";
-	cin >> car.id;
 	for (int i = 0; i < index; i++) *(id + i) = (*(c + i)).id;
 	for (int i = index + 1; i < size; i++) *(id + i - 1) = (*(c + i)).id;
 	do
 	{
-		if (!BOOL)
+		if (BOOL)
 		{
 			cout << "Id exist. Try again!" << endl;
-			cout << "Enter id : ";
-			cin >> car.id;
 		}
-		BOOL = true;
+		BOOL = false;
+		cout << "Enter id : ";
+		cin >> car.id;
 		for (int i = 0; i < size - 1; i++)
 		{
 			if (car.id == *(id + i))
 			{
-				BOOL = false;
+				BOOL = true;
 				break;
 			}
 		}
-	} while (!BOOL);
+	} while (BOOL);
 	delete[] id;
 	
 	cout << "Enter car color : ";
@@ -238,17 +275,17 @@ MotorCar InitCar(MotorCar* c, MotorCar car, int index, int size)
 	cout << "Enter car model : ";
 	cin >> car.model;
 
-	BOOL = true;
+	BOOL = false;
 	string region;
 	do{
-		if (!BOOL)
+		if (BOOL)
 		{
 			cout << "Error region. Try again!" << endl;
 		}
 		BOOL = false;
 		cout << "Enter car region (BK) : ";
 		cin >> region;
-		if (isupper(region[0]) && isalpha(region[0]) && isupper(region[1]) && isalpha(region[1]))
+		if (!(isupper(region[0]) && isalpha(region[0]) && isupper(region[1]) && isalpha(region[1])))
 		{
 			BOOL = true;
 		}
@@ -256,63 +293,43 @@ MotorCar InitCar(MotorCar* c, MotorCar car, int index, int size)
 	car.number.a[0] = region[0];
 	car.number.a[1] = region[1];
 
-	BOOL = true;
+	BOOL = false;
 	int number;
 	do {
-		if (!BOOL)
+		if (BOOL)
 		{
 			cout << "Error number. Try again!" << endl;
 		}
 		BOOL = false;
 		cout << "Enter car number (1234) : ";
 		cin >> number;
-		if (isdigit(number % 10) && isdigit(number % 100 / 10) && isdigit(number % 1000 / 100) && isdigit(number / 1000))
+		if (!(number / 1000 < 10 && number / 1000 > 0))
 		{
 			BOOL = true;
 		}
 	} while (BOOL);
-	car.number.b[0] = 1;
-	car.number.b[1] = 2;
-	car.number.b[2] = 3;
-	car.number.b[3] = 4;
+	car.number.b = number;
 
-	cout << "Enter car series (IT) : ";
-	cin >> car.number.c;
-
+	BOOL = false;
 	string series;
 	do {
-		BOOL = true;
-		if (!BOOL)
+		if (BOOL)
 		{
 			cout << "Error series. Try again!" << endl;
 		}
-		cout << "Enter car series (IT) : " << endl;
+		BOOL = false;
+		cout << "Enter car series (IT) : ";
 		cin >> series;
-		for (int i = 65; i <= 90; i++)
-		{
-			if ((char)i == series[0])
-			{
-				BOOL = false;
-				break;
-			}
-		}
-		if (!BOOL)
+		if (!(isupper(series[0]) && isalpha(series[0]) && isupper(series[1]) && isalpha(series[1])))
 		{
 			BOOL = true;
-			for (int i = 65; i <= 90; i++)
-			{
-				if ((char)i == series[1])
-				{
-					BOOL = false;
-					break;
-				}
-			}
 		}
-	} while (!BOOL);
+	} while (BOOL);
 	car.number.c[0] = series[0];
 	car.number.c[1] = series[1];
 
-	return car;
+	*(c + index) = car;
+	return c;
 }
 
 MotorCar* EditCar(MotorCar* c, int size)
@@ -327,18 +344,15 @@ MotorCar* EditCar(MotorCar* c, int size)
 		cin >> Index;
 	}
 	Index--;
-	MotorCar* temp = new MotorCar[size];
-	for (int i = 0; i < Index; i++)
-	{
-		*(temp + i) = *(c + i);
-	}
-	InitCar(c, *(temp + Index), Index, size);
-	for (int i = Index + 1; i < size; i++)
-	{
-		*(temp + i) = *(c + i);
-	}
-	delete[] c;
-	c = temp;
+	//for (int i = 0; i < Index; i++)
+	//{
+	//	*(temp + i) = *(c + i);
+	//}
+	c = InitCar(c, *(c + Index), Index, size);
+	//for (int i = Index + 1; i < size; i++)
+	//{
+	//	*(temp + i) = *(c + i);
+	//}
 	return c;
 }
 
@@ -423,16 +437,16 @@ void ShowAllCars(MotorCar* c, int size)
 MotorCar* CopyStructures(MotorCar* c, int& size)
 {
 	MotorCar* temp = new MotorCar[size]{
-		{ 1, "orange","Skoda",{"BK","1111","IT"} },
-		{ 2, "green","Mazda",{"BK","1112","IT"} },
-		{ 3, "blue","Toyota",{"BK","1113","IT"} },
-		{ 4, "red","Honda",{"BK","1114","IT"} },
-		{ 5, "yellow","Ford",{"BK","1115","IT"} },
-		{ 6, "black","Chevrolet",{"BK","1116","IT"} },
-		{ 7, "white","Nissan",{"BK","1117","IT"} },
-		{ 8, "silver","Hyundai",{"BK","1118","IT"} },
-		{ 9, "gray","Kia",{"BK","1119","IT"} },
-		{ 10, "purple","Volkswagen",{"BK","1120","IT"}
+		{ 1, "orange","Skoda",{"BK",1111,"IT"} },
+		{ 2, "green","Mazda",{"BK",1112,"IT"} },
+		{ 3, "blue","Toyota",{"BK",1113,"IT"} },
+		{ 4, "red","Honda",{"BK",1114,"IT"} },
+		{ 5, "yellow","Ford",{"BK",1115,"IT"} },
+		{ 6, "black","Chevrolet",{"BK",1116,"IT"} },
+		{ 7, "white","Nissan",{"BK",1117,"IT"} },
+		{ 8, "silver","Hyundai",{"BK",1118,"IT"} },
+		{ 9, "gray","Kia",{"BK",1119,"IT"} },
+		{ 10, "purple","Volkswagen",{"BK",1120,"IT"}
 	} };
 	return temp;
 }
