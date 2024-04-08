@@ -41,6 +41,26 @@ int Menu()
 	return choice;
 }
 
+
+
+
+void AddHuman(Human*& h, int& size)
+{
+	size++;
+	Human* temp = new Human[size];//1
+	for (int i = 0; i < size - 1; i++)
+	{
+		temp[i].Copy(h[i]);
+	}
+	temp[size - 1].Fill();
+	delete h;
+	h = temp;
+	h[size - 1].SaveToFile();
+}
+
+
+
+
 int main()
 {
 	int size = 0;
