@@ -41,6 +41,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-03 (Intro to OOP)",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-05 (Constructs, Destructor)", "2024-04-05 (Constructs, Destructor)\2024-04-05 (Constructs, Destructor).vcxproj", "{73807215-80D6-4923-9CC2-9ADEBAE2F3EC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-08 (Copy constructor)", "2024-04-08 (Copy constructor)\2024-04-08 (Copy constructor).vcxproj", "{F2BD920E-2691-4D9D-A150-E53A8F60DB2C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -201,6 +203,14 @@ Global
 		{73807215-80D6-4923-9CC2-9ADEBAE2F3EC}.Release|x64.Build.0 = Release|x64
 		{73807215-80D6-4923-9CC2-9ADEBAE2F3EC}.Release|x86.ActiveCfg = Release|Win32
 		{73807215-80D6-4923-9CC2-9ADEBAE2F3EC}.Release|x86.Build.0 = Release|Win32
+		{F2BD920E-2691-4D9D-A150-E53A8F60DB2C}.Debug|x64.ActiveCfg = Debug|x64
+		{F2BD920E-2691-4D9D-A150-E53A8F60DB2C}.Debug|x64.Build.0 = Debug|x64
+		{F2BD920E-2691-4D9D-A150-E53A8F60DB2C}.Debug|x86.ActiveCfg = Debug|Win32
+		{F2BD920E-2691-4D9D-A150-E53A8F60DB2C}.Debug|x86.Build.0 = Debug|Win32
+		{F2BD920E-2691-4D9D-A150-E53A8F60DB2C}.Release|x64.ActiveCfg = Release|x64
+		{F2BD920E-2691-4D9D-A150-E53A8F60DB2C}.Release|x64.Build.0 = Release|x64
+		{F2BD920E-2691-4D9D-A150-E53A8F60DB2C}.Release|x86.ActiveCfg = Release|Win32
+		{F2BD920E-2691-4D9D-A150-E53A8F60DB2C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
