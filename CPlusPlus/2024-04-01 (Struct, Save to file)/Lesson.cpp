@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -193,11 +194,13 @@ void ReadFromFile(Human*& h, int& size)
 		h = temp;
 	}
 }
-int main()
-{
+*/
+//int main()
+//{
 	/*Human h{};
 	h.Fill();
 	h.Show();*/
+	/*
 	bool isExit = false;
 	int size = 0;
 	Human* humans = new Human[size];
@@ -212,7 +215,7 @@ int main()
 		}
 	}
 	delete[]humans;
-
+	*/
 
 
 
@@ -282,4 +285,4 @@ int main()
 
 	} while (choice != 0);
 	*/
-}
+//}
