@@ -8,6 +8,7 @@ enum MENU{ CHANGE = 1, SHOW, SEARCHA, SEARCHT, SEARCHP, SEARCHG, ADD, SAVE, LOAD
 struct Book
 {
 private:
+	int id;
 	char title[50];
 	char author[50];
 	char publisher[50];
@@ -22,7 +23,8 @@ public:
 		for (int i = 0; i < size; i++) if (strlen(b[i].author) > amax) amax = strlen(b[i].author);
 		for (int i = 0; i < size; i++) if (strlen(b[i].publisher) > pmax) pmax = strlen(b[i].publisher);
 		for (int i = 0; i < size; i++) if (strlen(b[i].genre) > gmax) gmax = strlen(b[i].genre);
-		cout << "Title : " << left << setw(tmax) << title;
+		cout << "Id : " << left << setw(3) << id;
+		cout << " ,  Title : " << left << setw(tmax) << title;
 		cout << " ,  Author : " << left << setw(amax) << author;
 		cout << " ,  Publisher : " << left << setw(pmax) << publisher;
 		cout << " ,  Genre : " << left << setw(gmax) << genre;
@@ -31,6 +33,7 @@ public:
 	}
 	void Fill()
 	{
+		cout << "Enter id : "; cin >> id;
 		cout << "Enter title : "; cin >> title;
 		cout << "Enter author : "; cin >> author;
 		cout << "Enter publisher : "; cin >> publisher;
@@ -40,6 +43,7 @@ public:
 	}
 	void Copy(Book b)
 	{
+		id = b.id;
 		strcpy_s(title, strlen(b.title) + 1, b.title);
 		strcpy_s(author, strlen(b.author) + 1, b.author);
 		strcpy_s(publisher, strlen(b.publisher) + 1, b.publisher);
@@ -47,8 +51,9 @@ public:
 		yearOfPublication = b.yearOfPublication;
 		price = b.price;
 	}
-	void FillFromFile(char* titleB, char* authorB, char* publisherB, char* genreB, int yearOfPublicationB, int priceB)
+	void FillFromFile(int idB, char* titleB, char* authorB, char* publisherB, char* genreB, int yearOfPublicationB, int priceB)
 	{
+		id = idB;
 		strcpy_s(title, strlen(titleB) + 1, titleB);
 		strcpy_s(author, strlen(authorB) + 1, authorB);
 		strcpy_s(publisher, strlen(publisherB) + 1, publisherB);
@@ -69,6 +74,8 @@ public:
 		
 		//ofstream out(Filename, ios_base::app);
 		ofstream out("Library.txt", ios_base::app);
+		out << id;
+		out << ":";
 		out << title;
 		out << ":";
 		out << author;
@@ -82,6 +89,11 @@ public:
 		out << price;
 		out << "|";
 		out.close();
+	}
+	bool IdEqual(int id)
+	{
+		if (this->id == id) return true;
+		return false;
 	}
 };
 
@@ -125,28 +137,55 @@ void ReadFromFile(Book*& h, int& size)
 	ifstream in("Library.txt", ios_base::in);
 	while (!in.eof())
 	{
-		char buffTitle[250], buffAuthor[250], buffPublisher[250], buffGenre[250], buffYearOfPublication[250], buffPrice[250];
-		in.getline(buffTitle, 250, ':');
+		char buffId[250], buffTitle[250], buffAuthor[250], buffPublisher[250], buffGenre[250], buffYearOfPublication[250], buffPrice[250];
+		in.getline(buffId, 250, ':');
 		if (in.eof())break;
+		in.getline(buffTitle, 250, ':');
 		in.getline(buffAuthor, 250, ':');
 		in.getline(buffPublisher, 250, ':');
 		in.getline(buffGenre, 250, ':');
 		in.getline(buffYearOfPublication, 250, ':');
 		in.getline(buffPrice, 250, '|');
+		int id = atoi(buffId);
 		int yearOfPublication = atoi(buffYearOfPublication);
 		int price = atoi(buffPrice);
-		Book readHuman;
-		readHuman.FillFromFile(buffTitle, buffAuthor, buffPublisher, buffGenre, yearOfPublication, price);
+		Book readBook;
+		readBook.FillFromFile(id, buffTitle, buffAuthor, buffPublisher, buffGenre, yearOfPublication, price);
 		size++;
 		Book* temp = new Book[size];//1
 		for (int i = 0; i < size - 1; i++)
 		{
 			temp[i].Copy(h[i]);
 		}
-		temp[size - 1] = readHuman;
+		temp[size - 1] = readBook;
 		delete h;
 		h = temp;
 	}
+}
+
+void ChangeBook(Book*& b, int size)
+{
+	int id;
+	for (int i = 0; i < size; i++) b[i].Show(b, size);
+	cout << "Enter book id to change data : ";
+	cin >> id;
+	int index = -1;
+	for (int i = 0; i < size; i++)
+	{
+		if (b[i].IdEqual(id)) index = i; break;
+	}
+	Book* temp = new Book[size];
+	for (int i = 0; i < index; i++)
+	{
+		temp[i].Copy(b[i]);
+	}
+	temp[index].Fill();
+	for (int i = index + 1; i < size; i++)
+	{
+		temp[i].Copy(b[i]);
+	}
+	delete[] b;
+	b = temp;
 }
 
 
@@ -162,7 +201,7 @@ int main()
 	{
 		switch (Menu())
 		{
-		//case MENU::CHANGE:
+		case MENU::CHANGE: ChangeBook(Library, size); break;
 		case MENU::SHOW: for (int i = 0; i < size; i++) (*(Library + i)).Show(Library, size); break;
 		//case MENU::SEARCHA:
 		//case MENU::SEARCHT:
@@ -175,4 +214,6 @@ int main()
 		cout << endl;
 	}
 	cout << "Good bye" << endl;
+
+	delete[] Library;
 }
