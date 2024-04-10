@@ -34,10 +34,11 @@ public:
 	void Fill()
 	{
 		cout << "Enter id : "; cin >> id;
-		cout << "Enter title : "; cin >> title;
-		cout << "Enter author : "; cin >> author;
-		cout << "Enter publisher : "; cin >> publisher;
-		cout << "Enter genre : "; cin >> genre;
+		cin.ignore();
+		cout << "Enter title : "; cin.getline(title, 50);
+		cout << "Enter author : "; cin.getline(author, 50);
+		cout << "Enter publisher : "; cin.getline(publisher, 50);
+		cout << "Enter genre : "; cin.getline(genre, 50);
 		cout << "Enter year of publication : "; cin >> yearOfPublication;
 		cout << "Enter price : "; cin >> price;
 	}
@@ -97,19 +98,23 @@ public:
 	}
 	bool SearchAuthor(char author[50])
 	{
-		return strcmp(this->author, author);
+		if (strcmp(this->author, author) == 0) return true;
+		else return false;
 	}
 	bool SearchTitle(char title[50])
 	{
-		return strcmp(this->title, title);
+		if (strcmp(this->title, title) == 0) return true;
+		else return false;
 	}
 	bool SearchPublisher(char publisher[50])
 	{
-		return strcmp(this->publisher, publisher);
+		if (strcmp(this->publisher, publisher) == 0) return true;
+		else return false;
 	}
 	bool SearchGenre(char genre[50])
 	{
-		return strcmp(this->genre, genre);
+		if (strcmp(this->genre, genre) == 0) return true;
+		else return false;
 	}
 };
 
@@ -208,10 +213,10 @@ void SearchByAuthor(Book* b, int size)
 {
 	char author[50];
 	cout << "Enter author : ";
-	cin >> author;
+	cin.getline(author, 50);
 	for (int i = 0; i < size; i++)
 	{
-		if (!b[i].SearchAuthor(author)) b[i].Show(b, size); break;
+		if (b[i].SearchAuthor(author)) b[i].Show(b, size); break;
 	}
 }
 
@@ -219,10 +224,10 @@ void SearchByTitle(Book* b, int size)
 {
 	char title[50];
 	cout << "Enter title : ";
-	cin >> title;
+	cin.getline(title, 50);
 	for (int i = 0; i < size; i++)
 	{
-		if (!b[i].SearchTitle(title)) b[i].Show(b, size); break;
+		if (b[i].SearchTitle(title)) b[i].Show(b, size); break;
 	}
 }
 
@@ -230,10 +235,10 @@ void SearchByPublisher(Book* b, int size)
 {
 	char publisher[50];
 	cout << "Enter publisher : ";
-	cin >> publisher;
+	cin.getline(publisher, 50);
 	for (int i = 0; i < size; i++)
 	{
-		if (!b[i].SearchPublisher(publisher)) b[i].Show(b, size); break;
+		if (b[i].SearchPublisher(publisher)) b[i].Show(b, size); break;
 	}
 }
 
@@ -241,10 +246,10 @@ void SearchByGenre(Book* b, int size)
 {
 	char genre[50];
 	cout << "Enter genre : ";
-	cin >> genre;
+	cin.getline(genre, 50);
 	for (int i = 0; i < size; i++)
 	{
-		if (!b[i].SearchGenre(genre)) b[i].Show(b, size); break;
+		if (b[i].SearchGenre(genre)) b[i].Show(b, size); break;
 	}
 }
 
