@@ -23,29 +23,34 @@ class Human
 	int age;
 	int weigth;
 public:
+	static int count;
 	Human()//default constructor
 	{
 		this->name = "no name";
 		this->age = 0;
 		this->weigth = 0;
+		this->count++;
 	}
 	Human(string name):Human()
 	{
 		this->name = name;
 		//this->age = 0;
 		//this->weigth = 0;
+		this->count++;
 	}
 	Human(string name, int age):Human(name)
 	{
 		//this->name = name;
 		this->age = age;
 		//this->weigth = 0;
+		this->count++;
 	}
 	Human(string name, int age, int weigth):Human(name, age)
 	{
 		//this->name = name;
 		//this->age = age;
 		this->weigth = weigth;
+		this->count++;
 	}
 
 
