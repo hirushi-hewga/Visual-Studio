@@ -3,7 +3,7 @@
 #include <iomanip>
 using namespace std;
 
-enum MENU{ CHANGE = 1, SHOW, SEARCHA, SEARCHT, SEARCHP, SEARCHG, ADD, SAVE, LOAD };
+enum MENU { CHANGE = 1, SHOW, SEARCHA, SEARCHT, SEARCHP, SEARCHG, ADD, SAVE, LOAD };
 
 struct Book
 {
@@ -69,9 +69,9 @@ public:
 		//ios_base::ate		: Set the position of the file pointer to the end of the file after opening.
 		//ios_base::trunc	: Open file for writing, truncating the contents of the file to zero length.
 		//ios_base::binary	: Open file in binary mode.
-		
+
 		//(ios_base::in | ios_base::out) : Open file for reading and writing.
-		
+
 		//ofstream out(Filename, ios_base::app);
 		ofstream out("Library.txt", ios_base::app);
 		out << id;
@@ -94,6 +94,22 @@ public:
 	{
 		if (this->id == id) return true;
 		return false;
+	}
+	bool SearchAuthor(char author[50])
+	{
+		return strcmp(this->author, author);
+	}
+	bool SearchTitle(char title[50])
+	{
+		return strcmp(this->title, title);
+	}
+	bool SearchPublisher(char publisher[50])
+	{
+		return strcmp(this->publisher, publisher);
+	}
+	bool SearchGenre(char genre[50])
+	{
+		return strcmp(this->genre, genre);
 	}
 };
 
@@ -188,14 +204,40 @@ void ChangeBook(Book*& b, int size)
 	b = temp;
 }
 
+void SearchByAuthor(Book* b, int size)
+{
+	char author[50];
+	cout << "Enter author : ";
+	cin >> author;
+	for (int i = 0; i < size; i++)
+	{
+		if (!b[i].SearchAuthor(author)) b[i].Show(b, size); break;
+	}
+}
+
+void SearchByTitle()
+{
+
+}
+
+void SearchByPublisher()
+{
+
+}
+
+void SearchByGenre()
+{
+
+}
 
 
 
-int main()
+
+int main()// Book not found!
 {
 	int size = 0;
 	Book* Library = new Book[size];
-	
+
 	bool isExit = false;
 	while (!isExit)
 	{
@@ -203,10 +245,10 @@ int main()
 		{
 		case MENU::CHANGE: ChangeBook(Library, size); break;
 		case MENU::SHOW: for (int i = 0; i < size; i++) (*(Library + i)).Show(Library, size); break;
-		//case MENU::SEARCHA:
-		//case MENU::SEARCHT:
-		//case MENU::SEARCHP:
-		//case MENU::SEARCHG:
+		case MENU::SEARCHA: SearchByAuthor(Library, size);
+			//case MENU::SEARCHT:
+			//case MENU::SEARCHP:
+			//case MENU::SEARCHG:
 		case MENU::ADD: AddBook(Library, size); break;
 		case MENU::SAVE: for (int i = 0; i < size; i++) (*(Library + i)).SaveToFile(); break;
 		case MENU::LOAD: ReadFromFile(Library, size);
