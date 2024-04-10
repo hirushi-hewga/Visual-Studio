@@ -215,19 +215,37 @@ void SearchByAuthor(Book* b, int size)
 	}
 }
 
-void SearchByTitle()
+void SearchByTitle(Book* b, int size)
 {
-
+	char title[50];
+	cout << "Enter title : ";
+	cin >> title;
+	for (int i = 0; i < size; i++)
+	{
+		if (!b[i].SearchTitle(title)) b[i].Show(b, size); break;
+	}
 }
 
-void SearchByPublisher()
+void SearchByPublisher(Book* b, int size)
 {
-
+	char publisher[50];
+	cout << "Enter publisher : ";
+	cin >> publisher;
+	for (int i = 0; i < size; i++)
+	{
+		if (!b[i].SearchPublisher(publisher)) b[i].Show(b, size); break;
+	}
 }
 
-void SearchByGenre()
+void SearchByGenre(Book* b, int size)
 {
-
+	char genre[50];
+	cout << "Enter genre : ";
+	cin >> genre;
+	for (int i = 0; i < size; i++)
+	{
+		if (!b[i].SearchGenre(genre)) b[i].Show(b, size); break;
+	}
 }
 
 
@@ -245,10 +263,10 @@ int main()// Book not found!
 		{
 		case MENU::CHANGE: ChangeBook(Library, size); break;
 		case MENU::SHOW: for (int i = 0; i < size; i++) (*(Library + i)).Show(Library, size); break;
-		case MENU::SEARCHA: SearchByAuthor(Library, size);
-			//case MENU::SEARCHT:
-			//case MENU::SEARCHP:
-			//case MENU::SEARCHG:
+		case MENU::SEARCHA: SearchByAuthor(Library, size); break;
+		case MENU::SEARCHT: SearchByTitle(Library, size); break;
+		case MENU::SEARCHP: SearchByPublisher(Library, size); break;
+		case MENU::SEARCHG: SearchByGenre(Library, size); break;
 		case MENU::ADD: AddBook(Library, size); break;
 		case MENU::SAVE: for (int i = 0; i < size; i++) (*(Library + i)).SaveToFile(); break;
 		case MENU::LOAD: ReadFromFile(Library, size);
