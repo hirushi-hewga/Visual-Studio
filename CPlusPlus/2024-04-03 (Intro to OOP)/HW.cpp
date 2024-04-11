@@ -57,6 +57,7 @@ public:
 		cout << "Enter student education place name : "; cin >> nameEducationalPlace;
 		cout << "Enter education place location city : "; cin >> educationalPlaceLocation.city;
 		cout << "Enter education place location country : "; cin >> educationalPlaceLocation.country;
+		cout << "Enter student group number : "; cin >> groupNumber;
 	}
 	void ShowStudent()
 	{
@@ -67,6 +68,7 @@ public:
 		cout << "Student location : city -> " << studentLocation.city << " , country -> " << studentLocation.country << endl;
 		cout << "Student education place name : " << nameEducationalPlace << endl;
 		cout << "Student education place location : place city -> " << educationalPlaceLocation.city << " , place country -> " << educationalPlaceLocation.country << endl;
+		cout << "Student group number : " << groupNumber << endl;
 	}
 	void SetName(char name[50]) { this->name = name; }
 	void SetSurname(char surname[50]) { this->surname = surname; }
@@ -80,6 +82,7 @@ public:
 	void SetPlaceName(char nameEducationalPlace[50]) { this->nameEducationalPlace = nameEducationalPlace; }
 	void SetPlaceCity(char educationPlaceCity[50]) { educationalPlaceLocation.city = educationPlaceCity; }
 	void SetPlaceCountry(char educationPlaceCountry[50]) { educationalPlaceLocation.country = educationPlaceCountry; }
+	void SetGroupNumber(int groupNumber) { this->groupNumber = groupNumber; }
 
 	string GetName() { return name; }
 	string GetSurname() { return surname; }
@@ -93,6 +96,7 @@ public:
 	string GetPlaceName() { return nameEducationalPlace; }
 	string GetPlaceCity() { return educationalPlaceLocation.city; }
 	string GetPlaceCountry() { return educationalPlaceLocation.country; }
+	int GetGroupNumber() { return groupNumber; }
 };
 
 
@@ -101,7 +105,7 @@ public:
 int GetMenu()
 {
 	int choice = 0;
-	while (choice < 1 || choice > 12)
+	while (choice < 1 || choice > 13)
 	{
 		cout << "========== Get Menu ==========" << endl;
 		cout << "1 - get student name" << endl;
@@ -116,6 +120,7 @@ int GetMenu()
 		cout << "10 - get student education place name" << endl;
 		cout << "11 - get education place location city" << endl;
 		cout << "12 - get education place location country" << endl;
+		cout << "13 - get student group number" << endl;
 		cout << "Enter your choice : ";
 		cin >> choice;
 	}
@@ -125,9 +130,9 @@ int GetMenu()
 int SetMenu()
 {
 	int choice = 0;
-	while (choice < 1 || choice > 12)
+	while (choice < 1 || choice > 13)
 	{
-		cout << "========== Get Menu ==========" << endl;
+		cout << "========== Set Menu ==========" << endl;
 		cout << "1 - set student name" << endl;
 		cout << "2 - set student surname" << endl;
 		cout << "3 - set student lastname" << endl;
@@ -140,6 +145,7 @@ int SetMenu()
 		cout << "10 - set student education place name" << endl;
 		cout << "11 - set education place location city" << endl;
 		cout << "12 - set education place location country" << endl;
+		cout << "13 - set student group number" << endl;
 		cout << "Enter your choice : ";
 		cin >> choice;
 	}
@@ -149,38 +155,39 @@ int SetMenu()
 
 
 
-enum GETSETMENU { NAME = 1, SURNAME, LASTNAME, BIRTHDAY, BIRTHMONTH, BIRTHYEAR, PHONE, CITY, COUNTRY, PLACENAME, PLACECITY, PLACECOUNTRY };
+enum GETSETMENU { NAME = 1, SURNAME, LASTNAME, BIRTHDAY, BIRTHMONTH, BIRTHYEAR, PHONE, CITY, COUNTRY, PLACENAME, PLACECITY, PLACECOUNTRY, GROUP };
 
-void SetName(Student& st)			{ char name[50];		cin.getline(name, 50);		st.SetName(name);				}
-void SetSurname(Student& st)		{ char surname[50];		cin.getline(surname, 50);	st.SetSurname(surname);			}
-void SetLastname(Student& st)		{ char lastname[50];	cin.getline(lastname, 50);	st.SetLastname(lastname);		}
-void SetBirthDay(Student& st)		{ int day;				cin >> day;					st.SetBirthDay(day);			}
-void SetBirthMonth(Student& st)		{ int month;			cin >> month;				st.SetBirthMonth(month);		}
-void SetBirthYear(Student& st)		{ int year;				cin >> year;				st.SetBirthYear(year);			}
-void SetPhoneNumber(Student& st)	{ char phone[50];		cin.getline(phone, 50);		st.SetPhoneNumber(phone);		}
-void SetStudentCity(Student& st)	{ char city[50];		cin.getline(city, 50);		st.SetStudentCity(city);		}
-void SetStudentCountry(Student& st) { char country[50];		cin.getline(country, 50);	st.SetStudentCountry(country);	}
-void SetPlaceName(Student& st)		{ char name[50];		cin.getline(name, 50);		st.SetPlaceName(name);			}
-void SetPlaceCity(Student& st)		{ char city[50];		cin.getline(city, 50);		st.SetPlaceCity(city);			}
-void SetPlaceCountry(Student& st)	{ char country[50];		cin.getline(country, 50);	st.SetPlaceCountry(country);	}
+void SetName(Student& st)			{ char name[50];		cin.getline(name, 50);		st.SetName(name);					}
+void SetSurname(Student& st)		{ char surname[50];		cin.getline(surname, 50);	st.SetSurname(surname);				}
+void SetLastname(Student& st)		{ char lastname[50];	cin.getline(lastname, 50);	st.SetLastname(lastname);			}
+void SetBirthDay(Student& st)		{ int day;				cin >> day;					st.SetBirthDay(day);				}
+void SetBirthMonth(Student& st)		{ int month;			cin >> month;				st.SetBirthMonth(month);			}
+void SetBirthYear(Student& st)		{ int year;				cin >> year;				st.SetBirthYear(year);				}
+void SetPhoneNumber(Student& st)	{ char phone[50];		cin.getline(phone, 50);		st.SetPhoneNumber(phone);			}
+void SetStudentCity(Student& st)	{ char city[50];		cin.getline(city, 50);		st.SetStudentCity(city);			}
+void SetStudentCountry(Student& st) { char country[50];		cin.getline(country, 50);	st.SetStudentCountry(country);		}
+void SetPlaceName(Student& st)		{ char name[50];		cin.getline(name, 50);		st.SetPlaceName(name);				}
+void SetPlaceCity(Student& st)		{ char city[50];		cin.getline(city, 50);		st.SetPlaceCity(city);				}
+void SetPlaceCountry(Student& st)	{ char country[50];		cin.getline(country, 50);	st.SetPlaceCountry(country);		}
+void SetGroupNumber(Student& st)	{ char groupNumber[50];	cin >> groupNumber;			st.SetPlaceCountry(groupNumber);	}
 
 void SetValue(Student& st)
 {
-	cout << "Enter value to set : ";
 	switch (SetMenu())
 	{
-		case GETSETMENU::NAME: SetName(st);
-		case GETSETMENU::SURNAME: SetSurname(st);
-		case GETSETMENU::LASTNAME: SetLastname(st);
-		case GETSETMENU::BIRTHDAY: SetBirthDay(st);
-		case GETSETMENU::BIRTHMONTH: SetBirthMonth(st);
-		case GETSETMENU::BIRTHYEAR: SetBirthYear(st);
-		case GETSETMENU::PHONE: SetPhoneNumber(st);
-		case GETSETMENU::CITY: SetStudentCity(st);
-		case GETSETMENU::COUNTRY: SetStudentCountry(st);
-		case GETSETMENU::PLACENAME: SetPlaceName(st);
-		case GETSETMENU::PLACECITY: SetPlaceCity(st);
-		case GETSETMENU::PLACECOUNTRY: SetPlaceCountry(st);
+	case GETSETMENU::NAME:			cout << "Enter new student name to change : ";				SetName(st); break;
+	case GETSETMENU::SURNAME:		cout << "Enter new student surname to change : ";			SetSurname(st); break;
+	case GETSETMENU::LASTNAME:		cout << "Enter new student lastname to change : ";			SetLastname(st); break;
+	case GETSETMENU::BIRTHDAY:		cout << "Enter new student birth day to change : ";			SetBirthDay(st); break;
+	case GETSETMENU::BIRTHMONTH:	cout << "Enter new student birth month to change : ";		SetBirthMonth(st); break;
+	case GETSETMENU::BIRTHYEAR:		cout << "Enter new student birth year to change : ";		SetBirthYear(st); break;
+	case GETSETMENU::PHONE:			cout << "Enter new student phone number to change : ";		SetPhoneNumber(st); break;
+	case GETSETMENU::CITY:			cout << "Enter new student city to change : ";				SetStudentCity(st); break;
+	case GETSETMENU::COUNTRY:		cout << "Enter new student country to change : ";			SetStudentCountry(st); break;
+	case GETSETMENU::PLACENAME:		cout << "Enter new educational place name to change : ";	SetPlaceName(st); break;
+	case GETSETMENU::PLACECITY:		cout << "Enter new educational place city to change : ";	SetPlaceCity(st); break;
+	case GETSETMENU::PLACECOUNTRY:	cout << "Enter new educational place country to change : "; SetPlaceCountry(st); break;
+	case GETSETMENU::GROUP:			cout << "Enter new student group number to change : ";		SetGroupNumber(st);
 	}
 	cout << "Value changed." << endl;
 }
@@ -189,18 +196,19 @@ void GetValue(Student st)
 {
 	switch (GetMenu())
 	{
-	case GETSETMENU::NAME: cout << st.GetName() << endl;
-	case GETSETMENU::SURNAME: cout << st.GetSurname() << endl;
-	case GETSETMENU::LASTNAME: cout << st.GetLastname() << endl;
-	case GETSETMENU::BIRTHDAY: cout << st.GetBirthDay() << endl;
-	case GETSETMENU::BIRTHMONTH: cout << st.GetBirthMonth() << endl;
-	case GETSETMENU::BIRTHYEAR: cout << st.GetBirthYear() << endl;
-	case GETSETMENU::PHONE: cout << st.GetPhoneNumber() << endl;
-	case GETSETMENU::CITY: cout << st.GetStudentCity() << endl;
-	case GETSETMENU::COUNTRY: cout << st.GetStudentCountry() << endl;
-	case GETSETMENU::PLACENAME: cout << st.GetPlaceName() << endl;
-	case GETSETMENU::PLACECITY: cout << st.GetPlaceCity() << endl;
-	case GETSETMENU::PLACECOUNTRY: cout << st.GetPlaceCountry() << endl;
+	case GETSETMENU::NAME: cout << st.GetName() << endl; break;
+	case GETSETMENU::SURNAME: cout << st.GetSurname() << endl; break;
+	case GETSETMENU::LASTNAME: cout << st.GetLastname() << endl; break;
+	case GETSETMENU::BIRTHDAY: cout << st.GetBirthDay() << endl; break;
+	case GETSETMENU::BIRTHMONTH: cout << st.GetBirthMonth() << endl; break;
+	case GETSETMENU::BIRTHYEAR: cout << st.GetBirthYear() << endl; break;
+	case GETSETMENU::PHONE: cout << st.GetPhoneNumber() << endl; break;
+	case GETSETMENU::CITY: cout << st.GetStudentCity() << endl; break;
+	case GETSETMENU::COUNTRY: cout << st.GetStudentCountry() << endl; break;
+	case GETSETMENU::PLACENAME: cout << st.GetPlaceName() << endl; break;
+	case GETSETMENU::PLACECITY: cout << st.GetPlaceCity() << endl; break;
+	case GETSETMENU::PLACECOUNTRY: cout << st.GetPlaceCountry() << endl; break;
+	case GETSETMENU::GROUP: cout << st.GetGroupNumber() << endl;
 	}
 }
 
@@ -221,6 +229,7 @@ int Menu()
 		cout << "Enter your choice : ";
 		cin >> choice;
 	}
+	cout << endl;
 	return choice;
 }
 
@@ -230,18 +239,16 @@ int main()
 {
 	Student student;
 	student.Initialize();
-	student.ShowStudent();
-	student.InitStudent();
 	bool isExit = false;
 	while (!isExit)
 	{
 		cout << endl;
 		switch (Menu())
 		{
-		case MENU::SHOW: student.ShowStudent();
-		case MENU::INIT: student.InitStudent();
-		case MENU::GETV: GetValue(student);
-		case MENU::SETV: SetValue(student);
+		case MENU::SHOW: student.ShowStudent(); break;
+		case MENU::INIT: student.InitStudent(); break;
+		case MENU::GETV: GetValue(student); break;
+		case MENU::SETV: SetValue(student); break;
 		case MENU::EXIT: isExit = true;
 		}
 		cout << endl;
