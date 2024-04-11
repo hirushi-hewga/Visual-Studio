@@ -139,8 +139,8 @@ void SetValue(Dot& d)
 
 
 
-int main()
-{
+//int main()
+//{
 	/*
 	Dot dot;
 	dot.Initialize();
@@ -162,4 +162,4 @@ int main()
 	}
 	cout << "Good bye!" << endl;
 	*/
-}
+//}
