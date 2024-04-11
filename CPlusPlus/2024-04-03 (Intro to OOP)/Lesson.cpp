@@ -84,8 +84,9 @@ public:
 	}
 };
 
-int main()
-{
+//int main()
+//{
+	/*
 	Student student;//object
 	Student student1;//object
 	Student student2;//object
@@ -93,6 +94,7 @@ int main()
 	student.surname = "Kyluk";
 	student.marks[0] = 10;
 	cout << "Name : " << student.name << " Surname : " << student.surname << " Marks : " << student.marks[0] << endl;
+	*/
 
 
 
@@ -126,4 +128,4 @@ int main()
 	AddGameToPlayer(pl, 5);
 	PrintPlayer(pl);
 	*/
-}
+//}
