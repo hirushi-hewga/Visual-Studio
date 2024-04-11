@@ -1,3 +1,4 @@
+/*
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -136,6 +137,7 @@ void SetValue(Dot& d)
 	if (choice == 2) d.SetY(value);
 	if (choice == 3) d.SetZ(value);
 }
+*/
 
 
 
