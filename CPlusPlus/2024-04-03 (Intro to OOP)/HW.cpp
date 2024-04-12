@@ -169,7 +169,6 @@ void SetStudentCountry(Student& st) { char country[50];		cin.getline(country, 50
 void SetPlaceName(Student& st)		{ char name[50];		cin.getline(name, 50);		st.SetPlaceName(name);				}
 void SetPlaceCity(Student& st)		{ char city[50];		cin.getline(city, 50);		st.SetPlaceCity(city);				}
 void SetPlaceCountry(Student& st)	{ char country[50];		cin.getline(country, 50);	st.SetPlaceCountry(country);		}
-void SetGroupNumber(Student& st)	{ int groupNumber;		cin >> groupNumber;			st.SetGroupNumber(groupNumber);		}
 
 void SetValue(Student& st)
 {
