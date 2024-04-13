@@ -60,21 +60,13 @@ public:
 	}
 	void SetSize(int height, int width)
 	{
-		if (height > 0 && width > 0)
-		{
 			this->height = height;
 			this->width = width;
-		}
-		else cout << "Error size data. Data has not changed" << endl;
 	}
 	void SetCoord(int x, int y)
 	{
-		if (x >= 0 && y >= 0)
-		{
 			coord.x = x;
 			coord.y = y;
-		}
-		else cout << "Error coord data. Data has not changed" << endl;
 	}
 	~Rectangle()
 	{
@@ -84,13 +76,123 @@ public:
 
 
 
-enum MENU { CREATE = 1, SHOW, SETSIZE, SETCOORD };
+void CreateRectangle(Rectangle& rec)
+{
+	int choice = 0;
+	while (choice >= 1 && choice <= 3)
+	{
+		cout << endl;
+		cout << "1 - create default rectangle" << endl;
+		cout << "2 - create rectangle by size" << endl;
+		cout << "3 - create rectangle by height and width" << endl;
+		cout << "Enter your choice : ";
+		cin >> choice;
+	}
+	if (choice == 1)
+	{
+		Rectangle new_rec;
+		rec = new_rec;
+	}
+	if (choice == 2)
+	{
+		int size = -1;
+		bool isValidData = true;
+		while (size < 0)
+		{
+			if (!isValidData) cout << "Error data. Try again!" << endl;
+			if (isValidData) isValidData = false;
+			cout << "Enter size : ";
+			cin >> size;
+		}
+		Rectangle new_rec(size);
+		rec = new_rec;
+	}
+	if (choice == 3)
+	{
+		int height = -1;
+		int width = -1;
+		bool isValidData = true;
+		while (height < 0 || width < 0)
+		{
+			if (!isValidData) cout << "Error data. Try again!" << endl;
+			if (isValidData) isValidData = false;
+			cout << "Enter height : ";
+			cin >> height;
+			cout << "Enter width : ";
+			cin >> width;
+		}
+		Rectangle new_rec(height, width);
+		rec = new_rec;
+	}
+}
+
+int Menu()
+{
+	int choice = 0;
+	while (choice >= 1 && choice <= 6)
+	{
+		cout << endl;
+		cout << "1 - Create new rectangle" << endl;
+		cout << "2 - Show rectangle" << endl;
+		cout << "3 - Show rectangle data" << endl;
+		cout << "4 - Set rectangle size" << endl;
+		cout << "5 - Set rectangle coord" << endl;
+		cout << "6 - Exit" << endl;
+		cout << "Enter your choice : ";
+		cin >> choice;
+	}
+	return choice;
+}
+
+enum MENU { CREATE = 1, SHOW_RECTANGLE, SHOW_RECTANGLE_DATA, SET_SIZE, SET_COORD, EXIT };
 
 int main()
 {
-
-
-
+	Rectangle rectangle;
+	bool isExit = false;
+	while (!isExit)
+	{
+		cout << endl;
+		switch (Menu())
+		{
+		case MENU::CREATE: CreateRectangle(rectangle); break;
+		case MENU::SHOW_RECTANGLE: rectangle.Show(); break;
+		case MENU::SHOW_RECTANGLE_DATA: break;
+		case MENU::SET_SIZE:
+			int height = -1;
+			int width = -1;
+			bool isValidData = true;
+			while (height < 0 || width < 0)
+			{
+				if (!isValidData) cout << "Error data. Try again!" << endl;
+				if (isValidData) isValidData = false;
+				cout << "Enter height : ";
+				cin >> height;
+				cout << "Enter width : ";
+				cin >> width;
+			}
+			rectangle.SetSize(height, width);
+			break;
+		case MENU::SET_COORD:
+			int x = -1;
+			int y = -1;
+			bool isValidData = true;
+			while (height < 0 || width < 0)
+			{
+				if (!isValidData) cout << "Error data. Try again!" << endl;
+				if (isValidData) isValidData = false;
+				cout << "Enter x coord : ";
+				cin >> x;
+				cout << "Enter y coord : ";
+				cin >> y;
+			}
+			rectangle.SetCoord(x, y);
+			break;
+		case MENU::EXIT: isExit = true;
+		}
+		cout << endl;
+	}
+	cout << "Good bye." << endl;
 
 
 	//getch
