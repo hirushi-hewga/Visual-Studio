@@ -102,9 +102,9 @@ public:
 
 int main()
 {
-	Student st1;
+	//Student st1;
 	//st1.SetName("Vasia");
-	st1.Show();
+	//st1.Show();
 	
 	//st1.Initialize("Bob", 25);
 	//st1.Show();
@@ -118,15 +118,15 @@ int main()
 	//st1.SetAge(33);
 
 	//st1.Show();
-
+	
 	//st1.DeleteMarks();
 
-	Student st2("Mark", 12);
+	//Student st2("Mark", 12);
 	//st2.SetName("Olga");
-	st2.Show();
-	st2.AddMark(12);
-	st2.AddMark(11);
-	st2.AddMark(9);
-	st2.AddMark(3);
-	st2.Show();
+	//st2.Show();
+	//st2.AddMark(12);
+	//st2.AddMark(11);
+	//st2.AddMark(9);
+	//st2.AddMark(3);
+	//st2.Show();
 }
