@@ -16,6 +16,7 @@ class Rectangle
 public:
 	Rectangle()
 	{
+		cout << "--Construct rectangle--" << endl;
 		height = 0;
 		width = 0;
 		symbol = '0';
@@ -24,6 +25,7 @@ public:
 	}
 	Rectangle(int size)
 	{
+		cout << "--Construct rectangle--" << endl;
 		height = size;
 		width = size;
 		symbol = '0';
@@ -32,6 +34,7 @@ public:
 	}
 	Rectangle(int height, int width)
 	{
+		cout << "--Construct rectangle--" << endl;
 		this->height = height;
 		this->width = width;
 		symbol = '0';
@@ -62,15 +65,29 @@ public:
 			this->height = height;
 			this->width = width;
 		}
-		else cout << "Error size data." << endl;
+		else cout << "Error size data. Data has not changed" << endl;
+	}
+	void SetCoord(int x, int y)
+	{
+		if (x >= 0 && y >= 0)
+		{
+			coord.x = x;
+			coord.y = y;
+		}
+		else cout << "Error coord data. Data has not changed" << endl;
+	}
+	~Rectangle()
+	{
+		cout << "--Destruct rectangle--" << endl;
 	}
 };
 
 
 
+enum MENU { CREATE = 1, SHOW, SETSIZE, SETCOORD };
+
 int main()
 {
-
 
 
 
