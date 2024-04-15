@@ -45,6 +45,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-08 (Copy constructo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-10 (Destruction constructor, Static methods)", "2024-04-10 (Destruction constructor, Static methods)\2024-04-10 (Destruction constructor, Static methods).vcxproj", "{FF7DA90B-E720-4602-A163-E10FEEEB84FD}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-15 (Overload operator)", "2024-04-15 (Overload operator)\2024-04-15 (Overload operator).vcxproj", "{CB431311-E152-46C9-9BDE-F41EFBCC5514}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -221,6 +223,14 @@ Global
 		{FF7DA90B-E720-4602-A163-E10FEEEB84FD}.Release|x64.Build.0 = Release|x64
 		{FF7DA90B-E720-4602-A163-E10FEEEB84FD}.Release|x86.ActiveCfg = Release|Win32
 		{FF7DA90B-E720-4602-A163-E10FEEEB84FD}.Release|x86.Build.0 = Release|Win32
+		{CB431311-E152-46C9-9BDE-F41EFBCC5514}.Debug|x64.ActiveCfg = Debug|x64
+		{CB431311-E152-46C9-9BDE-F41EFBCC5514}.Debug|x64.Build.0 = Debug|x64
+		{CB431311-E152-46C9-9BDE-F41EFBCC5514}.Debug|x86.ActiveCfg = Debug|Win32
+		{CB431311-E152-46C9-9BDE-F41EFBCC5514}.Debug|x86.Build.0 = Debug|Win32
+		{CB431311-E152-46C9-9BDE-F41EFBCC5514}.Release|x64.ActiveCfg = Release|x64
+		{CB431311-E152-46C9-9BDE-F41EFBCC5514}.Release|x64.Build.0 = Release|x64
+		{CB431311-E152-46C9-9BDE-F41EFBCC5514}.Release|x86.ActiveCfg = Release|Win32
+		{CB431311-E152-46C9-9BDE-F41EFBCC5514}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
