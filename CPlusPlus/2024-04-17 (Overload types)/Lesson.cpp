@@ -1,68 +1,68 @@
-#include <iostream>
-using namespace std;
-
-class Point
-{
-	int x;
-	int y;
-public:
-	Point() : x(0), y(0) {}
-	Point(int x, int y) : x(x), y(x) {}
-	void Print()
-	{
-		cout << "X : " << x << " ,  Y : " << y << endl;
-	}
-#pragma region Increment/Decrement
-	Point operator ++ () // Increment postfix form
-	{
-		++this->x;
-		++this->y;
-		return *this;
-	}
-	Point operator -- () // Decrement postfix form
-	{
-		--this->x;
-		--this->y;
-		return *this;
-	}
-	Point operator ++ () // Increment prefix form
-	{
-		this->x++;
-		this->y++;
-		return *this;
-	}
-	Point operator -- () // Decrement prefix form
-	{
-		this->x--;
-		this->y--;
-		return *this;
-	}
-#pragma endregion
-	int GetX() const
-	{
-		return x;
-	}
-	int GetY() const
-	{
-		return y;
-	}
-	void SetX(int x)
-	{
-		this->x = x;
-	}
-	void SetY(int y)
-	{
-		this->y = y;
-	}
-	//friend Point operator ++ (Point & other);
-};
-
-
-
-bool operator < (const Point & left, const Point & right)
-{
-	return (left.GetX() + left.GetY()) < (right.GetX() + right.GetY());
-}
+//#include <iostream>
+//using namespace std;
+//
+//class Point
+//{
+//	int x;
+//	int y;
+//public:
+//	Point() : x(0), y(0) {}
+//	Point(int x, int y) : x(x), y(x) {}
+//	void Print()
+//	{
+//		cout << "X : " << x << " ,  Y : " << y << endl;
+//	}
+//#pragma region Increment/Decrement
+//	Point operator ++ () // Increment postfix form
+//	{
+//		++this->x;
+//		++this->y;
+//		return *this;
+//	}
+//	Point operator -- () // Decrement postfix form
+//	{
+//		--this->x;
+//		--this->y;
+//		return *this;
+//	}
+//	Point operator ++ () // Increment prefix form
+//	{
+//		this->x++;
+//		this->y++;
+//		return *this;
+//	}
+//	Point operator -- () // Decrement prefix form
+//	{
+//		this->x--;
+//		this->y--;
+//		return *this;
+//	}
+//#pragma endregion
+//	int GetX() const
+//	{
+//		return x;
+//	}
+//	int GetY() const
+//	{
+//		return y;
+//	}
+//	void SetX(int x)
+//	{
+//		this->x = x;
+//	}
+//	void SetY(int y)
+//	{
+//		this->y = y;
+//	}
+//	//friend Point operator ++ (Point & other);
+//};
+//
+//
+//
+//bool operator < (const Point & left, const Point & right)
+//{
+//	return (left.GetX() + left.GetY()) < (right.GetX() + right.GetY());
+//}
 
 //Point operator ++ (Point & other)
 //{
