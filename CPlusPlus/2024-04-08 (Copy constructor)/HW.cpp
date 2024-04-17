@@ -41,9 +41,7 @@ public:
 		carriages = new Carriage[other.countCarriages];
 		for (int i = 0; i < other.countCarriages; i++)
 		{
-			carriages[i].number = other.carriages[i].number;
-			carriages[i].places = other.carriages[i].places;
-			carriages[i].passangers = other.carriages[i].passangers;
+			carriages[i] = other.carriages[i];
 		}
 	}
 	void InitCarriage(Carriage& carriage)
@@ -131,7 +129,7 @@ void CopyTrain(Train*& trains, int& count)
 		Train* temp = new Train[count + 1];
 		for (int i = 0; i < count; i++)
 		{
-			temp[i] = trains[i];
+			temp[i] = Train(trains[i]);
 		}
 		temp[count] = Train(trains[choice - 1]);
 		if (trains != nullptr)
@@ -252,12 +250,6 @@ void ShowTrain(Train*& trains, int count)
 		trains[choice - 1].Show();
 		cout << endl;
 	}
-}
-
-void AddPassanger(Train& train)
-{
-	if (train.GetCountCarriages() != 0) train.AddPassanger();
-	else cout << "No carriages found!" << endl;
 }
 
 int Menu()
