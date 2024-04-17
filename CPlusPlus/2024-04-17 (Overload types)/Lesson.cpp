@@ -75,22 +75,22 @@ bool operator < (const Point & left, const Point & right)
 
 
 
-int main()
-{
-	Point p1(3, 8);
-	Point p2(2, 5);
-	int a = 5, b = 3, c = 8;
-	p1.operator++();
-	a++; // postfix
-	++a; // prefix
-	cout << "P1 : "; p1.Print();
-	++p1;
-	cout << "P1 : "; p1.Print();
-	--p1;
-	cout << "P1 : "; p1.Print();
-	p1++;
-	cout << "P1 : "; p1.Print();
-	p1--;
-	cout << "P1 : "; p1.Print();
-	p1 < p2 ? p1.Print() : p2.Print();
-}
+//int main()
+//{
+	//Point p1(3, 8);
+	//Point p2(2, 5);
+	//int a = 5, b = 3, c = 8;
+	//p1.operator++();
+	//a++; // postfix
+	//++a; // prefix
+	//cout << "P1 : "; p1.Print();
+	//++p1;
+	//cout << "P1 : "; p1.Print();
+	//--p1;
+	//cout << "P1 : "; p1.Print();
+	//p1++;
+	//cout << "P1 : "; p1.Print();
+	//p1--;
+	//cout << "P1 : "; p1.Print();
+	//p1 < p2 ? p1.Print() : p2.Print();
+//}
