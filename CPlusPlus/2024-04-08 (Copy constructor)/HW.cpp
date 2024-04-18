@@ -3,15 +3,29 @@ using namespace std;
 
 struct Carriage
 {
+private:
 	int number;
 	int places;
 	int passangers;
+public:
 	void Show()
 	{
 		cout << "======== Carriage [" << number << "] ========" << endl;
 		cout << "Places : " << places << endl;
 		cout << "Passangers : " << passangers << endl;
 	}
+	void InitCarriage(int countCarriages)
+	{
+		number = countCarriages + 1;
+		places = 20;
+		passangers = 0;
+	}
+	void SetNumber(int number) { this->number = number; }
+	void SetPlaces(int places) { this->places = places; }
+	void SetPassangers(int passangers) { this->passangers = passangers; }
+	int GetNumber() { return number; }
+	int GetPlaces() { return places; }
+	int GetPassangers() { return passangers; }
 };
 
 class Train
@@ -34,22 +48,27 @@ public:
 		countCarriages = 0;
 		carriages = nullptr;
 	}
-	Train(const Train& other)
+	Train(const Train & other)
 	{
 		model = other.model;
 		countCarriages = other.countCarriages;
-		carriages = new Carriage[other.countCarriages];
-		for (int i = 0; i < other.countCarriages; i++)
+		carriages = nullptr;
+		if (countCarriages != 0)
 		{
-			carriages[i] = other.carriages[i];
+			Carriage* temp = new Carriage[countCarriages];
+			for (int i = 0; i < countCarriages; i++)
+			{
+				temp[i].SetNumber(other.carriages[i].GetNumber());
+				temp[i].SetPlaces(other.carriages[i].GetPlaces());
+				temp[i].SetPassangers(other.carriages[i].GetPassangers());
+			}
+			carriages = temp;
 		}
 	}
-	void InitCarriage(Carriage& carriage)
-	{
-		carriage.number = countCarriages + 1;
-		carriage.places = 20;
-		carriage.passangers = 0;
-	}
+
+
+	
+	
 	void Show()
 	{
 		cout << endl;
@@ -60,6 +79,11 @@ public:
 			cout << endl;
 		}
 	}
+	
+	
+	void InitCarriage(Carriage& carriage) { carriage.InitCarriage(countCarriages); }
+
+
 	void AddCarriage()
 	{
 		Carriage* temp = new Carriage[countCarriages + 1];
@@ -73,28 +97,9 @@ public:
 		carriages = temp;
 		countCarriages++;
 	}
-	int GetCountCarriages()
-	{
-		return countCarriages;
-	}
-	string GetModel()
-	{
-		return model;
-	}
-	void AddPassanger()
-	{
-		int choice = 0;
-		bool isValidData = true;
-		while (choice < 1 || choice > countCarriages)
-		{
-			if (!isValidData) cout << "Error data. Try again!" << endl;
-			isValidData = false;
-			cout << "Enter carriage number ( 1 - " << countCarriages << " ) : ";
-			cin >> choice;
-		}
-		if (carriages[choice].passangers == carriages[choice].places) cout << "Carriage [ " << choice << " ] is full" << endl;
-		else carriages[choice - 1].passangers++;
-	}
+
+
+
 	~Train()
 	{
 		cout << "-- Destruct " << model << " --" << endl;
@@ -102,164 +107,79 @@ public:
 	}
 };
 
-
-
-
-
-
-
-void CopyTrain(Train*& trains, int& count)
+struct Depot
 {
-	if (count == 0) cout << "Trains not found!" << endl;
-	else
+	int countTrains;
+	Train* trains;
+public:
+	Depot()
+	{
+		countTrains = 0;
+		trains = nullptr;
+	}
+
+
+
+	void Show()
+	{
+		if (trains != nullptr) for (int i = 0; i < countTrains; i++) trains[i].Show();
+		else cout << "Not found trains!" << endl;
+	}
+	void AddTrain()
 	{
 		int choice = 0;
 		bool isValidData = true;
-		while (choice < 1 || choice > count)
+		while (choice < 1 || choice > 2)
 		{
 			if (!isValidData) cout << "Error data. Try again!" << endl;
 			isValidData = false;
-			for (int i = 0; i < count; i++)
-			{
-				cout << i + 1 << " - Train [ " << trains[i].GetModel() << " ]" << endl;
-			}
-			cout << "Choice train to copy : ";
+			cout << "1 - Add default train" << endl;
+			cout << "2 - Add train by name" << endl;
+			cout << "Enter your choice : ";
 			cin >> choice;
 		}
-		Train* temp = new Train[count + 1];
-		for (int i = 0; i < count; i++)
+		cout << endl;
+		Train* temp = new Train[countTrains + 1];
+		for (int i = 0; i < countTrains; i++)
 		{
 			temp[i] = Train(trains[i]);
 		}
-		temp[count] = Train(trains[choice - 1]);
+		if (choice == 2)
+		{
+			string name;
+			cout << endl;
+			cout << "Enter name : ";
+			cin >> name;
+			temp[countTrains] = Train(name);
+		}
 		if (trains != nullptr)
 			delete[] trains;
 		trains = temp;
-		count++;
-		cout << endl;
+		countTrains++;
 	}
-}
+	void AddCarriage()
+	{
 
-void AddTrain(Train*& trains, int& count)
-{
-	int choice = 0;
-	bool isValidData = true;
-	while (choice < 1 || choice > 2)
-	{
-		if (!isValidData) cout << "Error data. Try again!" << endl;
-		cout << "1 - Add default train" << endl;
-		cout << "2 - Add train with name" << endl;
-		cout << "Enter your choice : " << endl;
-		cin >> choice;
 	}
-	if (choice == 1)
-	{
-		Train* temp = new Train[count + 1];
-		for (int i = 0; i < count; i++)
-		{
-			temp[i] = trains[i];
-		}
-		temp[count] = Train();
-		if (trains != nullptr)
-			delete[] trains;
-		trains = temp;
-		count++;
-	}
-	if (choice == 2)
-	{
-		Train* temp = new Train[count + 1];
-		for (int i = 0; i < count; i++)
-		{
-			temp[i] = trains[i];
-		}
-		string model;
-		cout << "Enter train name : ";
-		cin >> model;
-		temp[count] = Train(model);
-		if (trains != nullptr)
-			delete[] trains;
-		trains = temp;
-		count++;
-	}
-}
 
-void AddPassanger(Train*& trains, int count)
-{
-	if (count == 0) cout << "Trains not found!" << endl;
-	else
-	{
-		int choice = 0;
-		bool isValidData = true;
-		while (choice < 1 || choice > count)
-		{
-			if (!isValidData) cout << "Error data. Try again!" << endl;
-			isValidData = false;
-			for (int i = 0; i < count; i++)
-			{
-				cout << i + 1 << " - Train [ " << trains[i].GetModel() << " ]" << endl;
-			}
-			cout << "Enter your choice : ";
-			cin >> choice;
-		}
-		trains[choice - 1].AddPassanger();
-		cout << endl;
-	}
-}
 
-void AddCarriage(Train*& trains, int count)
-{
-	if (count == 0) cout << "Trains not found!" << endl;
-	else
-	{
-		int choice = 0;
-		bool isValidData = true;
-		while (choice < 1 || choice > count)
-		{
-			if (!isValidData) cout << "Error data. Try again!" << endl;
-			isValidData = false;
-			for (int i = 0; i < count; i++)
-			{
-				cout << i + 1 << " - Train [ " << trains[i].GetModel() << " ]" << endl;
-			}
-			cout << "Enter your choice : ";
-			cin >> choice;
-		}
-		trains[choice - 1].AddCarriage();
-		cout << endl;
-	}
-}
 
-void ShowTrain(Train*& trains, int count)
-{
-	if (count == 0) cout << "Trains not found!" << endl;
-	else
+	~Depot()
 	{
-		int choice = 0;
-		bool isValidData = true;
-		while (choice < 1 || choice > count)
-		{
-			if (!isValidData) cout << "Error data. Try again!" << endl;
-			isValidData = false;
-			for (int i = 0; i < count; i++)
-			{
-				cout << i + 1 << " - Train [ " << trains[i].GetModel() << " ]" << endl;
-			}
-			cout << "Enter your choice : ";
-			cin >> choice;
-		}
-		trains[choice - 1].Show();
-		cout << endl;
+		delete[] trains;
 	}
-}
+};
+
+
+
 
 int Menu()
 {
 	int choice = 0;
 	bool isValidData = true;
-	while (choice < 1 || choice > 5)
+	while (choice < 1 || choice > 6)
 	{
 		if (!isValidData) cout << "Error data. Try again!" << endl;
-		cout << endl;
 		isValidData = false;
 		cout << "1 - Show train" << endl;
 		cout << "2 - Add train" << endl;
@@ -272,13 +192,10 @@ int Menu()
 	}
 	return choice;
 }
-
 enum MENU { SHOW = 1, ADD_TRAIN, COPY_TRAIN, ADD_CARRIAGE, ADD_PASSANGER, EXIT };
-
 int main()
 {
-	int countTrains = 0;
-	Train* trains = nullptr;
+	Depot depot;
 	bool isExit = false;
 	while (!isExit)
 	{
@@ -286,15 +203,14 @@ int main()
 		cout << "------------------------" << endl;
 		switch (Menu())
 		{
-		case MENU::SHOW: ShowTrain(trains, countTrains); break;
-		case MENU::ADD_TRAIN: AddTrain(trains, countTrains); break;
-		case MENU::COPY_TRAIN: CopyTrain(trains, countTrains); break;
-		case MENU::ADD_CARRIAGE: AddCarriage(trains, countTrains); break;
-		case MENU::ADD_PASSANGER: AddPassanger(trains, countTrains); break;
+		case MENU::SHOW: depot.Show(); break;
+		case MENU::ADD_TRAIN: depot.AddTrain(); break;
+		case MENU::COPY_TRAIN:  break;
+		case MENU::ADD_CARRIAGE:  break;
+		case MENU::ADD_PASSANGER:  break;
 		case MENU::EXIT: isExit = true;
 		}
 		cout << "------------------------" << endl;
 	}
 	cout << "Good bye." << endl;
-	delete[] trains;
 }
