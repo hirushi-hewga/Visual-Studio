@@ -79,9 +79,7 @@ public:
 			Carriage* temp = new Carriage[countCarriages];
 			for (int i = 0; i < countCarriages; i++)
 			{
-				temp[i].SetNumber(other.carriages[i].GetNumber());
-				temp[i].SetPlaces(other.carriages[i].GetPlaces());
-				temp[i].SetPassangers(other.carriages[i].GetPassangers());
+				temp[i] = other.carriages[i];
 			}
 			carriages = temp;
 		}
@@ -238,6 +236,32 @@ public:
 		}
 		else cout << "Not found trains!" << endl;
 	}
+	void CopyTrain()
+	{
+		if (trains == nullptr) cout << "Not found trains" << endl;
+		else{
+			int choice = 0;
+			bool isValidData = true;
+			while (choice < 1 || choice > countTrains)
+			{
+				if (!isValidData) cout << "Error data. Try again!" << endl;
+				isValidData = false;
+				cout << "Choice train ( 1 - " << countTrains << " ) to copy : ";
+				cin >> choice;
+			}
+			cout << endl;
+			Train* temp = new Train[countTrains + 1];
+			for (int i = 0; i < countTrains; i++)
+			{
+				temp[i] = Train(trains[i]);
+			}
+			temp[countTrains] = Train(trains[choice - 1]);
+			delete[] trains;
+			trains = temp;
+			countTrains++;
+		}
+	}
+
 
 
 
@@ -284,7 +308,7 @@ int main()
 		{
 		case MENU::SHOW: depot.Show(); break;
 		case MENU::ADD_TRAIN: depot.AddTrain(); break;
-		case MENU::COPY_TRAIN:  break;
+		case MENU::COPY_TRAIN: depot.CopyTrain(); break;
 		case MENU::ADD_CARRIAGE: depot.AddCarriage(); break;
 		case MENU::ADD_PASSANGER: depot.AddPassanger(); break;
 		case MENU::EXIT: isExit = true;
