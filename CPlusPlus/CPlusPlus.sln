@@ -49,6 +49,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-15 (Overload operat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-17 (Overload types)", "2024-04-17 (Overload types)\2024-04-17 (Overload types).vcxproj", "{1DE63BF7-1837-47CC-BE4B-C6025AB7106A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-19 (Overload data types)", "2024-04-19 (Overload data types)\2024-04-19 (Overload data types).vcxproj", "{86D84606-5217-4F68-8973-1CF890344139}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -241,6 +243,14 @@ Global
 		{1DE63BF7-1837-47CC-BE4B-C6025AB7106A}.Release|x64.Build.0 = Release|x64
 		{1DE63BF7-1837-47CC-BE4B-C6025AB7106A}.Release|x86.ActiveCfg = Release|Win32
 		{1DE63BF7-1837-47CC-BE4B-C6025AB7106A}.Release|x86.Build.0 = Release|Win32
+		{86D84606-5217-4F68-8973-1CF890344139}.Debug|x64.ActiveCfg = Debug|x64
+		{86D84606-5217-4F68-8973-1CF890344139}.Debug|x64.Build.0 = Debug|x64
+		{86D84606-5217-4F68-8973-1CF890344139}.Debug|x86.ActiveCfg = Debug|Win32
+		{86D84606-5217-4F68-8973-1CF890344139}.Debug|x86.Build.0 = Debug|Win32
+		{86D84606-5217-4F68-8973-1CF890344139}.Release|x64.ActiveCfg = Release|x64
+		{86D84606-5217-4F68-8973-1CF890344139}.Release|x64.Build.0 = Release|x64
+		{86D84606-5217-4F68-8973-1CF890344139}.Release|x86.ActiveCfg = Release|Win32
+		{86D84606-5217-4F68-8973-1CF890344139}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
