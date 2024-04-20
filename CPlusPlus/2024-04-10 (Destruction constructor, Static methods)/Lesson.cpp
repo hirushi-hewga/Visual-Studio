@@ -84,8 +84,9 @@ public:
 	}
 };
 
-int main()
-{	
+//int main()
+//{	
+	/*
 	Human h;
 	h.Show();
 
@@ -97,7 +98,8 @@ int main()
 
 	Human h4("Olga", 18, 100);
 	h4.Show();
+	*/
 
 
 	//Hello();
-}
+//}
