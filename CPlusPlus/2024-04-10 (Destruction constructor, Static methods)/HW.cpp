@@ -53,11 +53,46 @@ public:
 		workPhone = 0;
 		cellphone = 0;
 	}
+	Abonent(string name, string surname, string lastname) : Abonent()
+	{
+		fullname.SetName(name);
+		fullname.SetSurname(surname);
+		fullname.SetLastname(lastname);
+	}
+	Abonent(string name, string surname, string lastname, int homePhone, int workPhone, int cellphone) : Abonent(name, surname, lastname)
+	{
+		this->homePhone = homePhone;
+		this->workPhone = workPhone;
+		this->cellphone = cellphone;
+	}
+	
 
 
 
-
-	//
+	string GetName()
+	{
+		return fullname.GetName();
+	}
+	string GetSurname()
+	{
+		return fullname.GetSurname();
+	}
+	string GetLastname()
+	{
+		return fullname.GetLastname();
+	}
+	int GetHomePhone()
+	{
+		return homePhone;
+	}
+	int GetWorkPhone()
+	{
+		return workPhone;
+	}
+	int GetCellphone()
+	{
+		return cellphone;
+	}
 };
 
 
@@ -73,11 +108,69 @@ public:
 		countAbonents = 0;
 		abonents = nullptr;
 	}
-
-
-
-
-	//
+	
+	
+	
+	
+	void Show()
+	{
+		cout << endl;
+		if (countAbonents != 0)
+		{
+			for (int i = 0; i < countAbonents; i++)
+			{
+				cout << "------ Abonent " << i + 1 << " -------" << endl;
+				cout << "Full name : " << abonents[i].GetName() << ' ' << abonents[i].GetSurname() << ' ' << abonents[i].GetLastname() << endl;
+				cout << "Home phone : " << abonents[i].GetHomePhone() << endl;
+				cout << "Work phone : " << abonents[i].GetWorkPhone() << endl;
+				cout << "Cellphone : " << abonents[i].GetCellphone() << endl;
+			}
+		}
+		else cout << "Abonents not found." << endl;
+	}
+	void Add()
+	{
+		cout << endl;
+		int choice = 0;
+		bool isValidData = true;
+		while (choice < 1 || choice > 2)
+		{
+			if (!isValidData) cout << "Error choice. Try again!" << endl;
+			isValidData = false;
+			cout << "1 - Total fill abonent" << endl;
+			cout << "2 - Fill by full name" << endl;
+			cout << "Enter your choice : ";
+			cin >> choice;
+		}
+		Abonent* temp = new Abonent[countAbonents + 1];
+		for (int i = 0; i < countAbonents; i++)
+		{
+			temp[i] = abonents[i];
+		}
+		if (choice == 2)
+		{
+			string name, surname, lastname;
+			cout << "Enter name : "; cin >> name;
+			cout << "Enter surname : "; cin >> surname;
+			cout << "Enter lastname : "; cin >> lastname;
+			temp[countAbonents] = Abonent(name, surname, lastname);
+		}
+		if (choice == 1)
+		{
+			string name, surname, lastname;
+			int homePhone, workPhone, cellphone;
+			cout << "Enter name : "; cin >> name;
+			cout << "Enter surname : "; cin >> surname;
+			cout << "Enter lastname : "; cin >> lastname;
+			cout << "Enter homePhone : "; cin >> homePhone;
+			cout << "Enter workPhone : "; cin >> workPhone;
+			cout << "Enter cellphone : "; cin >> cellphone;
+			temp[countAbonents] = Abonent(name, surname, lastname, homePhone, workPhone, cellphone);
+		}
+		if (abonents != nullptr) delete[] abonents;
+		abonents = temp;
+		countAbonents++;
+	}
 
 
 
@@ -114,27 +207,19 @@ enum MENU { SHOW_ALL = 1, SHOW_BY_FULLNAME, ADD, DELETE, LOAD_FROM_FILE, EXIT };
 int main()
 {
 	AbonentList abonents;
-	int choice;
-	bool isValidData = true;
 	bool isExit = false;
 	while (!isExit)
 	{
 		cout << "========================" << endl;
-		while (choice < 1 || choice > 6)
+		switch (Menu())
 		{
-			if (!isValidData) cout << "Error choice. Try again!";
-			isValidData = false;
-			switch (Menu())
-			{
-			case MENU::SHOW_ALL:  break;
-			case MENU::SHOW_BY_FULLNAME:  break;
-			case MENU::ADD:  break;
-			case MENU::DELETE:  break;
-			case MENU::LOAD_FROM_FILE:  break;
-			case MENU::EXIT: isExit = true; break;
-			}
+		case MENU::SHOW_ALL: abonents.Show(); break;
+		case MENU::SHOW_BY_FULLNAME:  break;
+		case MENU::ADD: abonents.Add(); break;
+		case MENU::DELETE:  break;
+		case MENU::LOAD_FROM_FILE:  break;
+		case MENU::EXIT: isExit = true; break;
 		}
-		isValidData = true;
 		cout << "========================" << endl;
 	}
 	cout << "Good bye." << endl;
