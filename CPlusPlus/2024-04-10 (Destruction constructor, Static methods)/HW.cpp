@@ -343,15 +343,15 @@ public:
 			int cellphone = atoi(buffcellphone);
 			Abonent readHuman;
 			readHuman.FillFromFile(name, surname, lastname, cellphone, workphone, cellphone);
-			count++;
-			Abonent* temp = new Abonent[count];
-			for (int i = 0; i < count - 1; i++)
+			Abonent* temp = new Abonent[count + 1];
+			for (int i = 0; i < count; i++)
 			{
 				temp[i].Copy(abonents[i]);
 			}
 			temp[count] = readHuman;
 			delete abonents;
 			abonents = temp;
+			count++;
 		}
 	}
 
