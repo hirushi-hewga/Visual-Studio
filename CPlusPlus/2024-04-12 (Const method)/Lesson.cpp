@@ -56,33 +56,41 @@ public:
 	{
 		return sum;
 	}
-	double SetSum()const
+	double GetSum()const
+	{
+		return sum;
+	}
+	double SetSum()
 	{
 		sum += GetIncome();
 		return sum;
-
 	}
 };
 
 
 
 
-int main()
-{
-	Account ac1(2000, 5);
+//int main()
+//{
+	/*
+	int r;
+	cout << "Enter raate : ";
+	cin >> r;
+	Account ac1(2000, r);
 	const Account ac2(5000, 10);
 
 	cout << "Get Rate 1 : " << ac1.GetRate() << endl;
 	cout << "Get Rate 2 : " << ac2.GetRate() << endl;
 
-	cout << "Get Rate 1 : " << ac1.GetSum() << endl;
-	cout << "Get Rate 2 : " << ac2.GetSum() << endl;
+	cout << "Get Sum 1 : " << ac1.GetSum() << endl;
+	cout << "Get Sum 2 : " << ac2.GetSum() << endl;
 
 	cout << "Get Rate 1 : " << ac1.GetIncome() << endl;
 	cout << "Get Rate 2 : " << ac2.GetIncome() << endl;
 
-	cout << "Get Rate 2 : " << ac2.SetSum() << endl;
-	cout << "Get Rate 2 : " << ac2.SetSum() << endl;
+	cout << "Set Sum 1 : " << ac2.SetSum() << endl;
+	//cout << "Set Sum 2 : " << ac2.SetSum() << endl; // error
+	*/
 
 
 
@@ -101,4 +109,4 @@ int main()
 	//independencyDay.day = 28;  // error
 	//independencyDay.month = 6; // error
 	*/
-}
+//}
