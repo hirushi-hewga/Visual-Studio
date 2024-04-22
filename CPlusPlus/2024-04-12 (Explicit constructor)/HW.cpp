@@ -6,7 +6,7 @@ class Array
 	int size;
 	long* arr;
 public:
-	Array():size(0), arr(nullptr){}
+	Array() :size(0), arr(nullptr) {}
 	explicit Array(int size)
 	{
 		this->size = size;
@@ -30,6 +30,19 @@ public:
 		}
 	}
 
+
+
+	void Show()const
+	{
+		for (int i = 0; i < size; i++)
+		{
+			cout << arr[i] << ' ';
+		}
+		cout << endl;
+	}
+
+
+
 	~Array()
 	{
 		delete[] arr;
@@ -41,7 +54,80 @@ class ArrayList
 	int count;
 	Array* array;
 public:
-	ArrayList():count(0), array(nullptr){}
+	ArrayList() :count(0), array(nullptr) {}
+
+
+
+	void Add()
+	{
+		int choice = 0;
+		bool isValidData = true;
+		while (choice < 1 || choice > 2)
+		{
+			if (!isValidData) cout << "Error data. Try again!" << endl;
+			isValidData = false;
+			cout << endl;
+			cout << "1 - Add empty array" << endl;
+			cout << "2 - Add array by size" << endl;
+			cout << "Enter your choice : ";
+			cin >> choice;
+		}
+		if (choice == 1)
+		{
+			Array* temp = new Array[count + 1];
+			for (int i = 0; i < count; i++)
+			{
+				temp[i] = Array(array[i]);
+			}
+			temp[count] = Array();
+			if (array != nullptr)
+				delete[] array;
+			array = temp;
+			count++;
+		}
+		if (choice == 2)
+		{
+			Array* temp = new Array[count + 1];
+			for (int i = 0; i < count; i++)
+			{
+				temp[i] = Array(array[i]);
+			}
+			int size = 0;
+			cout << "Enter array size : "; cin >> size;
+			temp[count] = Array(size);
+			if (array != nullptr)
+				delete[] array;
+			array = temp;
+			count++;
+		}
+	}
+	void Show()const
+	{
+		for (int i = 0; i < count; i++)
+		{
+			cout << "======== Array " << i + 1 << " ========" << endl;
+			array[i].Show();
+			cout << endl;
+		}
+	}
+	void Init()
+	{
+		int choice = 0;
+		bool isValidData = true;
+		while (choice < 1 || choice > 3)
+		{
+			if (!isValidData) cout << "Error data. Try again!" << endl;
+			isValidData = false;
+			cout << endl;
+			cout << "1 - Init random" << endl;
+			cout << "2 - Init with klaviatura" << endl;
+			cout << "3 - Default Init (0)" << endl;
+			cout << "Enter your choice : ";
+			cin >> choice;
+		}
+	}
+
+
 
 	~ArrayList()
 	{
@@ -63,7 +149,7 @@ int Menu()
 		cout << endl;
 		cout << "1 - Add array" << endl;
 		cout << "2 - Init array" << endl;
-		cout << "3 - Show array" << endl;
+		cout << "3 - Show all array" << endl;
 		cout << "4 - Add element to array" << endl;
 		cout << "5 - Remove array element" << endl;
 		cout << "6 - Sort array" << endl;
@@ -85,9 +171,9 @@ int main()
 		cout << "========================" << endl;
 		switch (Menu())
 		{
-		case MENU::ADD:  break;
-		case MENU::INIT:  break;
-		case MENU::SHOW:  break;
+		case MENU::ADD: array_list.Add(); break;
+		case MENU::INIT: array_list.Init(); break;
+		case MENU::SHOW: array_list.Show(); break;
 		case MENU::ADD_ELEM:  break;
 		case MENU::RM_ELEM:  break;
 		case MENU::SORT:  break;
