@@ -70,8 +70,8 @@ public:
 };
 
 
-int main()
-{
+//int main()
+//{
 	/*
 	int size = 4;
 	Array arr(size);
@@ -108,4 +108,4 @@ int main()
 	DoSomething(); // double ===> float
 	double res = 5.0 / 4;
 	*/
-}
+//}
