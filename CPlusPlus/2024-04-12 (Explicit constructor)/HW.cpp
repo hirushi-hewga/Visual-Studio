@@ -40,6 +40,29 @@ public:
 		}
 		cout << endl;
 	}
+	void InitRand()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			arr[i] = rand() % 101 - 50;
+		}
+	}
+	void Init()
+	{
+		long value{};
+		cout << "Array value : "; cin >> value;
+		for (int i = 0; i < size; i++)
+		{
+			arr[i] = value;
+		}
+	}
+	void InitDefault()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			arr[i] = 0;
+		}
+	}
 
 
 
@@ -112,18 +135,37 @@ public:
 	}
 	void Init()
 	{
-		int choice = 0;
-		bool isValidData = true;
-		while (choice < 1 || choice > 3)
-		{
-			if (!isValidData) cout << "Error data. Try again!" << endl;
-			isValidData = false;
-			cout << endl;
-			cout << "1 - Init random" << endl;
-			cout << "2 - Init with klaviatura" << endl;
-			cout << "3 - Default Init (0)" << endl;
-			cout << "Enter your choice : ";
-			cin >> choice;
+		if (count == 0) cout << "Error data. Arrays not found!" << endl;
+		else{
+			int choice = 0;
+			bool isValidData = true;
+			while (choice < 1 || choice > 3)
+			{
+				if (!isValidData) cout << "Error data. Try again!" << endl;
+				isValidData = false;
+				cout << endl;
+				cout << "1 - Init random" << endl;
+				cout << "2 - Init with klaviatura" << endl;
+				cout << "3 - Default Init (0)" << endl;
+				cout << "Enter your choice : ";
+				cin >> choice;
+			}
+			isValidData = true;
+			int choice2 = 0;
+			while (choice2 < 1 || choice2 > count)
+			{
+				if (!isValidData) cout << "Error data. Try again!" << endl;
+				isValidData = false;
+				cout << endl;
+				Show();
+				cout << "Choice array : "; cin >> choice2;
+			}
+			if (choice == 1)
+				array[choice2 - 1].InitRand();
+			if (choice == 2)
+				array[choice2 - 1].Init();
+			if (choice == 3)
+				array[choice2 - 1].InitDefault();
 		}
 	}
 
