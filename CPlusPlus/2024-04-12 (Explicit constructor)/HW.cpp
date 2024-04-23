@@ -7,13 +7,15 @@ class Array
 	long* arr;
 public:
 	Array() :size(0), arr(nullptr) {}
-	explicit Array(int size)
+	Array(int size):size(size)
 	{
-		this->size = size;
-		arr = new long[size];
-		for (int i = 0; i < size; i++)
-		{
-			arr[i] = 0;
+		arr = nullptr;
+		if (size != 0) {
+			arr = new long[size];
+			for (int i = 0; i < size; i++)
+			{
+				*(arr + i) = 0;
+			}
 		}
 	}
 	Array(const Array& other)
@@ -29,6 +31,7 @@ public:
 			}
 		}
 	}
+
 
 
 
@@ -63,6 +66,22 @@ public:
 			arr[i] = 0;
 		}
 	}
+	int GetSize()const
+	{
+		return size;
+	}
+	long GetArray(int index)const
+	{
+		return arr[index];
+	}
+	void SetSize(int size)
+	{
+		this->size = size;
+	}
+	void SetArr(int index, long value)
+	{
+		arr[index] = value;
+	}
 
 
 
@@ -71,6 +90,8 @@ public:
 		delete[] arr;
 	}
 };
+
+
 
 class ArrayList
 {
@@ -100,7 +121,9 @@ public:
 			Array* temp = new Array[count + 1];
 			for (int i = 0; i < count; i++)
 			{
-				temp[i] = Array(array[i]);
+				temp[i].SetSize(array[i].GetSize());
+				for (int j = 0; j < array[i].GetSize(); j++)
+					temp[i].SetArr(j, array[i].GetArray(j));
 			}
 			temp[count] = Array();
 			if (array != nullptr)
@@ -110,13 +133,22 @@ public:
 		}
 		if (choice == 2)
 		{
+			isValidData = true;
 			Array* temp = new Array[count + 1];
 			for (int i = 0; i < count; i++)
 			{
-				temp[i] = Array(array[i]);
+				temp[i].SetSize(array[i].GetSize());
+				for (int j = 0; j < array[i].GetSize(); j++)
+					temp[i].SetArr(j, array[i].GetArray(j));
 			}
-			int size = 0;
-			cout << "Enter array size : "; cin >> size;
+			int size = -1;
+			while (size < 0)
+			{
+				if (!isValidData) cout << "Error data. Try again!" << endl;
+				isValidData = false;
+				cout << endl;
+				cout << "Enter array size : "; cin >> size;
+			}
 			temp[count] = Array(size);
 			if (array != nullptr)
 				delete[] array;
@@ -129,7 +161,8 @@ public:
 		for (int i = 0; i < count; i++)
 		{
 			cout << "======== Array " << i + 1 << " ========" << endl;
-			array[i].Show();
+			if (array[i].GetSize() == 0) cout << "      :EMPTY_ARRAY:" << endl;
+			else array[i].Show();
 			cout << endl;
 		}
 	}
