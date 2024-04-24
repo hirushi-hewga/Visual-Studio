@@ -69,6 +69,25 @@ void ShowAll(Array* array_list, int count)
 		cout << endl;
 	}
 }
+enum ADD_MENU { EMPTY = 1, BY_SIZE };
+void AddArray(Array*& array_list, int& count)
+{
+	int choice = 0;
+	bool isValidData = true;
+	while (choice < 1 || choice > 2)
+	{
+		if (!isValidData) cout << "Error choice. Try again!" << endl;
+		isValidData = false;
+		cout << "1 - Add empty array" << endl;
+		cout << "2 - Add array by size" << endl;
+		cout << "Enter your choice : " << endl; cin >> choice;
+	}
+	switch (choice)
+	{
+	case ADD_MENU::EMPTY:  break;
+	case ADD_MENU::BY_SIZE:  break;
+	}
+}
 
 
 
@@ -106,9 +125,9 @@ int main()
 		cout << "========================" << endl;
 		switch (Menu())
 		{
-		case MENU::ADD: ShowAll(array_list, count) break;
+		case MENU::ADD:  break;
 		case MENU::INIT:  break;
-		case MENU::SHOW:  break;
+		case MENU::SHOW: ShowAll(array_list, count); break;
 		case MENU::ADD_ELEM:  break;
 		case MENU::RM_ELEM:  break;
 		case MENU::SORT:  break;
