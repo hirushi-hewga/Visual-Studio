@@ -67,6 +67,130 @@ public:
 		}
 		if (size == 0) cout << "Error. Empty array!" << endl;
 	}
+	void AddElement()
+	{
+		long* temp = new long[size + 1];
+		for (int i = 0; i < size; i++)
+		{
+			temp[i] = arr[i];
+		}
+		if (arr != nullptr)
+			delete[] arr;
+		temp[size] = 0;
+		arr = temp;
+		size++;
+	}
+	void DeleteElementByIndex()
+	{
+		if (size >= 1) {
+			Show();
+			int index = -1;
+			bool isValidData = true;
+			while (index < 0 || index > size - 1) {
+				if (!isValidData) cout << "Error index. Try again!" << endl;
+				isValidData = false;
+				cout << "Enter element index to delete : ";
+				cin >> index;
+			}
+			long* temp = new long[size - 1];
+			for (int i = 0; i < index; i++)
+			{
+				temp[i] = arr[i];
+			}
+			for (int i = index + 1; i < size; i++)
+			{
+				temp[i - 1] = arr[i];
+			}
+			if (arr != nullptr)
+				delete[] arr;
+			arr = temp;
+			size--;
+		}
+		else cout << "Error. Empty array!" << endl;
+	}
+	void SortArray1(long* arr, int low, int high)
+	{
+		if (low < high) {
+			long pivot = arr[high];
+			int i = low - 1;
+
+			for (int j = low; j <= high - 1; j++) {
+				if (arr[j] < pivot) {
+					i++;
+					long temp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = temp;
+				}
+			}
+			long temp = arr[i + 1];
+			arr[i + 1] = arr[high];
+			arr[high] = temp;
+
+			int value = i + 1;
+
+			SortArray1(arr, low, value - 1);
+			SortArray1(arr, value + 1, high);
+		}
+	}
+	void SortArray2(long* arr, int low, int high)
+	{
+		if (low < high) {
+			long pivot = arr[high];
+			int i = low - 1;
+
+			for (int j = low; j <= high - 1; j++) {
+				if (arr[j] > pivot) {
+					i++;
+					long temp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = temp;
+				}
+			}
+			long temp = arr[i + 1];
+			arr[i + 1] = arr[high];
+			arr[high] = temp;
+
+			int pi = i + 1;
+
+			SortArray2(arr, low, pi - 1);
+			SortArray2(arr, pi + 1, high);
+		}
+	}
+	void QuickSort()
+	{
+		if (size != 0)
+		{
+			int choice = 0;
+			bool isValidData = true;
+			while (choice < 1 || choice > 2)
+			{
+				if (!isValidData) cout << "Error choice. Try again!" << endl;
+				isValidData = false;
+				cout << "1 - Sort by growth" << endl;
+				cout << "2 - Sort by decline" << endl;
+				cout << "Enter your choice : ";
+				cin >> choice;
+			}
+			if (choice == 1) SortArray1(arr, 0, size - 1);
+			if (choice == 2) SortArray2(arr, 0, size - 1);
+		}
+		else cout << "Error. Empty array!" << endl;
+	}
+	void GetValue()
+	{
+		long min = arr[0], max = arr[0], average = 0;
+		for (int i = 0; i < size; i++)
+		{
+			if (arr[i] < min) min = arr[i];
+			if (arr[i] > max) max = arr[i];
+			average += arr[i];
+		}
+		average /= size;
+		Show();
+		cout << "Min value : " << min << endl;
+		cout << "Max value : " << max << endl;
+		cout << "Average number : " << average << endl;
+	}
 
 
 
@@ -87,10 +211,10 @@ void Init(Array& arr)
 	{
 		if (!isValidData) cout << "Error choice. Try again!" << endl;
 		isValidData = false;
-		cout << " - Fill random" << endl;
-		cout << " - Fill from keyboard" << endl;
-		cout << " - Init default (0)" << endl;
-		cout << "Enter your choice : " << endl;
+		cout << "1 - Fill random" << endl;
+		cout << "2 - Fill from keyboard" << endl;
+		cout << "3 - Init default (0)" << endl;
+		cout << "Enter your choice : ";
 		cin >> choice;
 	}
 	switch (choice)
@@ -138,10 +262,10 @@ int main()
 		{
 		case MENU::INIT: Init(arr); break;
 		case MENU::SHOW: arr.Show(); break;
-		case MENU::ADD_ELEM:  break;
-		case MENU::RM_ELEM:  break;
-		case MENU::SORT:  break;
-		case MENU::GET_VALUES:  break;
+		case MENU::ADD_ELEM: arr.AddElement(); break;
+		case MENU::RM_ELEM: arr.DeleteElementByIndex(); break;
+		case MENU::SORT: arr.QuickSort(); break;
+		case MENU::GET_VALUES: arr.GetValue(); break;
 		case MENU::EXIT: isExit = true;
 		}
 	}
