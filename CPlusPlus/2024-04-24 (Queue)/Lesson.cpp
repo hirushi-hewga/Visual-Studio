@@ -1,17 +1,18 @@
 #include <iostream>
+#include <conio.h>
 using namespace std;
 
-
+template<typename T_arr>
 class Queue
 {
-	int* arr;
+	T_arr* arr;
 	int maxSize;
 	int top;
 public:
 	Queue() = delete;
 	Queue(int maxSize)
 	{
-		arr = new int[maxSize];
+		arr = new T_arr[maxSize];
 		top = 0;
 	}
 
@@ -25,14 +26,14 @@ public:
 	{
 		return top == 0;
 	}
-	void Enqueue(int element)
+	void Enqueue(T_arr element)
 	{
 		if (!IsFull())
 		{
 			arr[top++] = element;
 		}
 	}
-	int Dequeue()
+	T_arr Dequeue()
 	{
 		if (!IsEmpty())
 		{
@@ -54,7 +55,7 @@ public:
 	{
 		top = 0;
 	}
-	int Peek()
+	T_arr Peek()
 	{
 		if (IsEmpty()) return 0;
 		return arr[0];
