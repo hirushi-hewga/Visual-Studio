@@ -35,7 +35,7 @@ public:
 
 	void Show(int num)const
 	{
-		cout << "====== Array " << num + 1 << " ========" << endl;
+		cout << "======== Array " << num + 1 << " ========" << endl;
 		if (size != 0)
 		{
 			for (int i = 0; i < size; i++)
@@ -43,7 +43,7 @@ public:
 				cout << arr[i] << ' ';
 			}
 		}
-		else cout << "     :EMPTY_ARRAY:" << endl;
+		else cout << "      :EMPTY_ARRAY:" << endl;
 		cout << endl;
 	}
 
@@ -82,11 +82,29 @@ void AddArray(Array*& array_list, int& count)
 		cout << "2 - Add array by size" << endl;
 		cout << "Enter your choice : " << endl; cin >> choice;
 	}
+	Array* temp = new Array[count + 1];
+	for (int i = 0; i < count; i++)
+	{
+		temp[i] = Array(array_list[i]);
+	}
 	switch (choice)
 	{
-	case ADD_MENU::EMPTY:  break;
-	case ADD_MENU::BY_SIZE:  break;
+	case ADD_MENU::EMPTY: temp[count] = Array(); break;
+	case ADD_MENU::BY_SIZE:
+		int size = -1;
+		isValidData = true;
+		while (size < 0)
+		{
+			if (!isValidData) cout << "Error choice. Try again!" << endl;
+			isValidData = false;
+			cout << "Enter size new array : "; cin >> size;
+		}
+		temp[count] = Array(size);
 	}
+	if (array_list != nullptr)
+		delete[] array_list;
+	array_list = temp;
+	count++;
 }
 
 
@@ -118,14 +136,14 @@ int main()
 {
 	srand(time(NULL));
 	int count = 0;
-	Array* array_list;
+	Array* array_list = nullptr;
 	bool isExit = false;
 	while (!isExit)
 	{
 		cout << "========================" << endl;
 		switch (Menu())
 		{
-		case MENU::ADD:  break;
+		case MENU::ADD: AddArray(array_list, count); break;
 		case MENU::INIT:  break;
 		case MENU::SHOW: ShowAll(array_list, count); break;
 		case MENU::ADD_ELEM:  break;

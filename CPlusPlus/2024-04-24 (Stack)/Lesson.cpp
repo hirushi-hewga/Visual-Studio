@@ -148,11 +148,15 @@ bool IsValidCode(string code)
 			st.Pop();
 		}
 	}
+	return st.IsEmpty();
 }
 int main()
 {
 	string code = "class Stack { void Print() { if(){} } };";
-
+	if (IsValidCode(code))
+		cout << "Code is valid" << endl;
+	else
+		cout << "Code is invalid" << endl;
 
 
 
