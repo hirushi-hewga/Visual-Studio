@@ -178,14 +178,16 @@ public:
 	}
 	void GetValue()
 	{
-		long min = arr[0], max = arr[0], average = 0;
+		long* min = arr;
+		long* max = arr;
+		long average = 0;
 		for (int i = 0; i < size; i++)
 		{
 			if (arr[i] < min) min = arr[i];
 			if (arr[i] > max) max = arr[i];
 			average += arr[i];
 		}
-		average /= size;
+		average = average / size;
 		Show();
 		cout << "Min value : " << min << endl;
 		cout << "Max value : " << max << endl;
