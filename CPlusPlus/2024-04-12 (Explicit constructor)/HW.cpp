@@ -1,4 +1,4 @@
-#include <iostream>
+ #include <iostream>
 using namespace std;
 
 class Array
@@ -20,22 +20,18 @@ public:
 	}
 	Array(const Array& other):size(other.size)
 	{
-		arr = nullptr;
-		if (size != 0)
+		arr = new long[size];
+		for (int i = 0; i < size; i++)
 		{
-			arr = new long[size];
-			for (int i = 0; i < size; i++)
-			{
-				arr[i] = other.arr[i];
-			}
+			arr[i] = other.arr[i];
 		}
 	}
 
 
 
-	void Show(int num)const
+	void Show()const
 	{
-		cout << "======== Array " << num + 1 << " ========" << endl;
+		cout << "======== Array ========" << endl;
 		if (size != 0)
 		{
 			for (int i = 0; i < size; i++)
@@ -45,6 +41,31 @@ public:
 		}
 		else cout << "      :EMPTY_ARRAY:" << endl;
 		cout << endl;
+	}
+	void FillRandom()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			arr[i] = rand() % 101 - 50;
+		}
+		if (size == 0) cout << "Error. Empty array!" << endl;
+	}
+	void FillFromKeyboard()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			cout << "Enter element : ";
+			cin >> arr[i];
+		}
+		if (size == 0) cout << "Error. Empty array!" << endl;
+	}
+	void FillDefault()
+	{
+		for (int i = 0; i < size; i++)
+		{
+			arr[i] = 0;
+		}
+		if (size == 0) cout << "Error. Empty array!" << endl;
 	}
 
 
@@ -57,55 +78,29 @@ public:
 
 
 
-void ShowAll(Array* array_list, int count)
-{
-	if (count == 0) cout << "Not found arrays." << endl;
-	else
-	{
-		for (int i = 0; i < count; i++)
-		{
-			array_list[i].Show(i);
-		}
-		cout << endl;
-	}
-}
-enum ADD_MENU { EMPTY = 1, BY_SIZE };
-void AddArray(Array*& array_list, int& count)
+enum FILL { RANDOM = 1, KEYBOARD, DEFAULT };
+void Init(Array& arr)
 {
 	int choice = 0;
 	bool isValidData = true;
-	while (choice < 1 || choice > 2)
+	while (choice < 1 || choice > 3)
 	{
 		if (!isValidData) cout << "Error choice. Try again!" << endl;
 		isValidData = false;
-		cout << "1 - Add empty array" << endl;
-		cout << "2 - Add array by size" << endl;
-		cout << "Enter your choice : " << endl; cin >> choice;
-	}
-	Array* temp = new Array[count + 1];
-	for (int i = 0; i < count; i++)
-	{
-		temp[i] = Array(array_list[i]);
+		cout << " - Fill random" << endl;
+		cout << " - Fill from keyboard" << endl;
+		cout << " - Init default (0)" << endl;
+		cout << "Enter your choice : " << endl;
+		cin >> choice;
 	}
 	switch (choice)
 	{
-	case ADD_MENU::EMPTY: temp[count] = Array(); break;
-	case ADD_MENU::BY_SIZE:
-		int size = -1;
-		isValidData = true;
-		while (size < 0)
-		{
-			if (!isValidData) cout << "Error choice. Try again!" << endl;
-			isValidData = false;
-			cout << "Enter size new array : "; cin >> size;
-		}
-		temp[count] = Array(size);
+	case FILL::RANDOM: arr.FillRandom(); break;
+	case FILL::KEYBOARD: arr.FillFromKeyboard(); break;
+	case FILL::DEFAULT: arr.FillDefault();
 	}
-	if (array_list != nullptr)
-		delete[] array_list;
-	array_list = temp;
-	count++;
 }
+
 
 
 
@@ -113,39 +108,36 @@ int Menu()
 {
 	int choice = 0;
 	bool isValidData = true;
-	while (choice < 1 || choice > 8)
+	while (choice < 1 || choice > 7)
 	{
 		if (!isValidData) cout << "Error data. Try again!" << endl;
 		isValidData = false;
 		cout << endl;
-		cout << "1 - Add array" << endl;
-		cout << "2 - Init array" << endl;
-		cout << "3 - Show all array" << endl;
-		cout << "4 - Add element to array" << endl;
-		cout << "5 - Remove array element" << endl;
-		cout << "6 - Sort array" << endl;
-		cout << "7 - Get min max element, average value from array" << endl;
-		cout << "8 - Exit" << endl;
+		cout << "1 - Init array" << endl;
+		cout << "2 - Show all array" << endl;
+		cout << "3 - Add element to array" << endl;
+		cout << "4 - Remove array element" << endl;
+		cout << "5 - Sort array" << endl;
+		cout << "6 - Get min max element, average value from array" << endl;
+		cout << "7 - Exit" << endl;
 		cout << "Enter your choice : ";
 		cin >> choice;
 	}
 	return choice;
 }
-enum MENU { ADD = 1, INIT, SHOW, ADD_ELEM, RM_ELEM, SORT, GET_VALUES, EXIT };
+enum MENU { INIT = 1, SHOW, ADD_ELEM, RM_ELEM, SORT, GET_VALUES, EXIT };
 int main()
 {
 	srand(time(NULL));
-	int count = 0;
-	Array* array_list = nullptr;
+	Array arr;
 	bool isExit = false;
 	while (!isExit)
 	{
 		cout << "========================" << endl;
 		switch (Menu())
 		{
-		case MENU::ADD: AddArray(array_list, count); break;
-		case MENU::INIT:  break;
-		case MENU::SHOW: ShowAll(array_list, count); break;
+		case MENU::INIT: Init(arr); break;
+		case MENU::SHOW: arr.Show(); break;
 		case MENU::ADD_ELEM:  break;
 		case MENU::RM_ELEM:  break;
 		case MENU::SORT:  break;
