@@ -55,6 +55,50 @@ public:
 		int seconds = s + other.s + m * 60 + other.m * 60 + h * 3600 + other.h * 3600;
 		return Time(seconds);
 	}
+	Time operator -(const Time& other)const
+	{
+		int s1 = s + m * 60 + h * 3600;
+		int s2 = other.s + other.m * 60 + other.h * 3600;
+		return Time(s1 - s2);
+	}
+	Time operator *(int number)const
+	{
+		int seconds = s + m * 60 + h * 3600;
+		return Time(seconds * number);
+	}
+	Time operator /(int number)const
+	{
+		int seconds = s + m * 60 + h * 3600;
+		return Time(seconds / number);
+	}
+	bool operator >(const Time& other)const
+	{
+		int s1 = s + m * 60 + h * 3600;
+		int s2 = other.s + other.m * 60 + other.h * 3600;
+		return s1 > s2;
+	}
+	bool operator <(const Time& other)const
+	{
+		int s1 = s + m * 60 + h * 3600;
+		int s2 = other.s + other.m * 60 + other.h * 3600;
+		return s1 < s2;
+	}
+	bool operator >=(const Time& other)const
+	{
+		return !(*this < other);
+	}
+	bool operator <=(const Time& other)const
+	{
+		return !(*this > other);
+	}
+	bool operator ==(const Time& other)const
+	{
+		return !(*this < other && *this > other);
+	}
+	bool operator !=(const Time& other)const
+	{
+		return !(*this == other);
+	}
 #pragma endregion
 };
 
@@ -74,4 +118,62 @@ int main()
 	cout << "T2 : "; t2.Show();
 	Time newTime = t1 + t2;
 	cout << "T1 + T2 : "; newTime.Show();
+	newTime = t1 - t2;
+	cout << "T1 - T2 : "; newTime.Show();
+	newTime = t1 * 2;
+	cout << "T1 * 2 : "; newTime.Show();
+	newTime = t2 * 2;
+	cout << "T2 * 2 : "; newTime.Show();
+	newTime = t1 / 2;
+	cout << "T1 / 2 : "; newTime.Show();
+	newTime = t2 / 2;
+	cout << "T2 / 2 : "; newTime.Show();
+	cout << "----------------" << endl;
+	//============== > ===============
+
+	if (t1 > t2)
+		cout << "T1 is > T2" << endl;
+	else
+		cout << "T1 is < T2" << endl;
+	cout << "----------------" << endl;
+
+	//============== < ===============
+
+	if (t1 < t2)
+		cout << "T1 is < T2" << endl;
+	else
+		cout << "T1 is > T2" << endl;
+	cout << "----------------" << endl;
+
+	//============== >= ==============
+
+	if (t1 >= t2)
+		cout << "T1 is >= T2" << endl;
+	else
+		cout << "T1 is < T2" << endl;
+	cout << "----------------" << endl;
+
+	//============== <= ==============
+
+	if (t1 <= t2)
+		cout << "T1 is <= T2" << endl;
+	else
+		cout << "T1 is > T2" << endl;
+	cout << "----------------" << endl;
+
+	//============== == ==============
+
+	if (t1 == t2)
+		cout << "T1 == T2" << endl;
+	else
+		cout << "T1 != T2" << endl;
+	cout << "----------------" << endl;
+
+	//============== != ==============
+
+	if (t1 != t2)
+		cout << "T1 != T2" << endl;
+	else
+		cout << "T1 == T2" << endl;
+	cout << "----------------" << endl;
 }
