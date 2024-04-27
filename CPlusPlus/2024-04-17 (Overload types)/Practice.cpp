@@ -40,9 +40,9 @@ public:
 	}
 };
 
-int main()
-{
-	int size = 16;
+//int main()
+//{
+	/*int size = 16;
 	Array arr(size);
 	arr.Print();
 	for (int i = 0; i < size; i++)
@@ -52,5 +52,5 @@ int main()
 	cout << endl;
 	arr.Print();
 	arr(184);
-	arr.Print();
-}
+	arr.Print();*/
+//}
