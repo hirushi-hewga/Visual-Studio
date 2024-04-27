@@ -109,8 +109,9 @@ public:
 
 };
 
-int main()
-{
+//int main()
+//{
+	/*
 	Point p1(3, 8);
 	Point p2(2, 5);
 
@@ -170,4 +171,5 @@ int main()
 	{
 		cout << "p1 is != p2" << endl;
 	}
-}
+	*/
+//}
