@@ -8,7 +8,7 @@ class Point
 public:
 	Point() : x(0), y(0) {}
 	Point(int x, int y) : x(x), y(x) {}
-	void Print()
+	void Show()
 	{
 		cout << "X : " << x << " ,  Y : " << y << endl;
 	}
@@ -53,8 +53,8 @@ public:
 	}
 	Point operator !()
 	{
-		-this->x;
-		-this->y;
+		this->x *= -1;
+		this->y *= -1;
 		return *this;
 	}
 #pragma endregion
@@ -80,7 +80,25 @@ public:
 
 
 
-int main()
-{
+//int main()
+//{
+	/*
+	Point p1(3, 8);
+	cout << "P1 | "; p1.Show();
+	p1++;
+	cout << "P1 | "; p1.Show();
+	p1--;
+	cout << "P1 | "; p1.Show();
+	!p1;
+	cout << "P1 | "; p1.Show();
+	Point p2(3, 8);
+	cout << "P2 | "; p2.Show();
 
-}
+	if (p1 > p2)
+		cout << "P1 is > P2";
+	else if (p1 < p2)
+		cout << "P1 is < P2";
+	else
+		cout << "P1 == P2";
+	*/
+//}

@@ -1,0 +1,3 @@
+﻿  HW.cpp
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\Users\User\Desktop\Visual Studio\hirushi-hewga\Visual-Studio\CPlusPlus\x64\Debug\2024-04-19 (Move constructor, Operator =).exe : fatal error LNK1120: 1 unresolved externals
