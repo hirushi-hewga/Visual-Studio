@@ -13,5 +13,6 @@ class Book
 public:
 	Book();
 	Book(string t, int y, string a, int p, GENRE g):title(t),year(y),author(a),pages(p),genre(g) {}
+	void ShowInfo()const;
 };
 
