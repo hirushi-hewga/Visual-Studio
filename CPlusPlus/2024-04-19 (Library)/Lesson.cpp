@@ -1,9 +1,11 @@
 #include "Library.h"
 
-void ShowLibrary(Library lib) // copy constructor
+Library ShowLibrary(Library& lib) // copy constructor
 {
-	Library temp;
-}
+	Library temp; // default constructor
+	temp = lib; // operator =
+	return temp;
+} // copy constructor
 
 int main()
 {
@@ -20,4 +22,9 @@ int main()
 	lib.Show();
 
 	ShowLibrary(lib);
+
+
+	Library copy(lib); // copy constructor
+	Library newLib = copy; // operator =
+	newLib = lib; // operator =
 }

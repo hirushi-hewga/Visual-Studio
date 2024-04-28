@@ -10,6 +10,8 @@ public:
 	Library();
 	Library(string address);
 	Library(const Library& other);
+	Library operator =(const Library& other);
+	Library(Library&& other);
 	void Show()const;
 	void AddBook(Book book);
 	~Library();

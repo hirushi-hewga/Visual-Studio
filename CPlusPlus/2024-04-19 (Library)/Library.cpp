@@ -26,6 +26,30 @@ Library::Library(const Library& other)
 	cout << "--- Copy constructor ---" << endl;
 }
 
+Library Library::operator=(const Library& other)
+{
+	this->address = other.address;
+	this->countBooks = other.countBooks;
+	if (books != nullptr)
+		delete[] books;
+	this->books = new Book[countBooks];
+	for (int i = 0; i < countBooks; i++)
+	{
+		books[i] = other.books[i];
+	}
+	cout << "--- Operator = ---" << endl;
+	return *this;
+}
+
+Library::Library(Library&& other)
+{
+	this->address = other.address;
+	this->countBooks = other.countBooks;
+	this->books = other.books;
+	other.books = nullptr;
+	cout << "--- Move constructor ---" << endl;
+}
+
 void Library::Show() const
 {
 	cout << "Address : " << address << endl;
