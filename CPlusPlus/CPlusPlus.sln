@@ -49,8 +49,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-15 (Overload operat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-17 (Overload types)", "2024-04-17 (Overload types)\2024-04-17 (Overload types).vcxproj", "{1DE63BF7-1837-47CC-BE4B-C6025AB7106A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-19 (Overload data types)", "2024-04-19 (Overload data types)\2024-04-19 (Overload data types).vcxproj", "{86D84606-5217-4F68-8973-1CF890344139}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-12 (Const method)", "2024-04-12 (Const method)\2024-04-12 (Const method).vcxproj", "{252A88CC-1E5F-47DC-8777-95A714D2F8D7}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-04-12 (Explicit constructor)", "2024-04-12 (Explicit constructor)\2024-04-12 (Explicit constructor).vcxproj", "{8DDE76CA-09A5-408D-9789-89B40CD338B5}"
