@@ -32,6 +32,16 @@ public:
 			current = current->next;
 		}
 	}
+	void AddToTail(int value)
+	{
+		Node* newNode = new Node(value, nullptr);
+
+		Node* current = head;
+		while (current != nullptr)
+		{
+			current = current->next;
+		}
+	}
 	~List()
 	{
 		Node* current = nullptr;

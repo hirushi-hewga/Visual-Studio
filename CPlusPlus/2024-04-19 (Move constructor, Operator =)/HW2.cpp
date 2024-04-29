@@ -16,7 +16,7 @@ class Point
 	int y;
 public:
 	Point() : x(0), y(0) {}
-	Point(int x, int y) : x(x), y(x) {}
+	Point(int x, int y) : x(x), y(y) {}
 	void Show(int num)
 	{
 		gotoxy(this->x, this->y);
