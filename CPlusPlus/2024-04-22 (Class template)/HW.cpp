@@ -19,14 +19,14 @@ public:
 			}
 		}
 	}
-	Array(initializer_list<int>& list)
+	Array(const initializer_list<int>& list)
 	{
 		this->size = list.size();
 		arr = new T_value[size];
 		int i = 0;
-		for (T_value num : list)
+		for (T_value elem : list)
 		{
-			arr[i++] = num;
+			arr[i++] = elem;
 		}
 	}
 	Array(const Array& other) :size(other.size)
@@ -42,7 +42,6 @@ public:
 
 	void Show()const
 	{
-		cout << "======== Array ========" << endl;
 		if (size != 0)
 		{
 			for (int i = 0; i < size; i++)
@@ -50,7 +49,7 @@ public:
 				cout << arr[i] << ' ';
 			}
 		}
-		else cout << "      :EMPTY_ARRAY:" << endl;
+		else cout << "    :EMPTY_ARRAY:" << endl;
 		cout << endl;
 	}
 	void FillRandom()
@@ -191,7 +190,7 @@ public:
 	{
 		T_value min = *arr;
 		T_value max = *arr;
-		T_value average = 0;
+		float average = 0;
 		for (int i = 0; i < size; i++)
 		{
 			if (*(arr + i) < min) min = *(arr + i);
@@ -203,6 +202,18 @@ public:
 		cout << "Min value : " << min << endl;
 		cout << "Max value : " << max << endl;
 		cout << "Average number : " << average << endl;
+	}
+	void FillFromList(const initializer_list<int>& list)
+	{
+		this->size = list.size();
+		if (arr != nullptr)
+			delete[] arr;
+		arr = new T_value[size];
+		int i = 0;
+		for (T_value num : list)
+		{
+			arr[i++] = num;
+		}
 	}
 
 
@@ -217,5 +228,23 @@ public:
 
 int main()
 {
-	Array<int> numbers({ 1, 2, 56 });
+	Array<int> arr1({ 12, 45, 23, 34, 56, 15, 74 });
+	Array<float> arr2({ 56, 89, 67, 78 });
+	cout << "==== Array 1 ====" << endl; arr1.Show();
+	cout << "==== Array 2 ====" << endl; arr2.Show();
+	cout << endl;
+	arr1.FillFromList({ 1, 4, 2, 3 });
+	arr2.FillFromList({ 5, 8, 6, 7, 9, 3, 4 });
+	cout << "==== Array 1 ====" << endl; arr1.Show();
+	cout << "==== Array 2 ====" << endl; arr2.Show();
+	cout << endl;
+	arr1.QuickSort();
+	arr2.QuickSort();
+	cout << "==== Array 1 ====" << endl; arr1.Show();
+	cout << "==== Array 2 ====" << endl; arr2.Show();
+	cout << endl;
+	arr1.GetValue();
+	cout << endl;
+	arr2.GetValue();
+	cout << endl;
 }
