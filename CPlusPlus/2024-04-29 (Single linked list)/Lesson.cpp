@@ -64,4 +64,7 @@ int main()
 		list.AddToHead(i);
 	}
 	list.Print();
+	list.AddToTail(100);
+	list.AddToTail(200);
+	list.AddToTail(300);
 }
