@@ -97,8 +97,9 @@ T_arr GetMax(T_arr* arr, int size)
 
 
 
-int main()
-{
+//int main()
+//{
+	/*
 	Point<float> point(4.23, 6.5);
 	point.Print();
 	point.SetCoords(15, 23);
@@ -106,6 +107,7 @@ int main()
 
 	NewPoint<int, double> pointNew(10, 3.33);
 	pointNew.Print();
+	*/
 
 
 
@@ -148,4 +150,4 @@ int main()
 	string names[6] = { "Ilya", "Sasha", "Nikita", "Sergiy", "Ivan", "Max" };
 	cout << "Max : " << GetMax(names, 6) << endl;
 	*/
-}
+//}
