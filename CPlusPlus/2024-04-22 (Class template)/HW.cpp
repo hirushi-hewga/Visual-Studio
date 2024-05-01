@@ -118,7 +118,7 @@ public:
 		}
 		else cout << "Error. Empty array!" << endl;
 	}
-	void SortArray1(T_value* arr, int low, int high)
+	void SortArray1( int low, int high)
 	{
 		if (low < high) {
 			T_value pivot = arr[high];
@@ -138,11 +138,11 @@ public:
 
 			int value = i + 1;
 
-			SortArray1(arr, low, value - 1);
-			SortArray1(arr, value + 1, high);
+			SortArray1( low, value - 1);
+			SortArray1( value + 1, high);
 		}
 	}
-	void SortArray2(T_value* arr, int low, int high)
+	void SortArray2( int low, int high)
 	{
 		if (low < high) {
 			T_value pivot = arr[high];
@@ -162,59 +162,16 @@ public:
 
 			int pi = i + 1;
 
-			SortArray2(arr, low, pi - 1);
-			SortArray2(arr, pi + 1, high);
+			SortArray2( low, pi - 1);
+			SortArray2( pi + 1, high);
 		}
 	}
-	void QuickSort()
-	{
-		if (size != 0)
-		{
-			int choice = 0;
-			bool isValidData = true;
-			while (choice < 1 || choice > 2)
-			{
-				if (!isValidData) cout << "Error choice. Try again!" << endl;
-				isValidData = false;
-				cout << "1 - Sort by growth" << endl;
-				cout << "2 - Sort by decline" << endl;
-				cout << "Enter your choice : ";
-				cin >> choice;
-			}
-			if (choice == 1) SortArray1(arr, 0, size - 1);
-			if (choice == 2) SortArray2(arr, 0, size - 1);
-		}
-		else cout << "Error. Empty array!" << endl;
-	}
-	void GetValue()
-	{
-		T_value min = *arr;
-		T_value max = *arr;
-		float average = 0;
-		for (int i = 0; i < size; i++)
-		{
-			if (*(arr + i) < min) min = *(arr + i);
-			if (*(arr + i) > max) max = *(arr + i);
-			average += *(arr + i);
-		}
-		average /= size;
-		Show();
-		cout << "Min value : " << min << endl;
-		cout << "Max value : " << max << endl;
-		cout << "Average number : " << average << endl;
-	}
-	void FillFromList(const initializer_list<int>& list)
-	{
-		this->size = list.size();
-		if (arr != nullptr)
-			delete[] arr;
-		arr = new T_value[size];
-		int i = 0;
-		for (T_value num : list)
-		{
-			arr[i++] = num;
-		}
-	}
+	
+	void QuickSort();
+	void GetValue();
+	void FillFromList(const initializer_list<int>& list);
+	int BinarySearch(T_value key);
+	void ChangeElemByIndex(T_value newElem, int index);
 
 
 
@@ -226,10 +183,93 @@ public:
 
 
 
+template<typename T_value>
+void Array<T_value>::ChangeElemByIndex(T_value newElem, int index)
+{
+	if (index < size && index > 0) arr[index] = newElem;
+}
+template<typename T_value>
+int Array<T_value>::BinarySearch(T_value key)
+{
+	int b = 0, e = size - 1;
+	while (true)
+	{
+		int p = (b + e) / 2;
+		if (key > arr[p])
+		{
+			b = p + 1;
+		}
+		else if (key < arr[p])
+		{
+			e = p - 1;
+		}
+		else if (key == arr[p])
+		{
+			return p;
+		}
+
+		if (b > e) return -1;
+	}
+}
+template<typename T_value>
+void Array<T_value>::FillFromList(const initializer_list<int>& list)
+{
+	this->size = list.size();
+	if (arr != nullptr)
+		delete[] arr;
+	arr = new T_value[size];
+	int i = 0;
+	for (T_value num : list)
+	{
+		arr[i++] = num;
+	}
+}
+template<typename T_value>
+void Array<T_value>::GetValue()
+{
+	T_value min = *arr;
+	T_value max = *arr;
+	float average = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (*(arr + i) < min) min = *(arr + i);
+		if (*(arr + i) > max) max = *(arr + i);
+		average += *(arr + i);
+	}
+	average /= size;
+	Show();
+	cout << "Min value : " << min << endl;
+	cout << "Max value : " << max << endl;
+	cout << "Average number : " << average << endl;
+}
+template<typename T_value>
+void Array<T_value>::QuickSort()
+{
+	if (size != 0)
+	{
+		int choice = 0;
+		bool isValidData = true;
+		while (choice < 1 || choice > 2)
+		{
+			if (!isValidData) cout << "Error choice. Try again!" << endl;
+			isValidData = false;
+			cout << "1 - Sort by growth" << endl;
+			cout << "2 - Sort by decline" << endl;
+			cout << "Enter your choice : ";
+			cin >> choice;
+		}
+		if (choice == 1) SortArray1(0, size - 1);
+		if (choice == 2) SortArray2(0, size - 1);
+	}
+	else cout << "Error. Empty array!" << endl;
+}
+
+
+
 int main()
 {
 	Array<int> arr1({ 12, 45, 23, 34, 56, 15, 74 });
-	Array<float> arr2({ 56, 89, 67, 78 });
+	Array<int> arr2({ 56, 89, 67, 78 });
 	cout << "==== Array 1 ====" << endl; arr1.Show();
 	cout << "==== Array 2 ====" << endl; arr2.Show();
 	cout << endl;
@@ -247,4 +287,8 @@ int main()
 	cout << endl;
 	arr2.GetValue();
 	cout << endl;
+	int resArr1 = arr1.BinarySearch(3);
+	int resArr2 = arr2.BinarySearch(8);
+	cout << "index 1 : " << resArr1 << endl;
+	cout << "index 2 : " << resArr2 << endl;
 }
