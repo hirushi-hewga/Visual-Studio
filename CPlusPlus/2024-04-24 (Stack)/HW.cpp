@@ -35,25 +35,27 @@ public:
 	{
 		return top == EMPTY;
 	}
-	void Push(T value)
+	T Push(T value)
 	{
 		if (!IsFull())
 		{
 			arr[++top] = value;
+			return value;
 		}
 	}
-	void Pop()
+	T Pop()
 	{
 		if (!IsEmpty())
 		{
 			top--;
+			return arr[top + 1];
 		}
 	}
-	int Peek()const
+	T Peek()const
 	{
 		return arr[top];
 	}
-	int GetCount()const
+	T GetCount()const
 	{
 		return top + 1;
 	}
@@ -118,6 +120,7 @@ bool IsValidCode(string code)
 
 int main()
 {
+	/*
 	string code1 = "({x - y - z} * [x + 2y] - (z + 4x))";
 	string code2 = "([x - y - z} * [x + 2y) - {z + 4x))";
 	if (IsValidCode(code1))
@@ -128,4 +131,19 @@ int main()
 		cout << "Code 2 is valid" << endl;
 	else
 		cout << "Code 2 is invalid" << endl;
+	*/
+
+
+	/*
+	Stack<int> st({1, 56, 43, 84, 25, 58, 2, 8, 53, 97, 3});
+	st.Print();
+	cout << "Last element : " << st.Peek() << endl;
+	cout << "Count elements : " << st.GetCount() << endl;
+	cout << "Pop : " << st.Pop() << endl;
+	cout << "Pop : " << st.Pop() << endl;
+	cout << "Push : " << st.Push(47) << endl;
+	st.Print();
+	cout << "Last element : " << st.Peek() << endl;
+	cout << "Count elements : " << st.GetCount() << endl;
+	*/
 }

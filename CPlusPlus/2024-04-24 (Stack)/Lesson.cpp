@@ -57,98 +57,98 @@ using namespace std;
 //	}
 //};
 
-class MyClass
-{
-	// default delete
-	// default constructor
-	// copy constructor
-	// destructor
-	// operator =
-};
-
-class Stack
-{
-	enum { EMPTY = -1 };
-	int size;
-	int* arr;
-	int top;
-public:
-	Stack() = delete;
-	Stack(int size):size(size)
-	{
-		top = EMPTY;
-		arr = new int[size];
-	}
-	bool IsFull()const
-	{
-		return top == size - 1;
-	}
-	bool Push(int value)
-	{
-		if (!IsFull())
-		{
-			arr[++top] = value;
-			return true;
-		}
-		return false;
-	}
-	bool IsEmpty()const
-	{
-		return top == EMPTY;
-	}
-	int Pop()
-	{
-		if (!IsEmpty())
-		{
-			return arr[top--];
-		}
-	}
-	int Peek()
-	{
-		if (!IsEmpty())
-		{
-			return arr[top];
-		}
-	}
-	int GetCount()const
-	{
-		return top + 1;
-	}
-	void Clear()
-	{
-		top = EMPTY;
-	}
-	void Print()const
-	{
-		for (int i = 0; i <= top; i++)
-		{
-			cout << arr[i] << ' ';
-		}
-		cout << endl;
-	}
-	~Stack()
-	{
-		delete[] arr;
-	}
-};
-
-bool IsValidCode(string code)
-{
-	Stack st(10);
-	for (char symbol : code)
-	{
-		if (symbol == '{')
-		{
-			st.Push(1);
-		}
-		if (symbol == '}')
-		{
-			if (st.IsEmpty()) return false;
-			st.Pop();
-		}
-	}
-	return st.IsEmpty();
-}
+//class MyClass
+//{
+//	// default delete
+//	// default constructor
+//	// copy constructor
+//	// destructor
+//	// operator =
+//};
+//
+//class Stack
+//{
+//	enum { EMPTY = -1 };
+//	int size;
+//	int* arr;
+//	int top;
+//public:
+//	Stack() = delete;
+//	Stack(int size):size(size)
+//	{
+//		top = EMPTY;
+//		arr = new int[size];
+//	}
+//	bool IsFull()const
+//	{
+//		return top == size - 1;
+//	}
+//	bool Push(int value)
+//	{
+//		if (!IsFull())
+//		{
+//			arr[++top] = value;
+//			return true;
+//		}
+//		return false;
+//	}
+//	bool IsEmpty()const
+//	{
+//		return top == EMPTY;
+//	}
+//	int Pop()
+//	{
+//		if (!IsEmpty())
+//		{
+//			return arr[top--];
+//		}
+//	}
+//	int Peek()
+//	{
+//		if (!IsEmpty())
+//		{
+//			return arr[top];
+//		}
+//	}
+//	int GetCount()const
+//	{
+//		return top + 1;
+//	}
+//	void Clear()
+//	{
+//		top = EMPTY;
+//	}
+//	void Print()const
+//	{
+//		for (int i = 0; i <= top; i++)
+//		{
+//			cout << arr[i] << ' ';
+//		}
+//		cout << endl;
+//	}
+//	~Stack()
+//	{
+//		delete[] arr;
+//	}
+//};
+//
+//bool IsValidCode(string code)
+//{
+//	Stack st(10);
+//	for (char symbol : code)
+//	{
+//		if (symbol == '{')
+//		{
+//			st.Push(1);
+//		}
+//		if (symbol == '}')
+//		{
+//			if (st.IsEmpty()) return false;
+//			st.Pop();
+//		}
+//	}
+//	return st.IsEmpty();
+//}
 
 
 
