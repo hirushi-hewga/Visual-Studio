@@ -10,7 +10,7 @@ class Queue
 	int top;
 public:
 	Queue() = delete;
-	Queue(int maxSize)
+	Queue(int size):maxSize(size)
 	{
 		arr = new T_arr[maxSize];
 		top = 0;
