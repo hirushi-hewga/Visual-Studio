@@ -1,5 +1,7 @@
-#include <iostream>
-using namespace std;
+//#include <iostream>
+//using namespace std;
+
+/*
 
 class Queue
 {
@@ -118,8 +120,12 @@ int Menu()
 	return choice;
 }
 enum MENU { ADD = 1, PRINT, EXIT };
-int main()
-{
+
+*/
+
+//int main()
+//{
+	/*
 	Queue q;
 	bool isExit = false;
 	while (!isExit)
@@ -135,4 +141,5 @@ int main()
 	}
 	cout << endl;
 	cout << "Good bye." << endl;
-}
+	*/
+//}
