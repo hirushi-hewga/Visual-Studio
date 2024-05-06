@@ -5,26 +5,18 @@ template<typename T>
 class Queue
 {
 public:
-	struct Element {
+	struct Element
+	{
 		T value;
 		int priority;
 	};
-	/*ostream& operator << (ostream& out, const Element& el)
-	{
-		out << el.value << "  :  " << el.priority << " ";
-		return out;
-	}*/
-
 private:
 	Element* arr;
 	int size;
 public:
-	Queue() :arr(nullptr), size(0) {}
-	~Queue()
-	{
-		if (arr != nullptr)
-			delete[]arr;
-	}
+	Queue():arr(nullptr),size(0) {}
+
+
 	void Enqueue(T value, int pr)
 	{
 		int index = 0;
@@ -32,22 +24,20 @@ public:
 		{
 			index++;
 		}
-		size++;
-		Element* temp = new Element[size];
+		Element* temp = new Element[size + 1];
 		for (int i = 0; i < index; i++)
 		{
 			temp[i] = arr[i];
 		}
-		temp[index] = Element{ value, pr };
-		for (int i = index; i < size - 1; i++)
+		temp[index] = Element{value, pr};
+		for (int i = index + 1; i <= size; i++)
 		{
-			temp[i + 1] = arr[i];
+			temp[i] = arr[i - 1];
 		}
 		if (arr != nullptr)
-		{
-			delete[]arr;
-		}
+			delete[] arr;
 		arr = temp;
+		size++;
 	}
 	bool IsEmpty()const
 	{
@@ -61,7 +51,6 @@ public:
 			for (int i = 0; i < size; i++)
 			{
 				arr[i] = arr[i + 1];
-
 			}
 			size--;
 			return first;
@@ -70,35 +59,35 @@ public:
 	}
 	void Print()const
 	{
-		cout << "--------------- Queue with priority ----------------" << endl;
+		cout << "---------------- Queue with priority ----------------" << endl;
+		cout << "| ";
 		for (int i = 0; i < size; i++)
 		{
-			cout << arr[i].value << " " << arr[i].priority << " | ";
+			cout << arr[i].value << ':' << arr[i].priority << " | ";
 		}
 		cout << endl;
-		cout << "____________________________________________________" << endl;
+		cout << "-----------------------------------------------------" << endl;
+	}
+
+
+	~Queue()
+	{
+		if (arr != nullptr)
+			delete[] arr;
 	}
 };
-
 
 
 int main()
 {
 	Queue<char> q;
-	//Element<T> el = { 'A', 1};
-	//q.Enqueue(el);
-
-	q.Enqueue('A', 1);
-	q.Enqueue('B', 2);
-	q.Enqueue('C', 3);
-	q.Enqueue('G', 5);
-	q.Enqueue('K', 8);
-	q.Enqueue('N', 13);
+	q.Enqueue( 'A', 1 );
+	q.Enqueue( 'B', 2 );
+	q.Enqueue( 'C', 3 );
+	q.Enqueue( 'G', 7 );
+	q.Enqueue( 'K', 11 );
+	q.Enqueue( 'N', 14 );
 	q.Print();
-	q.Enqueue('D', 4);
+	q.Enqueue( 'D', 4 );
 	q.Print();
-	while (!q.IsEmpty())
-	{
-		cout << "Element : " << q.Dequeue().value << endl;
-	}
 }
