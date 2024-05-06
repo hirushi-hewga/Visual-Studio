@@ -19,7 +19,7 @@ public:
 
 	bool IsFull()const
 	{
-		return top < size - 1;
+		return top == size - 1;
 	}
 	bool IsEmpty()const
 	{
@@ -77,7 +77,21 @@ public:
 		if (arr != nullptr)
 			delete[] arr;
 	}
+	friend ostream& operator <<(ostream& out, const Stack& other);
 };
+
+ostream& operator <<(ostream& out, const Stack& other)
+{
+	if (other.top != Stack::EMPTY)
+	{
+		for (int i = 0; i <= other.top; i++)
+		{
+			out << other.arr[i] << ' ';
+		}
+	}
+	return out;
+}
+
 
 
 int main()
@@ -89,6 +103,29 @@ int main()
 	st.Push('d');
 	st.Push('e');
 	st.Push('f');
+	cout << st << endl;
 	st.Pop();
-	cout << st.GetCount() << endl;
+	cout << st << endl;
+	cout << "Count elements : " << st.GetCount() << endl;
+	if (st.IsEmpty())
+		cout << "Stack is empty" << endl;
+	else if (st.IsFull())
+		cout << "Stack is full" << endl;
+	st.Clear();
+	cout << "Count elements : " << st.GetCount() << endl;
+	st.Push('g');
+	st.Push('h');
+	st.Push('i');
+	st.Push('j');
+	st.Push('k');
+	st.Push('l');
+	cout << st << endl;
+	cout << "Last element : " << st.Peek() << endl;
+	st.ChangeMaxSize(15);
+	st.Push('m');
+	st.Push('n');
+	st.Push('o');
+	st.Push('p');
+	cout << st << endl;
+	cout << "Last element : " << st.Peek() << endl;
 }
