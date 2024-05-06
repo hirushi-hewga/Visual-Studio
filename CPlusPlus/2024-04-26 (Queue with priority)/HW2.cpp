@@ -77,18 +77,7 @@ public:
 		if (arr != nullptr)
 			delete[] arr;
 	}
-	friend ostream& operator <<(ostream& out, const Stack& other);
 };
-
-ostream& operator <<(ostream& out, const Stack& other)
-{
-	for (int i = 0; i <= other.top; i++)
-	{
-		out << other.arr[i];
-	}
-	return out;
-}
-
 
 
 int main()
@@ -99,5 +88,7 @@ int main()
 	st.Push('c');
 	st.Push('d');
 	st.Push('e');
-	cout << st << endl;
+	st.Push('f');
+	st.Pop();
+	cout << st.GetCount() << endl;
 }
