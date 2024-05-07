@@ -96,8 +96,9 @@ public:
 
 
 
-int main()
-{
+//int main()
+//{
+	/*
 	List list;
 	for (int i = 0; i < 5; i++)
 	{
@@ -116,4 +117,5 @@ int main()
 	list.DeleteFromTail();
 	list.DeleteFromTail();
 	list.Print();
-}
+	*/
+//}
