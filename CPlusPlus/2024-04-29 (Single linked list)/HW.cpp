@@ -174,8 +174,9 @@ public:
 
 
 
-int main()
-{
+//int main()
+//{
+	/*
 	srand(time(NULL));
 	List<int> list;
 	list.AddToHead(888);
@@ -217,4 +218,5 @@ int main()
 	cout << "list 1 : "; list.Show();
 	cout << "list 2 : "; list2.Show();
 	cout << "list 3 : "; list3.Show();
-}
+	*/
+//}
