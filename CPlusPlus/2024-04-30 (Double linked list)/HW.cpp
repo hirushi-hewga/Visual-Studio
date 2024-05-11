@@ -23,26 +23,28 @@ public:
 	}
 	void AddToHead(int value)
 	{
-		Node* newNode = new Node(nullptr, value, head);
+		Node* newNode = new Node(nullptr, value, nullptr);
 		if (IsEmpty())
 		{
 			head = tail = newNode;
 		}
 		else
 		{
+			newNode->next = head;
 			head->prev = newNode;
 			head = newNode;
 		}
 	}
 	void AddToTail(int value)
 	{
-		Node* newNode = new Node(tail, value, nullptr);
+		Node* newNode = new Node(nullptr, value, nullptr);
 		if (IsEmpty())
 		{
 			head = tail = newNode;
 		}
 		else
 		{
+			newNode->prev = tail;
 			tail->next = newNode;
 			tail = newNode;
 		}
@@ -79,19 +81,22 @@ public:
 	}
 	void AddByPos(int pos, int value)
 	{
-		if (IsEmpty() && pos == 1)
+		if (IsEmpty())
 		{
-			Node* newNode = new Node(nullptr, value, nullptr);
-			head = tail = newNode;
+			if (pos == 1)
+			{
+				Node* newNode = new Node(nullptr, value, nullptr);
+				head = tail = newNode;
+			}
 		}
 		else
 		{
 			Node* j = head;
-			for (int i = 1; i < pos || j->next != nullptr; j = j->next, i++) {}
+			for (int i = 1; i < pos && j->next != nullptr; j = j->next, i++) {}
 			Node* newNode = new Node(j->prev, value, j);
 			if (j == head) AddToHead(value);
 			else if (j == tail) AddToTail(value);
-			else j->prev = j->prev->next = j;
+			else j->prev = j->prev->next = newNode;
 		}
 	}
 	void DeleteByPos(int pos)
@@ -108,17 +113,9 @@ public:
 		else
 		{
 			Node* j = head;
-			for (int i = 1; i < pos || j->next != nullptr; j = j->next, i++) {}
-			if (j == head)
-			{
-				head = j->next;
-				head->prev = nullptr;
-			}
-			else if (j == tail)
-			{
-				tail = j->prev;
-				tail->next = nullptr;
-			}
+			for (int i = 1; i < pos && j->next != nullptr; j = j->next, i++) {}
+			if (j == head) DeleteFromHead();
+			else if (j == tail) DeleteFromTail();
 			else
 			{
 				j->prev->next = j->next;
@@ -129,14 +126,10 @@ public:
 	}
 	int ShowByPos(int pos)const
 	{
-		if (IsEmpty()) return -1;
-		else
-		{
-			Node* j = head;
-			for (int i = 1; i < pos || j != nullptr; j = j->next, i++) {}
-			if (j == nullptr) return -1;
-			return j->value;
-		}
+		Node* j = head;
+		for (int i = 1; i < pos && j != nullptr; j = j->next, i++) {}
+		if (j == nullptr) return -1;
+		return j->value;
 	}
 
 
@@ -174,7 +167,7 @@ public:
 			cin >> choice;
 		}
 		int place_count;
-		cout << "Enter count new carriage place : ";
+		cout << "Enter count places : ";
 		cin >> place_count;
 		switch (choice)
 		{
@@ -214,7 +207,7 @@ public:
 	}
 	void operator [](int pos)
 	{
-		cout << carriages.ShowByPos(pos) << endl;
+		cout << "Element [" << pos << "] : " << carriages.ShowByPos(pos) << endl;
 	}
 };
 
