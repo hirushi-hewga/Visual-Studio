@@ -84,14 +84,14 @@ public:
 
 
 
-int main()
-{
+//int main()
+//{
+	/*
 	srand(time(NULL));
 	Monster monster("Bob", 2, 200);
 	monster.Run();
 	monster.Print();
-	
-
+	*/
 
 
 	/*
@@ -114,4 +114,4 @@ int main()
 		cout << endl;
 	} while (boss.IsAlive() && dragon.IsAlive());
 	*/
-}
+//}
