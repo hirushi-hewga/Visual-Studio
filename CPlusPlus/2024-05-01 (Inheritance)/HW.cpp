@@ -44,11 +44,13 @@ public:
 
 
 
-int main()
-{
+//int main()
+//{
+	/*
 	Student st("Bogdan", "Kurylo", "Andriyovych", 17);
 	Aspirant asp("Vladyslav", "Yanchuk", "Maksymovych", 17, 99);
 
 	cout << "============ Student ============" << endl;st.Print();
 	cout << "============ Aspirant ===========" << endl;asp.Print();
-}
+	*/
+//}
