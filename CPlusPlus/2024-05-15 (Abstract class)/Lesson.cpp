@@ -57,31 +57,47 @@ public:
 	}
 };
 
-class Duck : public Animal
+class Reptile : public Animal
 {
-	float flyHeight;
+	float swimDeep;
 public:
-	Duck() :flyHeight(0), Animal() {}
-	Duck(string name, float weight, string place, float fly) :flyHeight(fly), Animal(name, weight, place) {}
-	void MakeSound()const override
-	{
-		cout << "Kra-kra-kra-kra-kra" << endl;
-	}
+	Reptile() :swimDeep(0), Animal() {}
+	Reptile(string name, float weight, string place, float deep) :swimDeep(deep), Animal(name, weight, place) {}
 	void Move()const override
 	{
-		cout << "I am swimming and flying up to " << flyHeight << " m" << endl;
+		cout << "I am crowling and swimming up to " << swimDeep << " m" << endl;
 	}
 };
+
+class Frog : public Reptile
+{
+public:
+	Frog():Reptile() {}
+	Frog(string name, float weight, string place, float deep):Reptile(name, weight, place, deep) {}
+	void MakeSound()const override
+	{
+		cout << "Kva-kva-kva-kva" << endl;
+	}
+};
+
+void RollCall(Animal& animal)
+{
+	animal.MakeSound();
+	animal.Move();
+	animal.ShowInfo();
+}
 
 
 
 int main()
 {
 	Lion lion("Sasha", 100, "Africa", 80);
-	lion.MakeSound();
-	lion.Move();
+	/*lion.MakeSound();
+	lion.Move();*/
 
-	Duck duck("Dasha", 100, "Canada", 80);
-	duck.MakeSound();
-	duck.Move();
+	Duck duck("Sergiy", 3, "Village", 2);
+	/*duck.MakeSound();
+	duck.Move();*/
+	
+	Frog frog("Ivan", 44, "UwU", 32);
 }
