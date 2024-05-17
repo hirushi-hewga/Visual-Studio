@@ -81,6 +81,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-15 (Abstract class)
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-17 (Multi inheritance)", "2024-05-17 (Multi inheritance)\2024-05-17 (Multi inheritance).vcxproj", "{C5416B56-26C9-4B1A-931B-CB41A0099DF4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-17 (Virtual destructor)", "2024-05-17 (Virtual destructor)\2024-05-17 (Virtual destructor).vcxproj", "{ACD8CC28-84E2-430C-B2D8-B5CC23C2E882}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -401,6 +403,14 @@ Global
 		{C5416B56-26C9-4B1A-931B-CB41A0099DF4}.Release|x64.Build.0 = Release|x64
 		{C5416B56-26C9-4B1A-931B-CB41A0099DF4}.Release|x86.ActiveCfg = Release|Win32
 		{C5416B56-26C9-4B1A-931B-CB41A0099DF4}.Release|x86.Build.0 = Release|Win32
+		{ACD8CC28-84E2-430C-B2D8-B5CC23C2E882}.Debug|x64.ActiveCfg = Debug|x64
+		{ACD8CC28-84E2-430C-B2D8-B5CC23C2E882}.Debug|x64.Build.0 = Debug|x64
+		{ACD8CC28-84E2-430C-B2D8-B5CC23C2E882}.Debug|x86.ActiveCfg = Debug|Win32
+		{ACD8CC28-84E2-430C-B2D8-B5CC23C2E882}.Debug|x86.Build.0 = Debug|Win32
+		{ACD8CC28-84E2-430C-B2D8-B5CC23C2E882}.Release|x64.ActiveCfg = Release|x64
+		{ACD8CC28-84E2-430C-B2D8-B5CC23C2E882}.Release|x64.Build.0 = Release|x64
+		{ACD8CC28-84E2-430C-B2D8-B5CC23C2E882}.Release|x86.ActiveCfg = Release|Win32
+		{ACD8CC28-84E2-430C-B2D8-B5CC23C2E882}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

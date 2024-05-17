@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c5416b56-26c9-4b1a-931b-cb41a0099df4}</ProjectGuid>
-    <RootNamespace>My20240517Multiinheritance</RootNamespace>
+    <ProjectGuid>{acd8cc28-84e2-430c-b2d8-b5cc23c2e882}</ProjectGuid>
+    <RootNamespace>My20240517Virtualdestructor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
