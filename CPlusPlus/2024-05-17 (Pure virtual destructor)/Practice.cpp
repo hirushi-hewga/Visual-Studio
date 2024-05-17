@@ -29,7 +29,33 @@ public:
 
 class Souce
 {
+public:
+	virtual void PrepareSouce()const = 0;
+};
 
+class MilanSouce : public Souce
+{
+public:
+	void PrepareSouce()const override
+	{
+		cout << "I prepare Milan souce" << endl;
+	}
+};
+class GreeceSouce : public Souce
+{
+public:
+	void PrepareSouce()const override
+	{
+		cout << "I prepare Greece souce" << endl;
+	}
+};
+
+
+
+class Fabric
+{
+public:
+	virtual void PreparePizza
 };
 
 
