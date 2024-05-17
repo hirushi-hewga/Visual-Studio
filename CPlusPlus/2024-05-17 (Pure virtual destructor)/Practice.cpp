@@ -55,7 +55,34 @@ public:
 class Fabric
 {
 public:
-	virtual void PreparePizza
+	virtual void PreparePizza()const = 0;
+	virtual void PrepareSouce()const = 0;
+};
+
+class FabricMilan : public Fabric
+{
+public:
+	void PreparePizza()const override
+	{
+		cout << "I prepare pizza" << endl;
+	}
+	void PrepareSouce()const override
+	{
+		cout << "I prepare souce" << endl;
+	}
+};
+
+class FabricGreece : public Fabric
+{
+public:
+	void PreparePizza()const override
+	{
+		cout << "I prepare pizza" << endl;
+	}
+	void PrepareSouce()const override
+	{
+		cout << "I prepare souce" << endl;
+	}
 };
 
 
