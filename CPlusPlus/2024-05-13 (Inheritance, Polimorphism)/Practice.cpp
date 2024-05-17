@@ -61,8 +61,9 @@ public:
 
 
 
-int main()
-{
+//int main()
+//{
+	/*
 	President president(350000, 5000000000, 28);
 	Manager manager(50000, 2500000, 8);
 	Worker worker(30000, 1000000, 0);
@@ -70,4 +71,5 @@ int main()
 	president.Print();
 	manager.Print();
 	worker.Print();
-}
+	*/
+//}
