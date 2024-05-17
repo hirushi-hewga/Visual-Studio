@@ -55,33 +55,33 @@ public:
 class Fabric
 {
 public:
-	virtual void PreparePizza()const = 0;
-	virtual void PrepareSouce()const = 0;
+	virtual Pizza* PreparePizza()const = 0;
+	virtual Souce* PrepareSouce()const = 0;
 };
 
 class FabricMilan : public Fabric
 {
 public:
-	void PreparePizza()const override
+	Pizza* PreparePizza()const override
 	{
-		cout << "I prepare pizza" << endl;
+		return new MilanPizza();
 	}
-	void PrepareSouce()const override
+	Souce* PrepareSouce()const override
 	{
-		cout << "I prepare souce" << endl;
+		return new MilanSouce();
 	}
 };
 
 class FabricGreece : public Fabric
 {
 public:
-	void PreparePizza()const override
+	Pizza* PreparePizza()const override
 	{
-		cout << "I prepare pizza" << endl;
+		cout << "I prepare Greece pizza" << endl;
 	}
-	void PrepareSouce()const override
+	Souce* PrepareSouce()const override
 	{
-		cout << "I prepare souce" << endl;
+		cout << "I prepare Greece souce" << endl;
 	}
 };
 
@@ -89,5 +89,15 @@ public:
 
 int main()
 {
+
+	FabricMilan milan;
+	Pizza* pizza = milan.PreparePizza();
+	Souce* souce = milan.PrepareSouce();
+
+	pizza->PreparePizza();
+	souce->PrepareSouce();
+
+	delete pizza;
+	delete souce;
 
 }

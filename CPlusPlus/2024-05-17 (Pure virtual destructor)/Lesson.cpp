@@ -52,26 +52,26 @@ public:
     }
 };
 
-int main()
-{
-    srand(time(0));
-    //Person st("Artem");
-    //st.Print();
+//int main()
+//{
+    //srand(time(0));
+    ////Person st("Artem");
+    ////st.Print();
 
-    Aspirant asp("Olga", { "Work with resourses", "Salles", "Test theme" });
-    asp.Print();
-    cout << "\n-------------------------------------------------------" << endl;
+    //Aspirant asp("Olga", { "Work with resourses", "Salles", "Test theme" });
+    //asp.Print();
+    //cout << "\n-------------------------------------------------------" << endl;
 
-    Person* groups[2]
-    {
-        //new Person("Artem"),
-        new Aspirant("Olga",{ "Work with resourses", "Salles", "Test theme"}),
-        new Aspirant("Victor", { "Main window", "User experiance"})
-    };
+    //Person* groups[2]
+    //{
+    //    //new Person("Artem"),
+    //    new Aspirant("Olga",{ "Work with resourses", "Salles", "Test theme"}),
+    //    new Aspirant("Victor", { "Main window", "User experiance"})
+    //};
 
-    for (int i = 0; i < 2; i++)
-    {
-        groups[i]->Print();
-        delete groups[i];
-    }
-}
+    //for (int i = 0; i < 2; i++)
+    //{
+    //    groups[i]->Print();
+    //    delete groups[i];
+    //}
+//}
