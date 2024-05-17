@@ -87,9 +87,9 @@ void TestDrive(Car& car)
 	car.Drive();
 }
 
-int main()
-{
-	Car car("BMW", 2.0, 50000, 2024);
+//int main()
+//{
+	/*Car car("BMW", 2.0, 50000, 2024);
 	car.SetSpeed(350);
 	car.Drive();
 	car.Print();
@@ -112,6 +112,6 @@ int main()
 	cout << endl << endl;
 	TestDrive(car);
 	TestDrive(police);
-	TestDrive(sport); 
+	TestDrive(sport); */
 
-}
+//}
