@@ -51,10 +51,11 @@ private:
 	int year;
 	Cartridge* cartridges;
 	int countCartridges;
-	Scanner scanner;
+	Scanner scanner; // Default constructor
+	const Document* currentDoc;
 public:
-	Printer():model("no model"),year(0),cartridges(nullptr), countCartridges(0) {}
-	Printer(string model, int year, float h, float w, float scanR)
+	Printer():model("no model"),year(0),cartridges(nullptr), countCartridges(0), currentDoc(nullptr) {}
+	Printer(string model, int year, float h, float w, float scanR):currentDoc(nullptr)
 	{
 		this->model = model;
 		this->year = year;
@@ -77,6 +78,7 @@ public:
 	void PrintDocument()
 	{
 		cout << "Printing document" << endl;
+		currentDoc->ShowInfo();
 	}
 	void ShowProperties()
 	{
@@ -86,11 +88,36 @@ public:
 			cartridges[i].ShowInfo();
 		}
 	}
+	void AddToQueue(const Document& doc)
+	{
+		currentDoc = &doc;
+	}
 
 	~Printer()
 	{
 		if (cartridges != nullptr)
 			delete[] cartridges;
+	}
+};
+
+class Document
+{
+private:
+	string name;
+	string format;
+	int pages;
+public:
+	Document():name("no name"), format("no format"), pages(0) {}
+	Document(string name, string format, int pages):name(name), format(format)
+	{
+		this->pages = pages > 0 ? pages : 0;
+	}
+
+	void ShowInfo()const
+	{
+		cout << "______________ Document : " << name << " ______________" << endl;
+		cout << "Format : " << format << endl;
+		cout << "Pages : " << pages << endl;
 	}
 };
 
