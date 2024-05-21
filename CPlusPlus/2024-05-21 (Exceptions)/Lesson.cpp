@@ -2,6 +2,18 @@
 #include <exception>
 using namespace std;
 
+class PasswordInvalidExceptions : public exception
+{
+public:
+	PasswordInvalidExceptions(const char* ex) : exception (ex) {}
+};
+class PasswordInvalidExceptions : public exception
+{
+	int length;
+public:
+	PasswordInvalidExceptions(const char* ex, int length) : length(), exception(ex) {}
+};
+
 
 
 float Divide(float a, float b)
@@ -20,7 +32,7 @@ float Divide(float a, float b)
 	}
 	else if (b == 5)
 	{
-		throw "Divide by 5"
+		throw "Divide by 5";
 	}
 	else
 	{
