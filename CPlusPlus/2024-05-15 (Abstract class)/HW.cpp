@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Windows.h>
+#include <conio.h>
 using namespace std;
 
 void gotoxy(int x, int y) {
@@ -40,10 +41,7 @@ public:
 	}
 	void ShowInfo()const
 	{
-		cout << "Name : " << name << endl;
-		cout << "Weight : " << weight << endl;
-		cout << "Place : " << place << endl;
-		cout << "Age : " << age << endl;
+		cout << "Name:" << name << " | Weight:" << weight << " | Place:" << place << " | Age:" << age << endl;
 	}
 };
 
@@ -167,31 +165,28 @@ public:
 	}
 	void Show()const
 	{
+		system("cls");
 		gotoxy(0);
-		cout << "Fox : " << foxCount << endl;
-	}
-	/*void Show()const
-	{
-		cout << "======== Fox [ " << foxCount << " ] ========" << endl;
+		cout << "== Fox [ " << foxCount << " ] ==" << endl;
 		for (int i = 0; i < foxCount; i++)
 		{
-			cout << "---- fox " << i + 1 << " ----" << endl;
+			cout << "Fox_" << i + 1 << ": ";
 			fox[i].ShowInfo();
 		}
-		cout << "======== Rabbit [ " << rabbitCount << " ] ========" << endl;
+		cout << "== Rabbit [ " << rabbitCount << " ] ==" << endl;
 		for (int i = 0; i < rabbitCount; i++)
 		{
-			cout << "---- rabbit " << i + 1 << " ----" << endl;
+			cout << "Rabbit_" << i + 1 << ": ";
 			rabbit[i].ShowInfo();
 		}
-		cout << "======== Grass [ " << grassCount << " ] ========" << endl;
-		for (int i = 0; i < grassCount; i++)
+		cout << "== Rabbit [ " << rabbitCount << " ] ==" << endl;
+		for (int i = 0; i < rabbitCount; i++)
 		{
-			cout << "---- grass " << i + 1 << " ----" << endl;
-			grass[i].ShowInfo();
+			cout << "Rabbit_" << i + 1 << ": ";
+			rabbit[i].ShowInfo();
 		}
-		cout << endl << endl << endl;
-	}*/
+		char s = _getch();
+	}
 
 
 	~Live()
