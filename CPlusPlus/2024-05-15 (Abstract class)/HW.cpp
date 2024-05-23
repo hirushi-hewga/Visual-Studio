@@ -45,6 +45,7 @@ public:
 		cout << "Name:" << name << " | Weight:" << weight << " | Place:" << place << " | Age:" << age << endl;
 	}
 	int GetAge()const { return age; }
+	void AppAge() { age++; }
 };
 
 
@@ -113,6 +114,51 @@ public:
 	Live() :fox(nullptr), rabbit(nullptr), grass(nullptr) {}
 
 
+	void ReadChangesFromFile()const
+	{
+		system("cls");
+		gotoxy(0);
+		ifstream in("Changes.txt", ios_base::in);
+		char change[50];
+		while (!in.eof())
+		{
+			in.getline(change, 50, '|');
+			if (in.eof()) break;
+			cout << "- ";
+			for (int i = 0; change[i] != '\0'; i++)
+				cout << change[i];
+			cout << endl;
+
+
+			//char buffname[250], buffsurname[250], buffage[250];
+			//in.getline(buffname, 250, ':');
+			//if (in.eof())break;
+			//in.getline(buffsurname, 250, ':');
+			//in.getline(buffage, 250, '|');
+			//int age = atoi(buffage);
+			//Human readHuman;
+			//readHuman.FillFromFile(buffname, buffsurname, age);
+			//size++;
+			//Human* temp = new Human[size];//1
+			//for (int i = 0; i < size - 1; i++)
+			//{
+			//	temp[i].Copy(h[i]);
+			//}
+			//temp[size - 1] = readHuman;
+			//delete h;
+			//h = temp;
+		}
+		cout << endl;
+		cout << "Press any key to continue : ";
+		char s = _getch();
+	}
+	void SaveChangesToFile(const char* change)const
+	{
+		ofstream out("Changes.txt", ios_base::app);
+		out << change;
+		out << '|';
+		out.close();
+	}
 	void ShowFox()const
 	{
 		system("cls");
@@ -293,9 +339,25 @@ public:
 	}
 	void Rules()
 	{
-		for (int i = 0; i < foxCount; i++) if (fox[i].GetAge() > 8) DeleteFoxByIndex(i);
-		for (int i = 0; i < rabbitCount; i++) if (rabbit[i].GetAge() > 8) DeleteRabbitByIndex(i);
-		if (grassCount > rabbitCount && grassCount != 0)
+		for (int i = 0; i < foxCount; i++)
+		{
+			fox[i].AppAge();
+			if (fox[i].GetAge() > 8)
+			{
+				DeleteFoxByIndex(i);
+				SaveChangesToFile("Death_of_fox");
+			}
+		}
+		for (int i = 0; i < rabbitCount; i++)
+		{
+			rabbit[i].AppAge();
+			if (rabbit[i].GetAge() > 8)
+			{
+				DeleteRabbitByIndex(i);
+				SaveChangesToFile("Death_of_rabbit");
+			}
+		}
+		if (grassCount > rabbitCount)
 		{
 			grassCount -= rabbitCount;
 			Grass* temp = new Grass[grassCount];
@@ -305,14 +367,20 @@ public:
 			}
 			delete[] grass;
 			grass = temp;
+			if (rabbitCount != 0) SaveChangesToFile("Some_of_the_grass_is_eaten");
 		}
-		else
+		else if (grassCount != 0)
 		{
 			delete[] grass;
 			grass = nullptr;
 			grassCount = 0;
+			SaveChangesToFile("All_the_grass_is_eaten");
 		}
-		if (rabbitCount < foxCount && rabbitCount != 0) DeleteRabbit();
+		if (rabbitCount < foxCount && rabbitCount != 0)
+		{
+			DeleteRabbit();
+			SaveChangesToFile("Fox_ate_the_rabbit");
+		}
 	}
 	void AddFox()
 	{
@@ -418,13 +486,14 @@ int Menu()
 		cout << "4 - Add grass" << endl;
 		cout << "5 - Delete fox" << endl;
 		cout << "6 - Delete rabbit" << endl;
-		cout << "7 - Exit" << endl;
+		cout << "7 - Show changes" << endl;
+		cout << "8 - Exit" << endl;
 		cout << "Enter your choice : ";
 		cin >> choice;
 	}
 	return choice;
 }
-enum MENU { SHOW = 1, ADD_FOX, ADD_RABBIT, ADD_GRASS, DELETE_FOX, DELETE_RABBIT, EXIT };
+enum MENU { SHOW = 1, ADD_FOX, ADD_RABBIT, ADD_GRASS, DELETE_FOX, DELETE_RABBIT, SHOW_CHANGES, EXIT };
 int main()
 {
 	Live live;
@@ -439,6 +508,7 @@ int main()
 		case MENU::ADD_GRASS: live.AddGrass(); break;
 		case MENU::DELETE_FOX: live.DeleteFox(); break;
 		case MENU::DELETE_RABBIT: live.DeleteRabbit(); break;
+		case MENU::SHOW_CHANGES: live.ReadChangesFromFile(); break;
 		case MENU::EXIT: isExit = true;
 		}
 		live.Rules();
@@ -446,4 +516,5 @@ int main()
 	system("cls");
 	gotoxy(0);
 	cout << "Good bye." << endl;
+	remove("Changes.txt");
 }
