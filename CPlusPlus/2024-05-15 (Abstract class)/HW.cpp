@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Windows.h>
 #include <conio.h>
+#include <fstream>
 using namespace std;
 
 void gotoxy(int x, int y) {
@@ -43,6 +44,7 @@ public:
 	{
 		cout << "Name:" << name << " | Weight:" << weight << " | Place:" << place << " | Age:" << age << endl;
 	}
+	int GetAge()const { return age; }
 };
 
 
@@ -111,11 +113,206 @@ public:
 	Live() :fox(nullptr), rabbit(nullptr), grass(nullptr) {}
 
 
-	void DeleteGrass()
+	void ShowFox()const
 	{
-		delete[] grass;
-		grass = nullptr;
-		grassCount = 0;
+		system("cls");
+		gotoxy(0);
+		cout << "== Fox [ " << foxCount << " ] ==" << endl;
+		for (int i = 0; i < foxCount; i++)
+		{
+			cout << "Fox_" << i + 1 << ": ";
+			fox[i].ShowInfo();
+		}
+	}
+	void ShowRabbit()const
+	{
+		system("cls");
+		gotoxy(0);
+		cout << "== Rabbit [ " << rabbitCount << " ] ==" << endl;
+		for (int i = 0; i < rabbitCount; i++)
+		{
+			cout << "Rabbit_" << i + 1 << ": ";
+			rabbit[i].ShowInfo();
+		}
+	}
+	void DeleteFox()
+	{
+		if (fox != nullptr)
+		{
+			int index = 0;
+			bool isValidData = true;
+			while (index < 1 || index > foxCount)
+			{
+				ShowFox();
+				if (!isValidData)
+				{
+					cout << endl;
+					cout << "Error choice! Try again." << endl;
+				}
+				else isValidData = false;
+				cout << endl;
+				cout << "Choice fox to delete ( 1";
+				if (foxCount == 1) cout << " ) : ";
+				else cout << "-" << foxCount << " ) : ";
+				cin >> index;
+			}
+			if (foxCount == 1)
+			{
+				delete[] fox;
+				fox = nullptr;
+				foxCount = 0;
+			}
+			else
+			{
+				Fox* temp = new Fox[--foxCount];
+				for (int i = 0; i < index - 1; i++)
+				{
+					temp[i] = Fox(fox[i]);
+				}
+				for (int i = index - 1; i < foxCount; i++)
+				{
+					temp[i] = Fox(fox[i + 1]);
+				}
+				delete[] fox;
+				fox = temp;
+			}
+		}
+		else
+		{
+			system("cls");
+			gotoxy(0);
+			cout << "Fox not found!" << endl;
+			cout << endl;
+			cout << "Press any key to continue : ";
+			char s = _getch();
+		}
+	}
+	void DeleteRabbit()
+	{
+		if (rabbit != nullptr)
+		{
+			int index = 0;
+			bool isValidData = true;
+			while (index < 1 || index > rabbitCount)
+			{
+				ShowRabbit();
+				if (!isValidData)
+				{
+					cout << endl;
+					cout << "Error choice! Try again." << endl;
+				}
+				else isValidData = false;
+				cout << endl;
+				cout << "Choice rabbit to delete ( 1";
+				if (rabbitCount == 1) cout << " ) : ";
+				else cout << "-" << rabbitCount << " ) : ";
+				cin >> index;
+			}
+			if (rabbitCount == 1)
+			{
+				delete[] rabbit;
+				rabbit = nullptr;
+				rabbitCount = 0;
+			}
+			else
+			{
+				Rabbit* temp = new Rabbit[--rabbitCount];
+				for (int i = 0; i < index - 1; i++)
+				{
+					temp[i] = Rabbit(rabbit[i]);
+				}
+				for (int i = index - 1; i < rabbitCount; i++)
+				{
+					temp[i] = Rabbit(rabbit[i + 1]);
+				}
+				delete[] rabbit;
+				rabbit = temp;
+			}
+		}
+		else
+		{
+			system("cls");
+			gotoxy(0);
+			cout << "Rabbit not found!" << endl;
+			cout << endl;
+			cout << "Press any key to continue : ";
+			char s = _getch();
+		}
+	}
+	void DeleteFoxByIndex(int index)
+	{
+		if (fox != nullptr)
+		{
+			if (foxCount == 1)
+			{
+				delete[] fox;
+				fox = nullptr;
+				foxCount = 0;
+			}
+			else
+			{
+				Fox* temp = new Fox[--foxCount];
+				for (int i = 0; i < index; i++)
+				{
+					temp[i] = Fox(fox[i]);
+				}
+				for (int i = index; i < foxCount; i++)
+				{
+					temp[i] = Fox(fox[i + 1]);
+				}
+				delete[] fox;
+				fox = temp;
+			}
+		}
+	}
+	void DeleteRabbitByIndex(int index)
+	{
+		if (rabbit != nullptr)
+		{
+			if (rabbitCount == 1)
+			{
+				delete[] rabbit;
+				rabbit = nullptr;
+				rabbitCount = 0;
+			}
+			else
+			{
+				Rabbit* temp = new Rabbit[--rabbitCount];
+				for (int i = 0; i < index; i++)
+				{
+					temp[i] = Rabbit(rabbit[i]);
+				}
+				for (int i = index; i < rabbitCount; i++)
+				{
+					temp[i] = Rabbit(rabbit[i + 1]);
+				}
+				delete[] rabbit;
+				rabbit = temp;
+			}
+		}
+	}
+	void Rules()
+	{
+		for (int i = 0; i < foxCount; i++) if (fox[i].GetAge() > 8) DeleteFoxByIndex(i);
+		for (int i = 0; i < rabbitCount; i++) if (rabbit[i].GetAge() > 8) DeleteRabbitByIndex(i);
+		if (grassCount > rabbitCount && grassCount != 0)
+		{
+			grassCount -= rabbitCount;
+			Grass* temp = new Grass[grassCount];
+			for (int i = 0; i < grassCount; i++)
+			{
+				temp[i] = Grass(grass[i]);
+			}
+			delete[] grass;
+			grass = temp;
+		}
+		else
+		{
+			delete[] grass;
+			grass = nullptr;
+			grassCount = 0;
+		}
+		if (rabbitCount < foxCount && rabbitCount != 0) DeleteRabbit();
 	}
 	void AddFox()
 	{
@@ -130,38 +327,37 @@ public:
 			delete[] fox;
 			fox = temp;
 		}
+		else
+		{
+			system("cls");
+			gotoxy(0);
+			cout << "Fox count is max!" << endl;
+			cout << endl;
+			cout << "Press any key to continue : ";
+			char s = _getch();
+		}
 	}
 	void AddRabbit()
 	{
-		if (rabbitCount < 5)
+		Rabbit* temp = new Rabbit[rabbitCount + 1];
+		for (int i = 0; i < rabbitCount; i++)
 		{
-			Rabbit* temp = new Rabbit[rabbitCount + 1];
-			for (int i = 0; i < rabbitCount; i++)
-			{
-				temp[i] = Rabbit(rabbit[i]);
-			}
-			temp[rabbitCount++] = Rabbit();
-			delete[] rabbit;
-			rabbit = temp;
+			temp[i] = Rabbit(rabbit[i]);
 		}
-		if (grassCount <= rabbitCount && grassCount != 0)
-			DeleteGrass();
+		temp[rabbitCount++] = Rabbit();
+		delete[] rabbit;
+		rabbit = temp;
 	}
 	void AddGrass()
 	{
-		if (grassCount < 5)
+		Grass* temp = new Grass[grassCount + 1];
+		for (int i = 0; i < grassCount; i++)
 		{
-			Grass* temp = new Grass[grassCount + 1];
-			for (int i = 0; i < grassCount; i++)
-			{
-				temp[i] = Grass(grass[i]);
-			}
-			temp[grassCount++] = Grass();
-			delete[] grass;
-			grass = temp;
+			temp[i] = Grass(grass[i]);
 		}
-		if (grassCount <= rabbitCount)
-			DeleteGrass();
+		temp[grassCount++] = Grass();
+		delete[] grass;
+		grass = temp;
 	}
 	void Show()const
 	{
@@ -179,12 +375,14 @@ public:
 			cout << "Rabbit_" << i + 1 << ": ";
 			rabbit[i].ShowInfo();
 		}
-		cout << "== Rabbit [ " << rabbitCount << " ] ==" << endl;
-		for (int i = 0; i < rabbitCount; i++)
+		cout << "== Grass [ " << grassCount << " ] ==" << endl;
+		for (int i = 0; i < grassCount; i++)
 		{
-			cout << "Rabbit_" << i + 1 << ": ";
-			rabbit[i].ShowInfo();
+			cout << "Grass_" << i + 1 << ": ";
+			grass[i].ShowInfo();
 		}
+		cout << endl;
+		cout << "Press any key to continue : ";
 		char s = _getch();
 	}
 
@@ -199,42 +397,53 @@ public:
 
 
 
+
+int Menu()
+{
+	int choice = 0;
+	bool isValidData = true;
+	while (choice < 1 || choice > 7)
+	{
+		system("cls");
+		gotoxy(0);
+		if (!isValidData)
+		{
+			cout << "Error choice! Try again." << endl;
+			cout << endl;
+		}
+		else isValidData = false;
+		cout << "1 - Show info" << endl;
+		cout << "2 - Add fox" << endl;
+		cout << "3 - Add rabbit" << endl;
+		cout << "4 - Add grass" << endl;
+		cout << "5 - Delete fox" << endl;
+		cout << "6 - Delete rabbit" << endl;
+		cout << "7 - Exit" << endl;
+		cout << "Enter your choice : ";
+		cin >> choice;
+	}
+	return choice;
+}
+enum MENU { SHOW = 1, ADD_FOX, ADD_RABBIT, ADD_GRASS, DELETE_FOX, DELETE_RABBIT, EXIT };
 int main()
 {
 	Live live;
-	live.Show();
-	live.AddFox();
-	live.AddRabbit();
-	live.AddGrass();
-	live.Show();
-
-
-	live.AddFox();
-	live.AddRabbit();
-	live.AddGrass();
-	live.Show();
-
-
-	live.AddFox();
-	live.AddRabbit();
-	live.AddGrass();
-	live.Show();
-
-
-	live.AddFox();
-	live.AddRabbit();
-	live.AddGrass();
-	live.Show();
-
-
-	live.AddFox();
-	live.AddRabbit();
-	live.AddGrass();
-	live.Show();
-
-
-	live.AddFox();
-	live.AddRabbit();
-	live.AddGrass();
-	live.Show();
+	bool isExit = false;
+	while (!isExit)
+	{
+		switch (Menu())
+		{
+		case MENU::SHOW: live.Show(); break;
+		case MENU::ADD_FOX: live.AddFox(); break;
+		case MENU::ADD_RABBIT: live.AddRabbit(); break;
+		case MENU::ADD_GRASS: live.AddGrass(); break;
+		case MENU::DELETE_FOX: live.DeleteFox(); break;
+		case MENU::DELETE_RABBIT: live.DeleteRabbit(); break;
+		case MENU::EXIT: isExit = true;
+		}
+		live.Rules();
+	}
+	system("cls");
+	gotoxy(0);
+	cout << "Good bye." << endl;
 }
