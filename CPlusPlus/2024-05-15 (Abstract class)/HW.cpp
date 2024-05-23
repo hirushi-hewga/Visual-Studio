@@ -1,5 +1,20 @@
 #include <iostream>
+#include <Windows.h>
 using namespace std;
+
+void gotoxy(int x, int y) {
+	COORD coord;
+	coord.X = x;
+	coord.Y = y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void gotoxy(int p) {
+	COORD coord;
+	coord.X = p;
+	coord.Y = p;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
 
 
 
@@ -152,6 +167,11 @@ public:
 	}
 	void Show()const
 	{
+		gotoxy(0);
+		cout << "Fox : " << foxCount << endl;
+	}
+	/*void Show()const
+	{
 		cout << "======== Fox [ " << foxCount << " ] ========" << endl;
 		for (int i = 0; i < foxCount; i++)
 		{
@@ -171,7 +191,7 @@ public:
 			grass[i].ShowInfo();
 		}
 		cout << endl << endl << endl;
-	}
+	}*/
 
 
 	~Live()
