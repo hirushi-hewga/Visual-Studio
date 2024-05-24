@@ -1,4 +1,4 @@
-#include <iostream>
+/*#include <iostream>
 #include <Windows.h>
 #include <conio.h>
 #include <fstream>
@@ -499,6 +499,7 @@ int Menu()
 	return choice;
 }
 enum MENU { SHOW = 1, ADD_FOX, ADD_RABBIT, ADD_GRASS, DELETE_FOX, DELETE_RABBIT, SHOW_CHANGES, EXIT };
+*/
 //int main()
 //{
 	/*
