@@ -170,6 +170,31 @@ public:
 			fox[i].ShowInfo();
 		}
 	}
+	void IndexDeleteRabbit()
+	{
+		if (rabbit != nullptr)
+		{
+			int index = 0;
+			bool isValidData = true;
+			while (index < 1 || index > rabbitCount)
+			{
+				ShowFox();
+				if (!isValidData)
+				{
+					cout << endl;
+					cout << "Error choice! Try again." << endl;
+				}
+				else isValidData = false;
+				cout << endl;
+				cout << "Choice rabbit to delete ( 1";
+				if (rabbitCount == 1) cout << " ) : ";
+				else cout << "-" << rabbitCount << " ) : ";
+				cin >> index;
+			}
+			DeleteRabbitByIndex(index);
+			SaveChangesToFile("Deleted_rabbit");
+		}
+	}
 	void ShowRabbit()const
 	{
 		system("cls");
@@ -222,6 +247,7 @@ public:
 				delete[] fox;
 				fox = temp;
 			}
+			SaveChangesToFile("Deleted_fox");
 		}
 		else
 		{
@@ -237,23 +263,6 @@ public:
 	{
 		if (rabbit != nullptr)
 		{
-			int index = 0;
-			bool isValidData = true;
-			while (index < 1 || index > rabbitCount)
-			{
-				ShowRabbit();
-				if (!isValidData)
-				{
-					cout << endl;
-					cout << "Error choice! Try again." << endl;
-				}
-				else isValidData = false;
-				cout << endl;
-				cout << "Choice rabbit to delete ( 1";
-				if (rabbitCount == 1) cout << " ) : ";
-				else cout << "-" << rabbitCount << " ) : ";
-				cin >> index;
-			}
 			if (rabbitCount == 1)
 			{
 				delete[] rabbit;
@@ -263,13 +272,9 @@ public:
 			else
 			{
 				Rabbit* temp = new Rabbit[--rabbitCount];
-				for (int i = 0; i < index - 1; i++)
+				for (int i = 0; i < rabbitCount; i++)
 				{
 					temp[i] = Rabbit(rabbit[i]);
-				}
-				for (int i = index - 1; i < rabbitCount; i++)
-				{
-					temp[i] = Rabbit(rabbit[i + 1]);
 				}
 				delete[] rabbit;
 				rabbit = temp;
@@ -496,18 +501,31 @@ int Menu()
 enum MENU { SHOW = 1, ADD_FOX, ADD_RABBIT, ADD_GRASS, DELETE_FOX, DELETE_RABBIT, SHOW_CHANGES, EXIT };
 int main()
 {
+	remove("Changes.txt");
 	Live live;
 	bool isExit = false;
 	while (!isExit)
 	{
 		switch (Menu())
 		{
-		case MENU::SHOW: live.Show(); break;
-		case MENU::ADD_FOX: live.AddFox(); break;
-		case MENU::ADD_RABBIT: live.AddRabbit(); break;
-		case MENU::ADD_GRASS: live.AddGrass(); break;
+		case MENU::SHOW:
+			live.Show();
+			live.SaveChangesToFile("Reviewed_info");
+			break;
+		case MENU::ADD_FOX:
+			live.AddFox();
+			live.SaveChangesToFile("Added_fox");
+			break;
+		case MENU::ADD_RABBIT:
+			live.AddRabbit();
+			live.SaveChangesToFile("Added_rabbit");
+			break;
+		case MENU::ADD_GRASS:
+			live.AddGrass();
+			live.SaveChangesToFile("Added_grass");
+			break;
 		case MENU::DELETE_FOX: live.DeleteFox(); break;
-		case MENU::DELETE_RABBIT: live.DeleteRabbit(); break;
+		case MENU::DELETE_RABBIT: live.IndexDeleteRabbit(); break;
 		case MENU::SHOW_CHANGES: live.ReadChangesFromFile(); break;
 		case MENU::EXIT: isExit = true;
 		}
@@ -516,5 +534,4 @@ int main()
 	system("cls");
 	gotoxy(0);
 	cout << "Good bye." << endl;
-	remove("Changes.txt");
 }
