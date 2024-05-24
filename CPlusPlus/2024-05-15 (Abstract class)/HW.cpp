@@ -499,8 +499,9 @@ int Menu()
 	return choice;
 }
 enum MENU { SHOW = 1, ADD_FOX, ADD_RABBIT, ADD_GRASS, DELETE_FOX, DELETE_RABBIT, SHOW_CHANGES, EXIT };
-int main()
-{
+//int main()
+//{
+	/*
 	remove("Changes.txt");
 	Live live;
 	bool isExit = false;
@@ -534,4 +535,5 @@ int main()
 	system("cls");
 	gotoxy(0);
 	cout << "Good bye." << endl;
-}
+	*/
+//}
