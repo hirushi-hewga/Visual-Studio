@@ -55,26 +55,26 @@ public:
 
 
 
-int main()
-{
-	srand(time(NULL));
-	//Person st("Artem");
-	//st.Print();
+//int main()
+//{
+	//srand(time(NULL));
+	////Person st("Artem");
+	////st.Print();
 
-	asp.Print();
+	////asp.Print();
 
 
-	cout << "\n-----------------------------\n";
-	Person* group[3]
-	{
-		//new Person("Artem"),
-		new Aspirant("Olga", { "Work with resourses", "Salles", "Test theme"}),
-		new Aspirant("Viktor", { "Main window", "User experiance" })
-	};
+	//cout << "\n-----------------------------\n";
+	//Person* group[3]
+	//{
+	//	//new Person("Artem"),
+	//	new Aspirant("Olga", { "Work with resourses", "Salles", "Test theme"}),
+	//	new Aspirant("Viktor", { "Main window", "User experiance" })
+	//};
 
-	for (int i = 0; i < 2; i++)
-	{
-		group[i]->Print();
-		delete group[i];
-	}
-}
+	//for (int i = 0; i < 2; i++)
+	//{
+	//	group[i]->Print();
+	//	delete group[i];
+	//}
+//}
