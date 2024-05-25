@@ -8,8 +8,8 @@ class Student
 	int* marks;
 	int markCount;
 public:
-	Student():name("no name"),spetialization("no specialization"), marks(nullptr), markCount(0) {}
-	Student(string name, string spetialization) :name(name), spetialization(spetialization)
+	Student() : spetialization("no spetialization"), name("no name"), marks(nullptr), markCount(0) {}
+	Student(string name, string spetialization) : name(name), spetialization(spetialization)
 	{
 		markCount = rand() % 10 + 1;
 		marks = new int[markCount];
@@ -18,8 +18,6 @@ public:
 			marks[i] = rand() % 4 + 9;
 		}
 	}
-
-
 	virtual void Print()const
 	{
 		cout << "Student : " << name << endl;
@@ -27,13 +25,12 @@ public:
 		cout << "Marks : ";
 		for (int i = 0; i < markCount; i++)
 		{
-			cout << marks[i];
+			cout << marks[i] << ' ';
 		}
-		cout << "\n----------------------------------------\n";
+		cout << "\n_________________________\n";
 	}
 
-
-	~Student()
+	virtual ~Student()
 	{
 		if (marks != nullptr)
 			delete[] marks;
@@ -42,33 +39,33 @@ public:
 
 class Aspirant : public Student
 {
-	string* subjects;
-	int countSubj;
+	string *subjects;
+	int subjectCount;
 public:
-	Aspirant(string name, string sp, initializer_list<string> subjects):Student(name, sp)
+	Aspirant() : subjects(nullptr), Student() {}
+	Aspirant(string name, string sp, initializer_list<string> sub) : Student(name, sp)
 	{
-		this->countSubj = subjects.size();
-		this->subjects = new string[countSubj];
+		this->subjectCount = sub.size();
+		subjects = new string[subjectCount];
+
 		int i = 0;
-		for (string s : subjects)
+		for (string s : sub)
 		{
 			this->subjects[i] = s;
 			i++;
 		}
 	}
 
-
 	void Print()const override
 	{
 		Student::Print();
 		cout << "Subject : ";
-		for (int i = 0; i < countSubj; i++)
+		for (int i = 0; i < subjectCount; i++)
 		{
-			cout << subjects[i] << ' ';
+			cout << subjects[i] << "  -  ";
 		}
-		cout << "theme" << endl;
+		cout << endl;
 	}
-
 
 	~Aspirant()
 	{
@@ -85,17 +82,18 @@ int main()
 	Student st("Artem", "Programmer");
 	st.Print();
 
-	Aspirant asp( "Olga", "Managment", { "Work with resourses", "Salles", "Test" } );
+	Aspirant asp("Olga", "Managment", { "Work with resourses", "Salles", "Test theme"});
 	asp.Print();
 
 
+	cout << "\n-----------------------------\n";
 	Student* group[3]
 	{
 		new Student("Artem", "Programmer"),
-		new Aspirant("Olga", "Management", { "Work with resourses", "Salles", "Test theme" }),
-		new Aspirant("Victor", "UA/UX", { "Main window", "User experiance" })
+		new Aspirant("Olga", "Managment", { "Work with resourses", "Salles", "Test theme"}),
+		new Aspirant("Viktor", "UA/UX", { "Main window", "User experiance" })
 	};
-
+	
 	for (int i = 0; i < 3; i++)
 	{
 		group[i]->Print();
