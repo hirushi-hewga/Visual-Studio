@@ -4,18 +4,26 @@ using namespace std;
 class Car
 {
 public:
-	void Drive()
+	void Drive()const
 	{
-		cout << "I am a car. I can drive!" << endl;
+		cout << "I am a car. I can drive" << endl;
+	}
+	void Use()const
+	{
+		cout << "I am airplane. I can fly" << endl;
 	}
 };
 
 class Airplane
 {
 public:
-	void Fly()
+	void Fly()const
 	{
-		cout << "I am Airplane. I can fly!" << endl;
+		cout << "I am airplane. I can fly" << endl;
+	}
+	void Use()const
+	{
+		cout << "I am airplane. I can fly" << endl;
 	}
 };
 
@@ -34,7 +42,7 @@ class C : public A{};
 class D : public B, public C
 {
 public:
-	int getValue()
+	int GetValue()
 	{
 		return D::B::A::A;
 		return D::A::A;
@@ -47,28 +55,26 @@ public:
 
 int main()
 {
-	D d;
-	d.getValue();
-	d.A::A = 10;
-	/*
+	/*D d;
+	d.GetValue();
+	d.A::A = 100;
 	D::A::A = 100;
-	D::B::A::A = 5;
-	*/
+	D::B::A::A = 5;*/
 
 
 
 
-	/*
-	Car car;
+	/*Car car;
 	car.Drive();
+	car.Use();
 
 	Airplane air;
 	air.Fly();
+	air.Use();
 
 	FlyCar flycar;
 	flycar.Drive();
 	flycar.Fly();
-	((Car)flycar).Use();
-	((Airplane)flycar).Use();
-	*/
+	(Car(flycar)).Use();
+	(Airplane(flycar)).Use();*/
 }
