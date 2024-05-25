@@ -1,77 +1,80 @@
 #include <iostream>
 using namespace std;
 
-class Person//abstract class 
+class Person // abstract class
 {
-protected:
-    string name;
+	string name;
 public:
-    Person() :name("no name") {}
-    Person(string name) :name(name) {}
-    virtual void Print()const
-    {
-        cout << "Student : " << name << endl;
-        cout << "\n____________________________________\n";
-    }
-    virtual ~Person() = 0 {}//pure virtual destructor
+	Person() : name("no name") {}
+	Person(string name) : name(name) {}
+	virtual void Print()const
+	{
+		cout << "Student : " << name << endl;
+		cout << "\n_________________________\n";
+	}
 
+	virtual ~Person() = 0 {} // pure virtual destructor
 };
+
 class Aspirant : public Person
 {
-    string* subjects;
-    int countSubj;
+	string* subjects;
+	int subjectCount;
 public:
-    Aspirant(string name, initializer_list<string> subjects) : Person(name)
-    {
-        this->countSubj = subjects.size();
-        this->subjects = new string[countSubj];
+	Aspirant() : subjects(nullptr), Person() {}
+	Aspirant(string name, initializer_list<string> sub) : Person(name)
+	{
+		this->subjectCount = sub.size();
+		subjects = new string[subjectCount];
 
-        int i = 0;
-        for (string s : subjects)
-        {
-            this->subjects[i] = s;
-            i++;
-        }
+		int i = 0;
+		for (string s : sub)
+		{
+			this->subjects[i] = s;
+			i++;
+		}
+	}
 
-    }
+	void Print()const override
+	{
+		Person::Print();
+		cout << "Subject : ";
+		for (int i = 0; i < subjectCount; i++)
+		{
+			cout << subjects[i] << "  -  ";
+		}
+		cout << endl;
+	}
 
-    void Print()const override
-    {
-        Person::Print();
-        cout << "Subject : ";
-        for (int i = 0; i < countSubj; i++)
-        {
-            cout << subjects[i] << "  -  ";
-        }
-        cout << endl;
-    }
-    ~Aspirant()
-    {
-        if (subjects != nullptr)
-            delete[]subjects;
-    }
+	~Aspirant()
+	{
+		if (subjects != nullptr)
+			delete[] subjects;
+	}
 };
 
-//int main()
-//{
-    //srand(time(0));
-    ////Person st("Artem");
-    ////st.Print();
 
-    //Aspirant asp("Olga", { "Work with resourses", "Salles", "Test theme" });
-    //asp.Print();
-    //cout << "\n-------------------------------------------------------" << endl;
 
-    //Person* groups[2]
-    //{
-    //    //new Person("Artem"),
-    //    new Aspirant("Olga",{ "Work with resourses", "Salles", "Test theme"}),
-    //    new Aspirant("Victor", { "Main window", "User experiance"})
-    //};
+int main()
+{
+	srand(time(NULL));
+	//Person st("Artem");
+	//st.Print();
 
-    //for (int i = 0; i < 2; i++)
-    //{
-    //    groups[i]->Print();
-    //    delete groups[i];
-    //}
-//}
+	asp.Print();
+
+
+	cout << "\n-----------------------------\n";
+	Person* group[3]
+	{
+		//new Person("Artem"),
+		new Aspirant("Olga", { "Work with resourses", "Salles", "Test theme"}),
+		new Aspirant("Viktor", { "Main window", "User experiance" })
+	};
+
+	for (int i = 0; i < 2; i++)
+	{
+		group[i]->Print();
+		delete group[i];
+	}
+}
