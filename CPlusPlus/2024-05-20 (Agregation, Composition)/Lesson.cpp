@@ -44,6 +44,26 @@ public:
 	}
 };
 
+class Document
+{
+	string name;
+	string format;
+	int pages;
+public:
+	Document() : name("no name"), format("no format"), pages(0) {}
+	Document(string name, string format, int pages) : name("no name"), format("no format")
+	{
+		this->pages = pages > 0 ? pages : 0;
+	}
+
+	void ShowInfo()const
+	{
+		cout << "---------------- Document : " << name << " ----------------" << endl;
+		cout << "Format : " << format << endl;
+		cout << "Pages : " << pages << endl;
+	}
+};
+
 
 
 class Printer
@@ -53,9 +73,10 @@ class Printer
 	Cartridge* cartridges;
 	int cartridgeCount;
 	Scanner scanner;
+	const Document* currentDoc;
 public:
-	Printer() : model("no model"), year(0), cartridges(nullptr), cartridgeCount(0) {}
-	Printer(string model, int year, float h, float w, float scanR)
+	Printer() : model("no model"), year(0), cartridges(nullptr), cartridgeCount(0), currentDoc(nullptr) {}
+	Printer(string model, int year, float h, float w, float scanR) : currentDoc(nullptr)
 	{
 		this->model = model;
 		this->year = year;
@@ -77,6 +98,11 @@ public:
 	void PrintDocument()const
 	{
 		cout << "Printing document" << endl;
+		if (currentDoc == nullptr)
+		{
+			cout << "No document to print" << endl;
+		}
+		else currentDoc->ShowInfo();
 	}
 	void ShowProperties()const
 	{
@@ -86,6 +112,14 @@ public:
 			cartridges[i].Show();
 		}
 	}
+	void AddToQueue(const Document& doc)
+	{
+		currentDoc = &doc;
+	}
+	void Cancel()
+	{
+		currentDoc = nullptr;
+	}
 
 	~Printer()
 	{
@@ -94,12 +128,20 @@ public:
 	}
 };
 
-
-
 int main()
 {
 	Printer printer("Cannon", 2020, 50, 50, 300);
 	printer.Scan();
 	printer.PrintDocument();
 	printer.ShowProperties();
+
+	Document doc1("passport.pdf", "A5", 5);
+	Document doc2("C++ for beginners.pdf", "A4", 1500);
+
+	printer.AddToQueue(doc1);
+	printer.PrintDocument();
+
+	printer.AddToQueue(doc2);
+	printer.Cancel();
+	printer.PrintDocument();
 }
