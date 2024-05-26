@@ -15,10 +15,7 @@ void gotoxy(int p) {
 class Parts
 {
 public:
-	virtual void ShowInfo()const
-	{
-		cout << "Info....." << endl;
-	}
+	virtual void ShowInfo()const = 0;
 };
 
 class Wheel : public Parts
@@ -26,7 +23,10 @@ class Wheel : public Parts
 	float radius;
 public:
 	Wheel() : radius(0) {}
-	Wheel(float radius) : radius(radius) {}
+	Wheel(float radius)
+	{
+		this->radius = radius > 0 ? radius : 0;
+	}
 
 	void ShowInfo()const override
 	{
@@ -80,10 +80,13 @@ public:
 };
 class Engine : public Parts
 {
-	int volume;
+	float volume;
 public:
 	Engine() : volume(0) {}
-	Engine(int volume) : volume(volume) {}
+	Engine(float volume)
+	{
+		this->volume = volume > 0 ? volume : 0;
+	}
 
 	void ShowInfo()const override
 	{
@@ -96,9 +99,9 @@ public:
 struct Node
 {
 	Node* prev;
-	Parts part;
+	Parts* part;
 	Node* next;
-	Node(Node* prev, Parts part, Node* next) : prev(prev), part(part), next(next) {}
+	Node(Node* prev, Parts* part, Node* next) : prev(prev), part(part), next(next) {}
 };
 class List
 {
@@ -122,7 +125,7 @@ public:
 	{
 		return head == nullptr;
 	}
-	void AddToHead(Parts part, int max)
+	void AddToHead(Parts* part, int max)
 	{
 		if (max > NodeCount())
 		{
@@ -147,7 +150,7 @@ public:
 			char s = _getch();
 		}
 	}
-	void AddToTail(Parts part, int max)
+	void AddToTail(Parts* part, int max)
 	{
 		if (max > NodeCount())
 		{
@@ -185,11 +188,13 @@ public:
 		}
 		else if (head == tail && head != nullptr)
 		{
+			delete head->part;
 			delete head;
 			head = tail = nullptr;
 		}
 		else
 		{
+			delete head->part;
 			head = head->next;
 			delete head->prev;
 			head->prev = nullptr;
@@ -208,11 +213,13 @@ public:
 		}
 		else if (head == tail && head != nullptr)
 		{
+			delete head->part;
 			delete tail;
 			tail = head = nullptr;
 		}
 		else
 		{
+			delete head->part;
 			tail = tail->prev;
 			delete tail->next;
 			tail->next = nullptr;
@@ -229,7 +236,7 @@ public:
 			Node* current = head;
 			for (int i = 1; current != nullptr; i++, current = current->next)
 			{
-				cout << "Rarts " << i << " : with "; current->part.ShowInfo();
+				cout << "Parts " << i << " : with "; current->part->ShowInfo();
 				cout << endl;
 			}
 		}
@@ -247,6 +254,36 @@ public:
 
 
 
+class Driver
+{
+	string name;
+	string surname;
+	int age;
+	int yearExperience;
+	bool drunk;
+public:
+	Driver() : name("no name"), surname("no surname"), age(0), yearExperience(0), drunk(false) {}
+	Driver(string name, string surname, int age, int yearExperience) : name(name), surname(surname)
+	{
+		this->age = age > 0 ? age : 0;
+		this->yearExperience = yearExperience > 0 ? yearExperience : 0;
+		this->drunk = rand() % 10 + 1 > 5 ? true : false;
+	}
+	
+	void ShowInfo()const
+	{
+		cout << "======== Driver info ========" << endl;
+		cout << "Name : " << name << endl;
+		cout << "Surname : " << surname << endl;
+		cout << "Age : " << age << endl;
+		cout << "Vehicle management experience : " << yearExperience << endl;
+	}
+	bool isDrunk()const
+	{
+		return drunk;
+	}
+};
+
 class Car
 {
 	List lights;
@@ -257,8 +294,9 @@ class Car
 	List wheels;
 	int wheelMaxCount;
 	Body* body;
+	Driver* driver;
 public:
-	Car() : engine(nullptr), body(nullptr), lightMaxCount(2), doorMaxCount(4), wheelMaxCount(4) {}
+	Car() : engine(nullptr), body(nullptr), driver(nullptr), lightMaxCount(2), doorMaxCount(4), wheelMaxCount(4) {}
 	
 	void ShowCarInfo()const
 	{
@@ -299,8 +337,8 @@ public:
 			cout << "Enter light type : ";
 			cin >> choice;
 		}
-		if (choice == 1) lights.AddToTail(Headlight(Headlight::STANDART), lightMaxCount);
-		if (choice == 2) lights.AddToTail(Headlight(Headlight::LED), lightMaxCount);
+		if (choice == 1) lights.AddToTail(new Headlight(Headlight::STANDART), lightMaxCount);
+		if (choice == 2) lights.AddToTail(new Headlight(Headlight::LED), lightMaxCount);
 	}
 	void DeleteLight()
 	{
@@ -308,10 +346,12 @@ public:
 	}
 	void AddDoor()
 	{
+		system("cls");
+		gotoxy(0);
 		string color;
 		cout << "Enter door color : ";
 		cin >> color;
-		doors.AddToTail(Door(color), doorMaxCount);
+		doors.AddToTail(new Door(color), doorMaxCount);
 	}
 	void DeleteDoor()
 	{
@@ -319,6 +359,8 @@ public:
 	}
 	void NewEngine()
 	{
+		system("cls");
+		gotoxy(0);
 		float volume;
 		cout << "Enter new engine volume (sm^3) : ";
 		cin >> volume;
@@ -334,10 +376,12 @@ public:
 	}
 	void AddWheel()
 	{
+		system("cls");
+		gotoxy(0);
 		float radius;
 		cout << "Enter wheel radius : ";
 		cin >> radius;
-		wheels.AddToTail(Wheel(radius), wheelMaxCount);
+		wheels.AddToTail(new Wheel(radius), wheelMaxCount);
 	}
 	void DeleteWheel()
 	{
@@ -345,6 +389,8 @@ public:
 	}
 	void NewBody()
 	{
+		system("cls");
+		gotoxy(0);
 		string type;
 		cout << "Enter new body type : ";
 		cin >> type;
@@ -358,11 +404,111 @@ public:
 		cout << "Press any key to continue : ";
 		char s = _getch();
 	}
+	void NewDriver()
+	{
+		system("cls");
+		gotoxy(0);
+		string name, surname;
+		int age, yearExperience;
+		cout << "Enter driver name : "; cin >> name;
+		cout << "Enter driver surname : "; cin >> surname;
+		cout << "Enter driver age : "; cin >> age;
+		cout << "Enter driver year experience : "; cin >> yearExperience;
+		if (age < 16)
+		{
+			system("cls");
+			gotoxy(0);
+			cout << "Error! Driver age < 16." << endl;
+			cout << endl;
+			cout << "Press any key to continue : ";
+			char s = _getch();
+		}
+		else
+		{
+			CancelDriver();
+			driver = new Driver(name, surname, age, yearExperience);
+		}
+	}
+	void CancelDriver()
+	{
+		if (driver != nullptr)
+			delete driver;
+		driver = nullptr;
+	}
+	bool IsWorking()const
+	{
+		system("cls");
+		gotoxy(0);
+		bool isWorking = true;
+		if (lights.NodeCount() < lightMaxCount)
+		{
+			cout << "- Not enought lights" << endl;
+			isWorking = false;
+		}
+		if (doors.NodeCount() < doorMaxCount)
+		{
+			cout << "- Not enought doors" << endl;
+			isWorking = false;
+		}
+		if (wheels.NodeCount() < wheelMaxCount)
+		{
+			cout << "- Not enought wheels" << endl;
+			isWorking = false;
+		}
+		if (engine == nullptr)
+		{
+			cout << "- No engine" << endl;
+			isWorking = false;
+		}
+		if (body == nullptr)
+		{
+			cout << "- No body" << endl;
+			isWorking = false;
+		}
+		return isWorking;
+	}
+	void Drive()const
+	{
+		if (IsWorking() && driver != nullptr)
+		{
+			if (driver->isDrunk())
+			{
+				cout << "You cant go! Driver is drunk." << endl;
+				cout << endl;
+				cout << "Press any key to continue : ";
+				char s = _getch();
+			}
+			else
+			{
+				cout << "We arrived in Kyiv" << endl;
+				cout << endl;
+				cout << "Press any key to continue : ";
+				char s = _getch();
+			}
+		}
+		else
+		{
+			cout << endl;
+			cout << "Press any key to continue : ";
+			char s = _getch();
+		}
+	}
+	void DriverInfo()const
+	{
+		system("cls");
+		gotoxy(0);
+		if (driver != nullptr) driver->ShowInfo();
+		else cout << "Driver not found" << endl;
+		cout << endl;
+		cout << "Press any key to continue : ";
+		char s = _getch();
+	}
 
 	~Car()
 	{
-		delete engine;
-		delete body;
+		if (engine != nullptr) delete engine;
+		if (body != nullptr) delete body;
+		if (driver != nullptr) delete driver;
 	}
 };
 
@@ -372,7 +518,7 @@ int Menu()
 {
 	int choice = 0;
 	bool isValidData = true;
-	while (choice < 1 || choice > 11)
+	while (choice < 1 || choice > 14)
 	{
 		system("cls");
 		gotoxy(0);
@@ -390,15 +536,20 @@ int Menu()
 		cout << "7 - Add wheel" << endl;
 		cout << "8 - Delete wheel" << endl;
 		cout << "9 - Create new body" << endl;
-		cout << "10 - Exit" << endl;
+		cout << "10 - Add driver" << endl;
+		cout << "11 - Cancel driver" << endl;
+		cout << "12 - Drive" << endl;
+		cout << "13 - Driver info" << endl;
+		cout << "14 - Exit" << endl;
 		cout << "Enter your choice : ";
 		cin >> choice;
 	}
 	return choice;
 }
-enum MENU { SHOW_CAR_INFO = 1, ADD_LIGHT, DELETE_LIGHT, ADD_DOOR, DELETE_DOOR, NEW_ENGINE, ADD_WHEEL, DELETE_WHEEL, NEW_BODY, EXIT };
+enum MENU { SHOW_CAR_INFO = 1, ADD_LIGHT, DELETE_LIGHT, ADD_DOOR, DELETE_DOOR, NEW_ENGINE, ADD_WHEEL, DELETE_WHEEL, NEW_BODY, ADD_DRIVER, DELETE_DRIVER, DRIVE, DRIVER_INFO, EXIT };
 int main()
 {
+	srand(time(NULL));
 	Car car;
 	bool isExit = false;
 	while (!isExit)
@@ -414,6 +565,10 @@ int main()
 		case MENU::ADD_WHEEL: car.AddWheel(); break;
 		case MENU::DELETE_WHEEL: car.DeleteWheel(); break;
 		case MENU::NEW_BODY: car.NewBody(); break;
+		case MENU::ADD_DRIVER: car.NewDriver(); break;
+		case MENU::DELETE_DRIVER: car.CancelDriver(); break;
+		case MENU::DRIVE: car.Drive(); break;
+		case MENU::DRIVER_INFO: car.DriverInfo(); break;
 		case MENU::EXIT: isExit = true;
 		}
 	}
