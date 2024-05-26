@@ -83,8 +83,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-17 (Virtual destruc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-17 (Pure virtual destructor)", "2024-05-17 (Pure virtual destructor)\2024-05-17 (Pure virtual destructor).vcxproj", "{67D73A2A-B0EB-4AD8-90E8-EC39EE7EF8E7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-20 (Agregation, Composition)", "2024-05-20 (Agregation, Composition)\2024-05-20 (Agregation, Composition).vcxproj", "{EFF28F1F-E37F-4BBB-AF54-7450722844AB}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-21 (Exceptions)", "2024-05-21 (Exceptions)\2024-05-21 (Exceptions).vcxproj", "{89FFED39-3425-4E7A-B70A-05FFD1ACA255}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-15 (Abstract class)", "2024-05-15 (Abstract class)\2024-05-15 (Abstract class).vcxproj", "{33994666-8677-4018-B1A8-6610CFF50725}"
