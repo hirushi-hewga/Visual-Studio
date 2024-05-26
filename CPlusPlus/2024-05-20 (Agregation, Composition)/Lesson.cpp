@@ -128,9 +128,9 @@ public:
 	}
 };
 
-int main()
-{
-	Printer printer("Cannon", 2020, 50, 50, 300);
+//int main()
+//{
+	/*Printer printer("Cannon", 2020, 50, 50, 300);
 	printer.Scan();
 	printer.PrintDocument();
 	printer.ShowProperties();
@@ -143,5 +143,5 @@ int main()
 
 	printer.AddToQueue(doc2);
 	printer.Cancel();
-	printer.PrintDocument();
-}
+	printer.PrintDocument();*/
+//}
