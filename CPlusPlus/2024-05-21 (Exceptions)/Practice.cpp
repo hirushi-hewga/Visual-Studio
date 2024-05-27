@@ -18,7 +18,7 @@ public:
 	Stack() = delete;
 	Stack(int size)
 	{
-		if (size < 0) { throw invalid_argument("Error argument! Size must be less that 0") }
+		if (size < 0) throw invalid_argument("Error argument! Size must be less that 0");
 		top = EMPTY;
 		arr = new T[size];
 	}
