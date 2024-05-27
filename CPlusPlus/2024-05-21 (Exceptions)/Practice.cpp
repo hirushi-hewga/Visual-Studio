@@ -88,9 +88,9 @@ public:
 
 
 
-int main()
-{
-		Stack<int> st({ 1, 56, 43, 84, 25, 58, 2, 8, 53, 97, 3 });
+//int main()
+//{
+	/*Stack<int> st({ 1, 56, 43, 84, 25, 58, 2, 8, 53, 97, 3 });
 	try
 	{
 		st.Print();
@@ -118,5 +118,5 @@ int main()
 	catch (...)
 	{
 		cout << "Unknown exception" << endl;
-	}
-}
+	}*/
+//}
