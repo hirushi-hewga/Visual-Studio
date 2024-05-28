@@ -129,9 +129,9 @@ public:
 
 
 
-int main()
-{
-	Animal animal("Tom", 10, "Flat");
+//int main()
+//{
+	/*Animal animal("Tom", 10, "Flat");
 	animal.ShowInfo();
 	Zoo zoo("Romashka");
 	zoo.AddAnimal(animal);
@@ -140,8 +140,9 @@ int main()
 	zoo.AddAnimal(Animal("Pig", 200, "Village"));
 	zoo.Show();
 	zoo.SaveBinary();
+
 	Zoo zoo("test");
 	zoo.Show();
 	zoo.BinaryLoad();
-	zoo.Show();
-}
+	zoo.Show();*/
+//}
