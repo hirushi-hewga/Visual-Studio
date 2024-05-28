@@ -11,7 +11,6 @@ int CharToInt_(const char* s)
 		if (!isdigit(s[i]))
 			throw exception("Numerical error");
 	}
-	char* endptr;
 	long long  number = atoll(s);
 	if (number > INT_MAX || number < INT_MIN)
 		throw overflow_error("out of range");
