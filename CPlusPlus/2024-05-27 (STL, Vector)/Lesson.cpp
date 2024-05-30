@@ -101,6 +101,7 @@ int main()
 		if (numbers[i] == 7)
 		{
 			numbers.insert(numbers.begin() + i, 7);
+			break;
 		}
 	}
 	Print(numbers);
