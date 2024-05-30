@@ -91,8 +91,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-20 (Agregation, Com
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-27 (STL, Vector)", "2024-05-27 (STL, Vector)\2024-05-27 (STL, Vector).vcxproj", "{9A601E0C-9294-4CF1-A657-248DE4D9CB34}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-27 (List)", "2024-05-27 (List)\2024-05-27 (List).vcxproj", "{E0E9CFCA-297B-4871-B9CD-F4CB079F584C}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "2024-05-22 (Work with file)", "2024-05-22 (Work with file)\2024-05-22 (Work with file).vcxproj", "{2AB996FF-9744-437F-83E5-56C44ED11B11}"
 EndProject
 Global
