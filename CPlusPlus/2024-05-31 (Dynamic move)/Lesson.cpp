@@ -1,7 +1,8 @@
 #include "Header.h"
+#include <chrono>
 
 
-
+enum DIRECTION { LEFT, RIGHT, UP, DOWN };
 class Hero
 {
 	string name;
@@ -9,6 +10,7 @@ class Hero
 	int h, w;
 	COORD position;
 	char symbol;
+	DIRECTION dir;
 
 	void Print(char filler)const
 	{
@@ -23,18 +25,20 @@ class Hero
 		}
 	}
 public:
-	Hero() : name("no name"), hp(100), h(1), w(1), position({0, 0}), symbol('#') {}
-	Hero(string name, int h, int w, char s) : name(name), hp(100), position({0, 0}), symbol(s)
+	Hero() : name("no name"), hp(100), h(1), w(1), position({0, 0}), symbol('#'), dir(RIGHT) {}
+	Hero(string name, int h, int w, char s) : name(name), hp(100), position({0, 0}), symbol(s), dir(RIGHT)
 	{
 		this->h = h >= 1 ? h : 1;
 		this->w = w >= 1 ? w : 1;
 	}
 	void PrintHero()const
 	{
+		SetConsoleTextAttribute(hConsole, ConsoleColors::DARKMAGENTA);
 		Print(symbol);
 	}
 	void ClearHero()const
 	{
+		SetConsoleTextAttribute(hConsole, ConsoleColors::CYAN);
 		Print(' ');
 	}
 	void ShowInfo()const
@@ -43,8 +47,13 @@ public:
 	}
 	void Move(int x, int y)
 	{
-		position.Y = y >= 0 ? y : 0;
-		position.X = x >= 0 ? x : 0;
+		switch (dir)
+		{
+		case DIRECTION::RIGHT: MoveRight(); break;
+		case DIRECTION::LEFT: MoveLeft(); break;
+		case DIRECTION::UP: MoveUp(); break;
+		case DIRECTION::DOWN: MoveDown(); break;
+		}
 	}
 	void MoveRight()
 	{
@@ -80,18 +89,28 @@ int main()
 	hero.ShowInfo();
 	hero.Move(10, 10);
 	hero.PrintHero();
+	time_t interval = 100;
+	time_t start = clock();
 	while (true)
 	{
-		int key = _getch();
-		if (key == 224)
+		if (clock() >= start + interval)
 		{
-			key = _getch();
-			switch (key)
+			hero.MoveRight();
+			start = clock();
+		}
+		if (_kbhit)
+		{
+			int key = _getch();
+			if (key == 224)
 			{
-			case 77: hero.MoveRight(); break;
-			case 80: hero.MoveDown(); break;
-			case 72: hero.MoveUp(); break;
-			case 75: hero.MoveLeft(); break;
+				key = _getch();
+				switch (key)
+				{
+				case 77: hero.MoveRight(); break;
+				case 80: hero.MoveDown(); break;
+				case 72: hero.MoveUp(); break;
+				case 75: hero.MoveLeft(); break;
+				}
 			}
 		}
 	}
