@@ -1,6 +1,8 @@
 #include <iostream>
 #include <conio.h>
 #include <vector>
+#include <algorithm>
+#include <iomanip>
 using namespace std;
 
 struct Time
@@ -23,11 +25,19 @@ public:
 		departure_time.minutes = m;
 		departure_time.seconds = s;
 	}
+	Time GetTime()const
+	{
+		return departure_time;
+	}
+	string GetStation()const
+	{
+		return station_of_destination;
+	}
 	friend ostream& operator <<(ostream& os, const Train& other);
 };
 ostream& operator <<(ostream& os, const Train& other)
 {
-	os << "Train number : " << other.number << " | Departure time : ";
+	os << "Train number : " << left << setw(3) << other.number << " | Departure time : ";
 	if (other.departure_time.hours < 10) os << '0';
 	os << other.departure_time.hours << ':';
 	if (other.departure_time.minutes < 10) os << '0';
@@ -35,6 +45,12 @@ ostream& operator <<(ostream& os, const Train& other)
 	if (other.departure_time.seconds < 10) os << '0';
 	os << other.departure_time.seconds << " | Station of destination : " << other.station_of_destination << endl;
 	return os;
+}
+bool CompareByTime(const Train& train1, const Train& train2)
+{
+	Time t1 = train1.GetTime();
+	Time t2 = train2.GetTime();
+	return t1.hours * 10000 + t1.minutes * 100 + t1.seconds < t2.hours * 10000 + t2.minutes * 100 + t2.seconds;
 }
 
 
@@ -123,7 +139,11 @@ public:
 	}
 	void SortByTime()
 	{
-		system_.
+		sort(system_.begin(), system_.end(), CompareByTime);
+	}
+	void ShowByStation(string station)const
+	{
+		auto it = find_if(system_.begin(), system_.end(), [station](const Train& t){ return t.GetStation() == station; });
 	}
 };
 
@@ -134,7 +154,7 @@ int main()
 	railway.AddTrainToSystem(Time{ 5, 12, 31 }, "Lviv");
 	railway.AddTrainToSystem(Time{ 23, 59, 59 }, "Rivne");
 	railway.AddTrainToSystem(Time{ 0, 31, 55 }, "Harkiv");
-	/*railway.AddTrainToSystem(Time{ 14, 28, 15 }, "Odesa");
+	railway.AddTrainToSystem(Time{ 14, 28, 15 }, "Odesa");
 	railway.AddTrainToSystem(Time{ 11, 11, 48 }, "Zdolbuniv");
 	railway.AddTrainToSystem(Time{ 8, 47, 38 }, "Kyrovohrad");
 	railway.AddTrainToSystem(Time{ 7, 40, 53 }, "Herson");
@@ -270,8 +290,11 @@ int main()
 	railway.AddTrainToSystem(Time{ 6, 14, 1 }, "Selysche");
 	railway.AddTrainToSystem(Time{ 0, 0, 29 }, "Birky");
 	railway.AddTrainToSystem(Time{ 6, 16, 25 }, "Lubeshiv");
-	railway.ShowTrains();
-	railway.ShowTrainByNumber(3);
+	/*cout << "=====================================================================" << endl; railway.ShowTrains();
+	cout << "=====================================================================" << endl; railway.ShowTrainByNumber(3);
 	railway.SetTimeByNumber(2);
-	railway.ShowTrains();*/
+	cout << "=====================================================================" << endl; railway.ShowTrains();
+	railway.SortByTime();
+	cout << "=====================================================================" << endl; railway.ShowTrains();*/
+	cout << "=====================================================================" << endl; railway.ShowByStation("Selysche");
 }
