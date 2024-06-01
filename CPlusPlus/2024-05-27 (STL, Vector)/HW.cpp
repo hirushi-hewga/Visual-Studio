@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <iomanip>
+#include <fstream>
 using namespace std;
 
 struct Time
@@ -18,6 +19,15 @@ class Train
 	string station_of_destination;
 public:
 	Train(int number, Time t, string station) : number(number), departure_time(t), station_of_destination(station) {}
+	Train(const Train& other)
+	{
+		this->number = other.number;
+		this->departure_time.hours = other.departure_time.hours;
+		this->departure_time.minutes = other.departure_time.minutes;
+		this->departure_time.seconds = other.departure_time.seconds;
+		this->station_of_destination = other.station_of_destination;
+	}
+	
 	int GetNumber()const { return number; }
 	void SetTime(int h, int m, int s)
 	{
@@ -33,18 +43,24 @@ public:
 	{
 		return station_of_destination;
 	}
-	friend ostream& operator <<(ostream& os, const Train& other);
+	void Show()const
+	{
+		cout << "Train number : " << left << setw(3) << number << " | Departure time : ";
+		if (departure_time.hours < 10) cout << '0';
+		cout << departure_time.hours << ':';
+		if (departure_time.minutes < 10) cout << '0';
+		cout << departure_time.minutes << ':';
+		if (departure_time.seconds < 10) cout << '0';
+		cout << departure_time.seconds << " | Station of destination : " << station_of_destination << endl;
+	}
+
+	friend ofstream& operator <<(ofstream& out, const Train& other);
+	friend ifstream& operator >>(ifstream& in, const Train& other);
 };
-ostream& operator <<(ostream& os, const Train& other)
+ofstream& operator <<(ofstream& out, const Train& other)
 {
-	os << "Train number : " << left << setw(3) << other.number << " | Departure time : ";
-	if (other.departure_time.hours < 10) os << '0';
-	os << other.departure_time.hours << ':';
-	if (other.departure_time.minutes < 10) os << '0';
-	os << other.departure_time.minutes << ':';
-	if (other.departure_time.seconds < 10) os << '0';
-	os << other.departure_time.seconds << " | Station of destination : " << other.station_of_destination << endl;
-	return os;
+	out << other.number << ':' << other.departure_time.hours << ':' << other.departure_time.minutes << ':' << other.departure_time.seconds << ':' << other.station_of_destination << '|' << endl;
+	return out;
 }
 bool CompareByTime(const Train& train1, const Train& train2)
 {
@@ -70,7 +86,7 @@ public:
 			if (system_.size() == 0) throw exception("Not found trains");
 			for (int i = 0; i < system_.size(); i++)
 			{
-				cout << system_[i];
+				system_[i].Show();
 			}
 		}
 		catch (exception ex)
@@ -91,7 +107,7 @@ public:
 			{
 				if (system_[i].GetNumber() == num)
 				{
-					cout << system_[i] << endl;
+					system_[i].Show();
 					isFound = true;
 					break;
 				}
@@ -116,7 +132,7 @@ public:
 			{
 				if (system_[i].GetNumber() == num)
 				{
-					cout << system_[i] << endl;
+					system_[i].Show();
 					isFound = true;
 					int h, m, s;
 					cout << "Enter hours : "; cin >> h;
@@ -143,7 +159,39 @@ public:
 	}
 	void ShowByStation(string station)const
 	{
-		auto it = find_if(system_.begin(), system_.end(), [station](const Train& t){ return t.GetStation() == station; });
+		for (int i = 0; i < system_.size(); i++)
+		{
+			if (system_[i].GetStation() == station)
+				system_[i].Show();
+		}
+		cout << endl;
+	}
+	void Save()const
+	{
+		ofstream out("Trains.txt", ios_base::out);
+		for (int i = 0; i < system_.size(); i++)
+		{
+			out << system_[i];
+		}
+		out.close();
+	}
+	void Load()
+	{
+		system_.clear();
+		ifstream in("Trains.txt", ios_base::in);
+		char buffnumber[250], buffhours[250], buffminutes[250], buffseconds[250], buffstation[250];
+		while (!in.eof())
+		{
+			in.getline(buffnumber, 250, ':');
+			if (in.eof()) break;
+			in.getline(buffhours, 250, ':');
+			in.getline(buffminutes, 250, ':');
+			in.getline(buffseconds, 250, ':');
+			in.getline(buffstation, 250, '|');
+			Train train(Train{ atoi(buffnumber), {atoi(buffhours), atoi(buffminutes), atoi(buffseconds)}, buffstation });
+			system_.push_back(train);
+		}
+		in.close();
 	}
 };
 
@@ -277,24 +325,28 @@ int main()
 	railway.AddTrainToSystem(Time{ 15, 48, 13 }, "Lukiv");
 	railway.AddTrainToSystem(Time{ 0, 18, 18 }, "Zabolottia");
 	railway.AddTrainToSystem(Time{ 20, 41, 3 }, "Krymne");
-	railway.AddTrainToSystem(Time{ 16, 59, 35 }, "Stara vyzhivka");
+	/*railway.AddTrainToSystem(Time{ 16, 59, 35 }, "Stara vyzhivka");
 	railway.AddTrainToSystem(Time{ 3, 32, 19 }, "Domanove");
 	railway.AddTrainToSystem(Time{ 13, 22, 33 }, "Hirnyky");
 	railway.AddTrainToSystem(Time{ 12, 35, 24 }, "Radne");
 	railway.AddTrainToSystem(Time{ 22, 52, 43 }, "Butsyn");
 	railway.AddTrainToSystem(Time{ 8, 32, 57 }, "Soshychne");
 	railway.AddTrainToSystem(Time{ 20, 18, 40 }, "Olenyne");
-	railway.AddTrainToSystem(Time{ 7, 1, 27 }, "Manevychi");
+	railway.AddTrainToSystem(Time{ 7, 1, 27 }, "Manevychi");*/
 	railway.AddTrainToSystem(Time{ 9, 53, 2 }, "Prylisne");
 	railway.AddTrainToSystem(Time{ 11, 8, 26 }, "Vuterta");
 	railway.AddTrainToSystem(Time{ 6, 14, 1 }, "Selysche");
 	railway.AddTrainToSystem(Time{ 0, 0, 29 }, "Birky");
 	railway.AddTrainToSystem(Time{ 6, 16, 25 }, "Lubeshiv");
+	railway.AddTrainToSystem(Time{ 8, 2, 14 }, "Selysche");
 	/*cout << "=====================================================================" << endl; railway.ShowTrains();
 	cout << "=====================================================================" << endl; railway.ShowTrainByNumber(3);
 	railway.SetTimeByNumber(2);
 	cout << "=====================================================================" << endl; railway.ShowTrains();
 	railway.SortByTime();
-	cout << "=====================================================================" << endl; railway.ShowTrains();*/
-	cout << "=====================================================================" << endl; railway.ShowByStation("Selysche");
+	cout << "=====================================================================" << endl; railway.ShowTrains();
+	cout << "=====================================================================" << endl; railway.ShowByStation("Selysche");*/
+	//railway.Save();
+	/*railway.Load();
+	railway.ShowTrains();*/
 }
