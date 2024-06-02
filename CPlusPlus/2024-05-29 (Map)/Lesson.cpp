@@ -50,20 +50,21 @@ public:
 
 
 
-map<string, int>::iterator FindByValue(map<string, int>& clients, int value)
-{
-	for (map<string, int>::iterator i = clients.begin(); i != clients.end(); i++)
-	{
-		if (i->second == value)
-		{
-			return i;
-		}
-	}
-	return clients.end();
-}
+//map<string, int>::iterator FindByValue(map<string, int>& clients, int value)
+//{
+//	for (map<string, int>::iterator i = clients.begin(); i != clients.end(); i++)
+//	{
+//		if (i->second == value)
+//		{
+//			return i;
+//		}
+//	}
+//	return clients.end();
+//}
 
 int main()
 {
+	/*
 	Dictionary dictionary("English-Ukrainian");
 	dictionary.Print();
 
@@ -81,6 +82,7 @@ int main()
 	{
 		cout << item << " ";
 	}
+	*/
 
 
 
