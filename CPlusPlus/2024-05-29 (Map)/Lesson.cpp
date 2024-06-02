@@ -62,8 +62,8 @@ public:
 //	return clients.end();
 //}
 
-int main()
-{
+//int main()
+//{
 	/*
 	Dictionary dictionary("English-Ukrainian");
 	dictionary.Print();
@@ -188,4 +188,4 @@ int main()
 		cout << "Key : " << item.first << " | Value : " << item.second << endl;
 	}
 	*/
-}
+//}
