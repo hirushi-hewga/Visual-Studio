@@ -32,7 +32,7 @@ public:
 	void AddTranslate()
 	{
 		bool isValidData = true;
-		string word = "";
+		string word;
 		while (dic.find(word) == dic.end())
 		{
 			system("cls");
@@ -56,16 +56,43 @@ public:
 			dic[word].push_back(translate);
 		} while (!translate.empty());
 	}
-	void AddTranslate_(string word, string translate)
+	void AddWord()
 	{
-		if (dic.find(word) == dic.end())
-			cout << "Word not found!" << endl;
-		else
-			dic[word].push_back(translate);
-	}
-	void AddWord(string word, string translate)
-	{
+		string word, translate;
+		system("cls");
+		cout << "Enter new word : ";
+		getline(cin, word);
+		cout << "Enter translate : ";
+		getline(cin, translate);
 		dic.insert(make_pair(word, list<string>{translate}));
+	}
+	void ShowByWord()const
+	{
+		bool isValidData = true;
+		string word;
+		while (dic.find(word) == dic.end())
+		{
+			system("cls");
+			for (auto pair : dic)
+			{
+				cout << "- " << pair.first << endl;
+			}
+			if (!isValidData) cout << "\nWord not found! Try again.\n";
+			isValidData = true;
+			cout << endl;
+			cout << "Enter word : ";
+			getline(cin, word);
+		}
+
+		system("cls");
+		cout << "==== Word : " << dic.find(word)->first << "====" << endl;
+		for (string word : dic.find(word)->second)
+		{
+			cout << "- " << word << endl;
+		}
+		cout << endl;
+		cout << "Press any key to continue : ";
+		_getch();
 	}
 };
 
@@ -103,8 +130,8 @@ int main()
 	{
 		switch (Menu())
 		{
-		case ADD_PAIR:  break;
-		case SEARCH_BY_WORD:  break;
+		case ADD_PAIR: dictionary.AddWord(); break;
+		case SEARCH_BY_WORD: dictionary.ShowByWord(); break;
 		case ADD_TRANSLATE: dictionary.AddTranslate(); break;
 		case DELETE_WORD:  break;
 		case SHOW: dictionary.Print(); break;
