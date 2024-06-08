@@ -1,8 +1,9 @@
+#include <conio.h>
+#include <fstream>
 #include <iostream>
-#include <string>
 #include <list>
 #include <map>
-#include <conio.h>
+#include <string>
 using namespace std;
 
 class Dictionary
@@ -94,6 +95,62 @@ public:
 		cout << "Press any key to continue : ";
 		_getch();
 	}
+	void DeleteWord()
+	{
+		bool isValidData = true;
+		string word;
+		while (dic.find(word) == dic.end())
+		{
+			system("cls");
+			for (auto pair : dic)
+			{
+				cout << "- " << pair.first << endl;
+			}
+			if (!isValidData) cout << "\nWord not found! Try again.\n";
+			isValidData = true;
+			cout << endl;
+			cout << "Enter word : ";
+			getline(cin, word);
+		}
+
+		dic.erase(word);
+	}
+	void SaveToFile()const
+	{
+		ofstream out("Dictionary.txt", ios_base::out);
+		out << name << endl;
+		for (auto pair : dic)
+		{
+			out << pair.first;
+			for (string word : pair.second)
+			{
+				out << ':';
+				out << word;
+			}
+			out << '|';
+			out << endl;
+		}
+		out.close();
+	}
+	void LoadFromFile()
+	{
+		ifstream in("Dictionary.txt", ios_base::in);
+		if (!in.is_open())
+		{
+			system("cls");
+			cout << "Failed to open file!" << endl;
+			cout << endl;
+			cout << "Press any key to continue : ";
+			_getch();
+		}
+		else
+		{
+			dic.clear();
+
+			
+		}
+		in.close();
+	}
 };
 
 
@@ -133,7 +190,7 @@ int main()
 		case ADD_PAIR: dictionary.AddWord(); break;
 		case SEARCH_BY_WORD: dictionary.ShowByWord(); break;
 		case ADD_TRANSLATE: dictionary.AddTranslate(); break;
-		case DELETE_WORD:  break;
+		case DELETE_WORD: dictionary.DeleteWord(); break;
 		case SHOW: dictionary.Print(); break;
 		case SAVE:  break;
 		case LOAD:  break;
