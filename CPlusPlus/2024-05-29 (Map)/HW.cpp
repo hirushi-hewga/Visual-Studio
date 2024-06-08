@@ -54,17 +54,19 @@ public:
 		{
 			cout << "Enter translate : ";
 			getline(cin, translate);
+			if (translate.empty())
+				break;
 			dic[word].push_back(translate);
-		} while (!translate.empty());
+		} while (true);
 	}
 	void AddWord()
 	{
 		string word, translate;
 		system("cls");
 		cout << "Enter new word : ";
-		getline(cin, word);
+		cin >> word;
 		cout << "Enter translate : ";
-		getline(cin, translate);
+		cin >> translate;
 		dic.insert(make_pair(word, list<string>{translate}));
 	}
 	void ShowByWord()const
@@ -121,11 +123,11 @@ public:
 		out << name << endl;
 		for (auto pair : dic)
 		{
-			out << pair.first;
+			out << pair.first << endl;
 			for (string word : pair.second)
 			{
-				out << ':';
 				out << word;
+				out << endl;
 			}
 			out << '|';
 			out << endl;
@@ -146,8 +148,23 @@ public:
 		else
 		{
 			dic.clear();
-
-			
+			getline(in, name);
+			string word, translate;
+			while (!in.eof())
+			{
+				getline(in, word);
+				if (in.eof())
+					break;
+				getline(in, translate);
+				dic.insert(make_pair(word, list<string>{translate}));
+				while (true)
+				{
+					getline(in, translate);
+					if (translate == "|")
+						break;
+					dic[word].push_back(translate);
+				}
+			}
 		}
 		in.close();
 	}
@@ -192,42 +209,9 @@ int main()
 		case ADD_TRANSLATE: dictionary.AddTranslate(); break;
 		case DELETE_WORD: dictionary.DeleteWord(); break;
 		case SHOW: dictionary.Print(); break;
-		case SAVE:  break;
-		case LOAD:  break;
+		case SAVE: dictionary.SaveToFile(); break;
+		case LOAD: dictionary.LoadFromFile(); break;
 		case EXIT: isExit = true;
 		}
 	}
-
-
-
-
-	/*
-	Dictionary dictionary("English-Ukrainian");
-	dictionary.AddWord("light", "svitlo");
-	dictionary.AddWord("great", "chudovo");
-	dictionary.AddWord("just", "prosto");
-	dictionary.AddWord("open", "vidchuneno");
-	dictionary.AddWord("neither", "ni");
-	dictionary.AddWord("because", "oskilku");
-	dictionary.AddWord("left", "zliva");
-	dictionary.AddWord("alive", "badioruy");
-	dictionary.AddWord("quality", "yakist");
-	dictionary.AddWord("may", "mozna");
-	dictionary.Print();
-	dictionary.AddTranslate_("light", "lehkiy");
-	dictionary.AddTranslate_("great", "velukiy");
-	dictionary.AddTranslate_("just", "zaraz");
-	dictionary.AddTranslate_("open", "otvir");
-	dictionary.AddTranslate_("neither", "zoden");
-	dictionary.AddTranslate_("because", "bo");
-	dictionary.AddTranslate_("left", "pokunytuy");
-	dictionary.AddTranslate_("alive", "zuvuy");
-	dictionary.AddTranslate_("quality", "vlastuvist");
-	dictionary.AddTranslate_("may", "traven");
-	dictionary.Print();
-
-	dictionary.AddWord("save", "vryatuvaty");
-	dictionary.AddTranslate("save");
-	dictionary.Print();
-	*/
 }
