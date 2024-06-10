@@ -41,20 +41,34 @@ void hidecursor()
 }
 
 enum DIRECTION { LEFT, RIGHT, UP, DOWN };
+enum HERO { NO_HERO, BATMAN, JOKER, HALK };
 
 class Hero
 {
+	HERO hero;
 	int w, h;
 	COORD position;
 	char symbol;
 	DIRECTION dir;
-public:
-	Hero() : h(15), w(30), position({ 1, 1 }), symbol((char)178), dir(RIGHT) {}
 
-	void PrintSymbol()const
+	void PrintSymbols(int count, ConsoleColors color, char symbol)const
 	{
-
+		SetConsoleTextAttribute(hConsole, color);
+		for (int i = 0; i < count * 2; i++)
+		{
+			cout << symbol;
+		}
 	}
+	void PrintSymbols(int count)const
+	{
+		for (int i = 0; i < count * 2; i++)
+		{
+			cout << ' ';
+		}
+	}
+public:
+	Hero() : hero(NO_HERO), h(8), w(16), position({1, 1}), symbol((char)178), dir(RIGHT) {}
+
 	void PrintBord()const
 	{
 		COORD pos{ 0, 0 };
@@ -78,85 +92,272 @@ public:
 			cout << (char)205;
 		cout << (char)188;
 	}
-	void MarkHero()const
-	{
-		SetConsoleTextAttribute(hConsole, ConsoleColors::RED);
-		for (int i = 0; i < h; i++)
-		{
-			SetCursorPosition(position.X, position.Y + i);
-			for (int i = 0; i < w; i++)
-			{
-				cout << symbol;
-			}
-		}
-	}
-	void PrintHero()const
+	void MarkBatman()const
 	{
 		COORD pos{ position.X, position.Y };
-		SetCursorPosition(pos.X + 12, pos.Y);
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 4; i++) cout << symbol;
-		for (int i = 0; i < 2; i++)
-		{
-			SetCursorPosition(pos.X + 10, ++pos.Y);
-			for (int i = 0; i < 2; i++) cout << symbol;
-			SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
-			for (int i = 0; i < 4; i++) cout << symbol;
-			SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-			for (int i = 0; i < 2; i++) cout << symbol;
-		}
-		SetCursorPosition(pos.X + 8, ++pos.Y);
-		for (int i = 0; i < 2; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
-		for (int i = 0; i < 8; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 2; i++) cout << symbol;
-
-		SetCursorPosition(pos.X + 8, ++pos.Y);
-		for (int i = 0; i < 2; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
-		for (int i = 0; i < 2; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 4; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
-		for (int i = 0; i < 2; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 2; i++) cout << symbol;
-		SetCursorPosition(pos.X + 24, pos.Y);
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 4; i++) cout << symbol;
-
-		SetCursorPosition(pos.X + 6, ++pos.Y);
-		for (int i = 0; i < 2; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
-		for (int i = 0; i < 4; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 4; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
-		for (int i = 0; i < 4; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 2; i++) cout << symbol;
-		SetCursorPosition(pos.X + 22, pos.Y);
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 2; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::DARKGRAY);
-		for (int i = 0; i < 4; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 2; i++) cout << symbol;
-
-		SetCursorPosition(pos.X + 6, ++pos.Y);
-		for (int i = 0; i < 2; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
-		for (int i = 0; i < 4; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 4; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
-		for (int i = 0; i < 4; i++) cout << symbol;
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 2; i++) cout << symbol;
-		SetCursorPosition(pos.X + 24, pos.Y);
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GRAY);
-		for (int i = 0; i < 2; i++) cout << symbol;
+		SetCursorPosition(pos.X, pos.Y);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(6);
+		PrintSymbols(1, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(8, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(4, DARKRED, symbol);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(2, RED, symbol);
+		PrintSymbols(2, DARKRED, symbol);
+		PrintSymbols(2, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(2, DARKGRAY, symbol);
+		PrintSymbols(2, RED, symbol);
+		PrintSymbols(2, DARKGRAY, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(6, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(2, RED, symbol);
+		PrintSymbols(2, DARKGRAY, symbol);
+		PrintSymbols(2, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(4, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+	}
+	void PrintBatman()const
+	{
+		COORD pos{ position.X, position.Y };
+		SetCursorPosition(pos.X, pos.Y);
+		PrintSymbols(1, DARKBLUE, symbol);
+		PrintSymbols(6);
+		PrintSymbols(1, DARKBLUE, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(8, DARKBLUE, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKBLUE, symbol);
+		PrintSymbols(1, BLACK, symbol);
+		PrintSymbols(4, DARKBLUE, symbol);
+		PrintSymbols(1, BLACK, symbol);
+		PrintSymbols(1, DARKBLUE, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKBLUE, symbol);
+		PrintSymbols(2, BLACK, symbol);
+		PrintSymbols(2, DARKBLUE, symbol);
+		PrintSymbols(2, BLACK, symbol);
+		PrintSymbols(1, DARKBLUE, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKBLUE, symbol);
+		PrintSymbols(2, WHITE, symbol);
+		PrintSymbols(2, BLACK, symbol);
+		PrintSymbols(2, WHITE, symbol);
+		PrintSymbols(1, DARKBLUE, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKBLUE, symbol);
+		PrintSymbols(6, BLACK, symbol);
+		PrintSymbols(1, DARKBLUE, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKBLUE, symbol);
+		PrintSymbols(2, YELLOW, symbol);
+		PrintSymbols(2, WHITE, symbol);
+		PrintSymbols(2, YELLOW, symbol);
+		PrintSymbols(1, DARKBLUE, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1);
+		PrintSymbols(1, DARKBLUE, symbol);
+		PrintSymbols(4, YELLOW, symbol);
+		PrintSymbols(1, DARKBLUE, symbol);
+	}
+	void MarkJoker()const
+	{
+		COORD pos{ position.X, position.Y };
+		SetCursorPosition(pos.X, pos.Y);
+		PrintSymbols(1);
+		PrintSymbols(6, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(8, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(2, RED, symbol);
+		PrintSymbols(2, DARKRED, symbol);
+		PrintSymbols(2, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(4, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(1, RED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(1, BLACK, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(2, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(1, BLACK, symbol);
+		PrintSymbols(1, RED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(8, RED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(4, BLACK, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(1, RED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(4, DARKRED, symbol);
+		PrintSymbols(1, RED, symbol);
+	}
+	void PrintJoker()const
+	{
+		COORD pos{ position.X, position.Y };
+		SetCursorPosition(pos.X, pos.Y);
+		PrintSymbols(1);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(1, GREEN, symbol);
+		PrintSymbols(2, DARKGREEN, symbol);
+		PrintSymbols(1, GREEN, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(1, GREEN, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(2, GREEN, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(1, GREEN, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, GREEN, symbol);
+		PrintSymbols(2, WHITE, symbol);
+		PrintSymbols(2, DARKGREEN, symbol);
+		PrintSymbols(2, WHITE, symbol);
+		PrintSymbols(1, GREEN, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, WHITE, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(4, WHITE, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(1, WHITE, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, WHITE, symbol);
+		PrintSymbols(1, BLACK, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(2, WHITE, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(1, BLACK, symbol);
+		PrintSymbols(1, WHITE, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(8, WHITE, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, WHITE, symbol);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(4, BLACK, symbol);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(1, WHITE, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1);
+		PrintSymbols(1, WHITE, symbol);
+		PrintSymbols(4, RED, symbol);
+		PrintSymbols(1, WHITE, symbol);
+	}
+	void MarkHalk()const
+	{
+		COORD pos{ position.X, position.Y };
+		SetCursorPosition(pos.X, pos.Y);
+		PrintSymbols(1);
+		PrintSymbols(6, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(8, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(2, DARKRED, symbol);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(1, DARKRED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(2, DARKRED, symbol);
+		PrintSymbols(2, RED, symbol);
+		PrintSymbols(2, DARKRED, symbol);
+		PrintSymbols(1, RED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, RED, symbol);
+		PrintSymbols(1, DARKGRAY, symbol);
+		PrintSymbols(4, RED, symbol);
+		PrintSymbols(1, DARKGRAY, symbol);
+		PrintSymbols(1, RED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(3, RED, symbol);
+		PrintSymbols(2, DARKGRAY, symbol);
+		PrintSymbols(3, RED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(3, RED, symbol);
+		PrintSymbols(2, BLACK, symbol);
+		PrintSymbols(3, RED, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1);
+		PrintSymbols(6, RED, symbol);
+	}
+	void PrintHalk()const
+	{
+		COORD pos{ position.X, position.Y };
+		SetCursorPosition(pos.X, pos.Y);
+		PrintSymbols(1);
+		PrintSymbols(6, BLACK, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(8, BLACK, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, BLACK, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(1, BLACK, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(2, BLACK, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(1, BLACK, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(2, BLACK, symbol);
+		PrintSymbols(1, GREEN, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(2, BLACK, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(1, WHITE, symbol);
+		PrintSymbols(4, GREEN, symbol);
+		PrintSymbols(1, WHITE, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(2, GREEN, symbol);
+		PrintSymbols(2, WHITE, symbol);
+		PrintSymbols(2, GREEN, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(2, GREEN, symbol);
+		PrintSymbols(2, BLACK, symbol);
+		PrintSymbols(2, GREEN, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
+		SetCursorPosition(pos.X, ++pos.Y);
+		PrintSymbols(1);
+		PrintSymbols(1, DARKGREEN, symbol);
+		PrintSymbols(4, GREEN, symbol);
+		PrintSymbols(1, DARKGREEN, symbol);
 	}
 	void ClearHero()const
 	{
@@ -167,6 +368,33 @@ public:
 			{
 				cout << ' ';
 			}
+		}
+	}
+	void ChoiceHero()
+	{
+		int choice = 0;
+		bool isValidData = true;
+		while (choice < 1 || choice > 3)
+		{
+			cout << "1 - Batman" << endl;
+			cout << "2 - Joker" << endl;
+			cout << "3 - Halk" << endl;
+			cout << endl;
+			if (!isValidData)
+			{
+				cout << "Error choice! Try again." << endl;
+				cout << endl;
+			}
+			else isValidData = false;
+			cout << "Enter your choice : ";
+			cin >> choice;
+		}
+		system("cls");
+		switch (choice)
+		{
+		case HERO::BATMAN: hero = BATMAN; break;
+		case HERO::JOKER: hero = JOKER; break;
+		case HERO::HALK: hero = HALK;
 		}
 	}
 	void Move()
@@ -180,7 +408,12 @@ public:
 		case UP: isMoved = MoveUp(); break;
 		case DOWN: isMoved = MoveDown();
 		}
-		isMoved ? PrintHero() : MarkHero();
+		switch (hero)
+		{
+		case HERO::BATMAN: isMoved ? PrintBatman() : MarkBatman(); break;
+		case HERO::JOKER: isMoved ? PrintJoker() : MarkJoker(); break;
+		case HERO::HALK: isMoved ? PrintHalk() : MarkHalk();
+		}
 	}
 	bool IsValidPosition(int x, int y)const
 	{
@@ -232,8 +465,10 @@ public:
 
 int main()
 {
-	hidecursor();
 	Hero hero;
+	hero.ChoiceHero();
+
+	hidecursor();
 	hero.PrintBord();
 
 	time_t interval = 100;
