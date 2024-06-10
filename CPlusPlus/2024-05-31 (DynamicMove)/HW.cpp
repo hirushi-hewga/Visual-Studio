@@ -49,8 +49,31 @@ class Hero
 	char symbol;
 	DIRECTION dir;
 public:
-	Hero() : h(1), w(1), position({ 1, 1 }), symbol((char)178), dir(RIGHT) {}
+	Hero() : h(3), w(5), position({ 1, 1 }), symbol((char)178), dir(RIGHT) {}
 
+	void PrintBord()const
+	{
+		COORD pos{ 0, 0 };
+		SetCursorPosition(pos.X, pos.Y);
+		cout << (char)201;
+		for (int i = 0; i < 54; i++)
+			cout << (char)205;
+		cout << (char)187;
+		for (int i = 0; i < 24; i++)
+		{
+			pos.Y++;
+			SetCursorPosition(pos.X, pos.Y);
+			cout << (char)186;
+			SetCursorPosition(pos.X + 55, pos.Y);
+			cout << (char)186;
+		}
+		pos.Y++;
+		SetCursorPosition(pos.X, pos.Y);
+		cout << (char)200;
+		for (int i = 0; i < 54; i++)
+			cout << (char)205;
+		cout << (char)188;
+	}
 	void MarkHero()const
 	{
 		SetConsoleTextAttribute(hConsole, ConsoleColors::RED);
@@ -65,6 +88,7 @@ public:
 	}
 	void PrintHero()const
 	{
+		SetConsoleTextAttribute(hConsole, ConsoleColors::GREEN);
 		for (int i = 0; i < h; i++)
 		{
 			SetCursorPosition(position.X, position.Y + i);
@@ -100,7 +124,7 @@ public:
 	}
 	bool IsValidPosition(int x, int y)const
 	{
-		return x > 0 && y > 0 && x < 40 && y < 15;
+		return x > 0 && y > 0 && x + w - 1 < 55 && y + h - 1 < 25;
 	}
 	bool MoveRight()
 	{
@@ -150,15 +174,14 @@ int main()
 {
 	hidecursor();
 	Hero hero;
+	hero.PrintBord();
 
-
-
-	time_t interval = 500;
+	time_t interval = 100;
 	time_t start = clock();
 
 	while (true)
 	{
-		if (clock() >= start + 500)
+		if (clock() >= start + interval)
 		{
 			hero.Move();
 			start = clock();
