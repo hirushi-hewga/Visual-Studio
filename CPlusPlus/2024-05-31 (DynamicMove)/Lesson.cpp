@@ -115,40 +115,40 @@ public:
 
 
 
-int main()
-{
-	hidecursor();
-
-	Hero hero("King", 3, 4, '#');
-	hero.ShowInfo();
-	hero.SetPosition(10, 10);
-	hero.PrintHero();
-	time_t interval = 500;
-	time_t start = clock();
-
-	while (true)
-	{
-		if (clock() >= start + 500)
-		{
-			hero.Move();
-			start = clock();
-		}
-		if (_kbhit())
-		{
-			int key = _getch();
-
-			if (key == 224)
-			{
-				key = _getch();
-				//cout << key << endl;
-				switch (key)
-				{
-				case 77: hero.ChangeDirection(RIGHT); break;
-				case 80: hero.ChangeDirection(DOWN); break;
-				case 72: hero.ChangeDirection(UP); break;
-				case 75: hero.ChangeDirection(LEFT); break;
-				}
-			}
-		}
-	}
-}
+//int main()
+//{
+//	hidecursor();
+//
+//	Hero hero("King", 3, 4, '#');
+//	hero.ShowInfo();
+//	hero.SetPosition(10, 10);
+//	hero.PrintHero();
+//	time_t interval = 500;
+//	time_t start = clock();
+//
+//	while (true)
+//	{
+//		if (clock() >= start + 500)
+//		{
+//			hero.Move();
+//			start = clock();
+//		}
+//		if (_kbhit())
+//		{
+//			int key = _getch();
+//
+//			if (key == 224)
+//			{
+//				key = _getch();
+//				//cout << key << endl;
+//				switch (key)
+//				{
+//				case 77: hero.ChangeDirection(RIGHT); break;
+//				case 80: hero.ChangeDirection(DOWN); break;
+//				case 72: hero.ChangeDirection(UP); break;
+//				case 75: hero.ChangeDirection(LEFT); break;
+//				}
+//			}
+//		}
+//	}
+//}
