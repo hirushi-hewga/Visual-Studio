@@ -49,8 +49,12 @@ class Hero
 	char symbol;
 	DIRECTION dir;
 public:
-	Hero() : h(3), w(5), position({ 1, 1 }), symbol((char)178), dir(RIGHT) {}
+	Hero() : h(15), w(30), position({ 1, 1 }), symbol((char)178), dir(RIGHT) {}
 
+	void PrintSymbol()const
+	{
+
+	}
 	void PrintBord()const
 	{
 		COORD pos{ 0, 0 };
@@ -88,7 +92,7 @@ public:
 	}
 	void PrintHero()const
 	{
-		SetConsoleTextAttribute(hConsole, ConsoleColors::GREEN);
+		SetConsoleTextAttribute(hConsole, ConsoleColors::WHITE);
 		for (int i = 0; i < h; i++)
 		{
 			SetCursorPosition(position.X, position.Y + i);
@@ -97,6 +101,40 @@ public:
 				cout << symbol;
 			}
 		}
+		COORD pos{ position.X, position.Y };
+		SetCursorPosition(pos.X + 12, pos.Y);
+		SetConsoleTextAttribute(hConsole, ConsoleColors::BLACK);
+		for (int i = 0; i < 4; i++) cout << symbol;
+		for (int i = 0; i < 2; i++)
+		{
+			SetCursorPosition(pos.X + 10, ++pos.Y);
+			for (int i = 0; i < 2; i++) cout << symbol;
+			SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
+			for (int i = 0; i < 4; i++) cout << symbol;
+			SetConsoleTextAttribute(hConsole, ConsoleColors::BLACK);
+			for (int i = 0; i < 2; i++) cout << symbol;
+		}
+		SetCursorPosition(pos.X + 8, ++pos.Y);
+		for (int i = 0; i < 2; i++) cout << symbol;
+		SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
+		for (int i = 0; i < 8; i++) cout << symbol;
+		SetConsoleTextAttribute(hConsole, ConsoleColors::BLACK);
+		for (int i = 0; i < 2; i++) cout << symbol;
+
+		SetCursorPosition(pos.X + 8, ++pos.Y);
+		for (int i = 0; i < 2; i++) cout << symbol;
+		SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
+		for (int i = 0; i < 2; i++) cout << symbol;
+		SetConsoleTextAttribute(hConsole, ConsoleColors::BLACK);
+		for (int i = 0; i < 4; i++) cout << symbol;
+		SetConsoleTextAttribute(hConsole, ConsoleColors::YELLOW);
+		for (int i = 0; i < 2; i++) cout << symbol;
+		SetConsoleTextAttribute(hConsole, ConsoleColors::BLACK);
+		for (int i = 0; i < 2; i++) cout << symbol;
+
+		SetCursorPosition(pos.X + 24, pos.Y);
+		SetConsoleTextAttribute(hConsole, ConsoleColors::BLACK);
+		for (int i = 0; i < 4; i++) cout << symbol;
 	}
 	void ClearHero()const
 	{
