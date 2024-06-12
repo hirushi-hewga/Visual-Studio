@@ -102,6 +102,10 @@ public:
 	{
 
 	}
+	void DeleteService()
+	{
+
+	}
 	void AddOrder()
 	{
 
@@ -114,11 +118,19 @@ public:
 	{
 
 	}
-	void SaveDataBaseToFile()const
+	void SaveDataBaseOfOrderedServicesToFile()const
 	{
 
 	}
-	void LoadDataBaseFromFile()
+	void LoadDataBaseOfOrderedServicesFromFile()
+	{
+
+	}
+	void SaveDataBaseOfPerformedServicesToFile()const
+	{
+
+	}
+	void LoadDataBaseOfPerformedServicesFromFile()
 	{
 
 	}
