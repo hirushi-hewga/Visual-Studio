@@ -55,24 +55,20 @@ public:
 	{
 		ticket_of_mail.push_back(Ticket{ ticket_number, date_mail_sent, sender_address, service, mail_weight, cost_of_service, false });
 	}
-	void ShowTickets()const
+	bool ShowTickets()const
 	{
-		system("cls");
 		if (!ticket_of_mail.empty())
 		{
+			cout << "======== " << name << ' ' << surname << " ========" << endl;
 			for (Ticket ticket : ticket_of_mail)
 			{
 				ticket.Show();
 				cout << endl;
 			}
-		}
-		else
-		{
-			cout << "Tickets not found!" << endl;
 			cout << endl;
+			return true;
 		}
-		cout << "Press any key to continue : ";
-		_getch();
+		return false;
 	}
 };
 
@@ -80,8 +76,8 @@ class NovaPoshta
 {
 	string department_name;
 	list<string> services;
-	vector<list<Customer>> database_of_ordered_services;
-	vector<list<Customer>> database_of_performed_services;
+	vector<Customer> database_of_ordered_services;
+	vector<Customer> database_of_performed_services;
 public:
 	NovaPoshta() = delete;
 	NovaPoshta(string department_name) : department_name(department_name)
@@ -146,27 +142,68 @@ public:
 			}
 			cout << endl;
 			cout << "The service has been successfully changed" << endl;
-			cout << endl;
-			cout << "Press any key to continue : ";
-			_getch();
 		}
-		else
-		{
-			cout << "Not found services" << endl;
-			cout << endl;
-			cout << "Press any key to continue : ";
-			_getch();
-		}
+		else cout << "Not found services" << endl;
+		cout << endl;
+		cout << "Press any key to continue : ";
+		_getch();
 	}
 	void AddService()
 	{
-		
+		system("cls");
+		string newService;
+		cout << "Enter new service to add : ";
+		cin >> newService;
+		services.push_back(newService);
+		cout << endl;
+		cout << "Service added" << endl;
+		cout << endl;
+		cout << "The service has been successfully added" << endl;
+		cout << endl;
+		cout << "Press any key to continue : ";
+		_getch();
 	}
 	void DeleteService()
 	{
-
+		system("cls");
+		if (!services.empty())
+		{
+			bool isValidData = true;
+			int choice;
+			int i;
+			while (choice < 1 || choice > services.size())
+			{
+				i = 0;
+				for (string service : services)
+				{
+					cout << i << " - " << service << endl;
+				}
+				cout << endl;
+				if (!isValidData)
+				{
+					cout << "Error choice! Try again." << endl;
+					cout << endl;
+				}
+				else isValidData = false;
+				cout << "Choice a service to delete : ";
+				cin >> choice;
+			}
+			auto it = services.begin();
+			advance(it, choice - 1);
+			services.erase(it);
+			cout << endl;
+			cout << "The service has been successfully deleted" << endl;
+		}
+		else cout << "Not found services" << endl;
+		cout << endl;
+		cout << "Press any key to continue : ";
+		_getch();
 	}
 	void AddOrder()
+	{
+
+	}
+	void AddTicket()
 	{
 
 	}
@@ -176,21 +213,67 @@ public:
 	}
 	void ShowDataBaseOfOrderedServices()const
 	{
-
+		system("cls");
+		if (!database_of_ordered_services.empty())
+		{
+			bool isFoundTicket = false;
+			for (Customer customer : database_of_ordered_services)
+			{
+				if (customer.ShowTickets())
+				{
+					isFoundTicket = true;
+				}
+			}
+			if (!isFoundTicket)
+			{
+				cout << "No tickets found for undelivered orders!" << endl;
+				cout << endl;
+			}
+		}
+		else
+		{
+			cout << "No tickets found for undelivered orders!" << endl;
+			cout << endl;
+		}
+		cout << "Press any key to continue : ";
+		_getch();
 	}
 	void ShowDataBaseOfPerformedServices()const
 	{
-
+		system("cls");
+		if (!database_of_performed_services.empty())
+		{
+			bool isFoundTicket = false;
+			for (Customer customer : database_of_performed_services)
+			{
+				if (customer.ShowTickets())
+				{
+					isFoundTicket = true;
+				}
+			}
+			if (!isFoundTicket)
+			{
+				cout << "No tickets found for delivered orders!" << endl;
+				cout << endl;
+			}
+		}
+		else
+		{
+			cout << "No tickets found for delivered orders!" << endl;
+			cout << endl;
+		}
+		cout << "Press any key to continue : ";
+		_getch();
 	}
 	void SaveDataBaseOfOrderedServicesToFile()const
 	{
 
 	}
-	void LoadDataBaseOfOrderedServicesFromFile()
+	void SaveDataBaseOfPerformedServicesToFile()const
 	{
 
 	}
-	void SaveDataBaseOfPerformedServicesToFile()const
+	void LoadDataBaseOfOrderedServicesFromFile()
 	{
 
 	}
