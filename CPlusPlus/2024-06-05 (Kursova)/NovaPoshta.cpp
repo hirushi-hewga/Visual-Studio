@@ -43,17 +43,18 @@ struct Ticket
 	}
 };
 
-class Customer
+class Client
 {
 	string name;
 	string surname;
 	list<Ticket> ticket_of_mail;
 public:
-	Customer() : name("no name"), surname("no surname") {}
+	Client() = delete;
+	Client(string name, string surname) : name(name), surname(surname) {}
 
 	void AddTicket(string ticket_number, Date date_mail_sent, string sender_address, string service, int mail_weight, int cost_of_service)
 	{
-		ticket_of_mail.push_back(Ticket{ ticket_number, date_mail_sent, sender_address, service, mail_weight, cost_of_service, false });
+		ticket_of_mail.push_back(Ticket{ ticket_number, date_mail_sent, sender_address, service, mail_weight, cost_of_service, true });
 	}
 	bool ShowTickets()const
 	{
@@ -70,14 +71,18 @@ public:
 		}
 		return false;
 	}
+	void ShowClient()const
+	{
+		cout << " - " << name << ' ' << surname << " | Tickets : " << ticket_of_mail.size() << endl;
+	}
 };
 
 class NovaPoshta
 {
 	string department_name;
 	list<string> services;
-	vector<Customer> database_of_ordered_services;
-	vector<Customer> database_of_performed_services;
+	vector<Client> database_of_ordered_services;
+	vector<Client> database_of_performed_services;
 public:
 	NovaPoshta() = delete;
 	NovaPoshta(string department_name) : department_name(department_name)
@@ -199,13 +204,113 @@ public:
 		cout << "Press any key to continue : ";
 		_getch();
 	}
-	void AddOrder()
+	void AddClient()
 	{
-
+		system("cls");
+		string name, surname;
+		cout << "Enter client name : ";
+		cin >> name;
+		cout << "Enter client surname : ";
+		cin >> surname;
+		database_of_ordered_services.push_back(Client(name, surname));
+		database_of_performed_services.push_back(Client(name, surname));
+		cout << endl;
+		cout << "Client added" << endl;
+		cout << endl;
+		cout << "Press any key to continue : ";
+		_getch();
+	}
+	void ShowClients()const
+	{
+		system("cls");
+		if (!database_of_ordered_services.empty())
+		{
+			for (Client client : database_of_ordered_services)
+			{
+				client.ShowClient();
+			}
+		}
+		else cout << "Clients not found" << endl;
+		cout << endl;
+		cout << "Press any key to continue : ";
+		_getch();
 	}
 	void AddTicket()
 	{
+		system("cls");
+		if (!services.empty() && !database_of_ordered_services.empty())
+		{
+			string ticket_number, sender_address, service;
+			int years, months, days, hours, minutes;
+			int mail_weight, cost_of_service;
 
+			int client = 0;
+			bool isValidData = true;
+			while (client < 1 || client > database_of_ordered_services.size())
+			{
+				int i = 0;
+				for (Client client_ : database_of_ordered_services)
+				{
+					cout << ++i;
+					client_.ShowClient();
+				}
+				cout << "Choice client : ";
+				cin >> client;
+			}
+			auto it = database_of_ordered_services.begin();
+			advance(it, client - 1);
+
+			cout << "Enter ticket number : ";
+			cin >> ticket_number;
+
+			cout << "Enter sender address : ";
+			cin >> sender_address;
+
+			int choice = 0;
+			isValidData = true;
+			while (choice < 1 || choice > services.size())
+			{
+				int i = 0;
+				for (string service_ : services)
+				{
+					cout << ++i << " - " << service_ << endl;
+				}
+				cout << "Choice service : ";
+				cin >> choice;
+			}
+			auto it_ = services.begin();
+			advance(it_, choice - 1);
+			service = (*it_);
+
+			cout << "Enter year mail sent : ";
+			cin >> years;
+			cout << "Enter months mail sent : ";
+			cin >> months;
+			cout << "Enter days mail sent : ";
+			cin >> days;
+			cout << "Enter hours mail sent : ";
+			cin >> hours;
+			cout << "Enter minutes mail sent : ";
+			cin >> minutes;
+
+			cout << "Enter mail weight : ";
+			cin >> mail_weight;
+
+			cout << "Enter cost of service : ";
+			cin >> cost_of_service;
+
+			(*it).AddTicket(ticket_number, Date{ years, months, days, {hours, minutes} }, sender_address, service, mail_weight, cost_of_service);
+
+			cout << "Ticket added" << endl;
+		}
+		else
+		{
+			if (services.empty()) cout << "Services not found" << endl;
+			if (database_of_ordered_services.empty()) cout << "Clients not found" << endl;
+		}
+		cout << endl;
+		cout << "Press any key to continue : ";
+		_getch();
 	}
 	void DeliverTheOrder()
 	{
@@ -217,7 +322,7 @@ public:
 		if (!database_of_ordered_services.empty())
 		{
 			bool isFoundTicket = false;
-			for (Customer customer : database_of_ordered_services)
+			for (Client customer : database_of_ordered_services)
 			{
 				if (customer.ShowTickets())
 				{
@@ -244,7 +349,7 @@ public:
 		if (!database_of_performed_services.empty())
 		{
 			bool isFoundTicket = false;
-			for (Customer customer : database_of_performed_services)
+			for (Client customer : database_of_performed_services)
 			{
 				if (customer.ShowTickets())
 				{
