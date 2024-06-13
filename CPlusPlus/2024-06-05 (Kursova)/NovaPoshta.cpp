@@ -35,11 +35,11 @@ struct Ticket
 	bool isDelivered;
 	void Show()const
 	{
-		cout << "\t======== Ticket : " << ticket_number << " ========" << endl;
-		cout << "\tDate mail sent : " << date_mail_sent << endl;
-		cout << "\tOrder address : " << order_address << endl;
-		cout << "\tMail weight : " << mail_weight << endl;
-		cout << "\tCost of service : " << cost_of_service << endl;
+		cout << ". ======== Ticket : " << ticket_number << " ========" << endl;
+		cout << "   Date mail sent : " << date_mail_sent << endl;
+		cout << "   Order address : " << order_address << endl;
+		cout << "   Mail weight : " << mail_weight << endl;
+		cout << "   Cost of service : " << cost_of_service << endl;
 	}
 };
 
@@ -52,6 +52,20 @@ public:
 	Client() = delete;
 	Client(string name, string surname) : name(name), surname(surname) {}
 
+	int size()const
+	{
+		return ticket_of_mail.size();
+	}
+	bool empty()const
+	{
+		return ticket_of_mail.size() == 0;
+	}
+	Ticket& GetTicket(int index)
+	{
+		auto it = ticket_of_mail.begin();
+		advance(it, index);
+		return (*it);
+	}
 	void AddTicket(string ticket_number, Date date_mail_sent, string sender_address, string service, int mail_weight, int cost_of_service)
 	{
 		ticket_of_mail.push_back(Ticket{ ticket_number, date_mail_sent, sender_address, service, mail_weight, cost_of_service, true });
@@ -61,8 +75,10 @@ public:
 		if (!ticket_of_mail.empty())
 		{
 			cout << "======== " << name << ' ' << surname << " ========" << endl;
+			int i = 0;
 			for (Ticket ticket : ticket_of_mail)
 			{
+				cout << ++i;
 				ticket.Show();
 				cout << endl;
 			}
@@ -314,7 +330,77 @@ public:
 	}
 	void DeliverTheOrder()
 	{
+		if (!database_of_ordered_services.empty())
+		{
+			int i;
+			int choice = 0;
+			vector<Client>::iterator it;
+			while (true)
+			{
+				try
+				{
+					system("cls");
+					while (choice < 1 || choice > database_of_ordered_services.size())
+					{
+						i = 0;
+						for (Client client : database_of_ordered_services)
+						{
+							cout << ++i; client.ShowClient();
+						}
+						cout << endl;
+						cout << "Choice client to deliver the order : ";
+						cin >> choice;
+					}
+					it = database_of_ordered_services.begin();
+					advance(it, choice - 1);
+					if ((*it).empty()) throw exception("not found for this client");
+					break;
+				}
+				catch (exception ex)
+				{
+					system("cls");
+					cout << ex.what() << endl;
+					cout << endl;
+					cout << "Press any key to repeat : ";
+					_getch();
+				}
+				catch (...)
+				{
+					system("cls");
+					cout << "Unknown exception" << endl;
+					cout << endl;
+					cout << "Press any key to repeat : ";
+					_getch();
+				}
+			}
+			auto it_ = database_of_performed_services.begin();
+			advance(it_, choice - 1);
+			choice = 0;
+			bool isValidData = true;
+			system("cls");
+			while (choice < 1 || choice >(*it).size())
+			{
+				(*it).ShowTickets();
+				if (!isValidData)
+				{
+					cout << "Error choice! Try again." << endl;
+					cout << endl;
+				}
+				cout << "Choice a ticket for delivery : ";
+				cin >> choice;
+			}
+			Ticket& ticket = (*it).GetTicket(choice - 1);
 
+
+		}
+		else
+		{
+			system("cls");
+			cout << "No tickets found for undelivered orders!" << endl;
+			cout << endl;
+		}
+		cout << "Press any key to continue : ";
+		_getch();
 	}
 	void ShowDataBaseOfOrderedServices()const
 	{
