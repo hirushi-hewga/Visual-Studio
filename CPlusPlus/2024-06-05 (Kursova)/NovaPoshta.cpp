@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <conio.h>
 #include <vector>
 #include <list>
@@ -42,6 +43,20 @@ struct Ticket
 		cout << "   Cost of service : " << cost_of_service << endl;
 	}
 };
+ofstream& operator <<(ofstream& out, const Ticket& other)
+{
+	out << other.ticket_number << endl;
+	out << other.date_mail_sent.years << endl;
+	out << other.date_mail_sent.months << endl;
+	out << other.date_mail_sent.days << endl;
+	out << other.date_mail_sent.time.hours << endl;
+	out << other.date_mail_sent.time.minutes << endl;
+	out << other.order_address << endl;
+	out << other.service << endl;
+	out << other.mail_weight << endl;
+	out << other.cost_of_service << endl;
+	return out;
+}
 
 class Client
 {
@@ -97,7 +112,19 @@ public:
 	{
 		cout << " - " << name << ' ' << surname << " | Tickets : " << ticket_of_mail.size() << endl;
 	}
+	friend ofstream& operator <<(ofstream& out, const Client& other);
 };
+ofstream& operator <<(ofstream& out, const Client& other)
+{
+	out << other.name << endl;
+	out << other.surname << endl;
+	for (Ticket ticket : other.ticket_of_mail)
+	{
+		out << ticket;
+	}
+	out << endl;
+	return out;
+}
 
 class NovaPoshta
 {
@@ -495,7 +522,7 @@ int Menu()
 {
 	int choice = 0;
 	bool isValidData = true;
-	while (choice < 1 || choice > 13)
+	while (choice < 1 || choice > 15)
 	{
 		system("cls");
 		cout << " 1 - Show services" << endl;
@@ -506,11 +533,13 @@ int Menu()
 		cout << " 6 - Show clients" << endl;
 		cout << " 7 - Add ticket" << endl;
 		cout << " 8 - Deliver the order" << endl;
-		cout << " 9 - Save ordered services to file" << endl;
-		cout << "10 - Save performed services to file" << endl;
-		cout << "11 - Load ordered services from file" << endl;
-		cout << "12 - Load performed services from file" << endl;
-		cout << "13 - Exit" << endl;
+		cout << " 9 - show ordered services" << endl;
+		cout << "10 - show performed services" << endl;
+		cout << "11 - Save ordered services to file" << endl;
+		cout << "12 - Save performed services to file" << endl;
+		cout << "13 - Load ordered services from file" << endl;
+		cout << "14 - Load performed services from file" << endl;
+		cout << "15 - Exit" << endl;
 		if (!isValidData)
 		{
 			cout << "\nError choice! Try again.\n";
@@ -522,7 +551,7 @@ int Menu()
 	}
 	return choice;
 }
-enum MENU { SHOW_SERVICES = 1, CHANGE_SERVICE, ADD_SERVICE, DELETE_SERVICE, ADD_CLIENT, SHOW_CLIENTS, ADD_TICKET, DELIVER_THE_ORDER, SAVE_ORDERED_SERVICES, SAVE_PERFORMED_SERVICES, LOAD_ORDERED_SERVICES, LOAD_PERFORMED_SERVICES, EXIT };
+enum MENU { SHOW_SERVICES = 1, CHANGE_SERVICE, ADD_SERVICE, DELETE_SERVICE, ADD_CLIENT, SHOW_CLIENTS, ADD_TICKET, DELIVER_THE_ORDER, SHOW_ORDERED_SERVICES, SHOW_PERFORMED_SERVICES, SAVE_ORDERED_SERVICES, SAVE_PERFORMED_SERVICES, LOAD_ORDERED_SERVICES, LOAD_PERFORMED_SERVICES, EXIT };
 int main()
 {
 	NovaPoshta nova_poshta("Nova Poshta");
@@ -539,6 +568,8 @@ int main()
 		case SHOW_CLIENTS: nova_poshta.ShowClients(); break;
 		case ADD_TICKET: nova_poshta.AddTicket(); break;
 		case DELIVER_THE_ORDER: nova_poshta.DeliverTheOrder(); break;
+		case SHOW_ORDERED_SERVICES: nova_poshta.ShowDataBaseOfOrderedServices(); break;
+		case SHOW_PERFORMED_SERVICES: nova_poshta.ShowDataBaseOfPerformedServices(); break;
 		case SAVE_ORDERED_SERVICES: nova_poshta.SaveDataBaseOfOrderedServicesToFile(); break;
 		case SAVE_PERFORMED_SERVICES: nova_poshta.SaveDataBaseOfPerformedServicesToFile(); break;
 		case LOAD_ORDERED_SERVICES: nova_poshta.LoadDataBaseOfOrderedServicesFromFile(); break;
